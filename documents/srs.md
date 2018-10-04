@@ -1,37 +1,38 @@
 # Требования к проекту
 1. [Бизнес требования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#1-%D0%91%D0%B8%D0%B7%D0%BD%D0%B5%D1%81-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 
- 1.1 [Исходные данные](Исходные-данные)
+ 1.1 [Исходные данные](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#11-%D0%98%D1%81%D1%85%D0%BE%D0%B4%D0%BD%D1%8B%D0%B5-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5)
  
- 1.2 [Возможности бизнеса](Возможности-бизнеса)
+ 1.2 [Возможности бизнеса](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#12-%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B1%D0%B8%D0%B7%D0%BD%D0%B5%D1%81%D0%B0)
  
-2. [Требования пользователя](Требования-пользователя)
+2. [Требования пользователя](Тhttps://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#2-%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F)
 
- 2.1 [Xарактеристики пользователей](Xарактеристики-пользователей)
+ 2.1 [Xарактеристики пользователей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#21-%D0%A5%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9)
 
- 2.1.1 [Целевая аудитория](Целевая-аудитория)
+ 2.1.1 [Целевая аудитория](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#211-%D0%A6%D0%B5%D0%BB%D0%B5%D0%B2%D0%B0%D1%8F-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F)
     
-2.1.2 [Побочная аудитория](Побочная-аудитория)
+2.1.2 [Побочная аудитория](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#212-%D0%9F%D0%BE%D0%B1%D0%BE%D1%87%D0%BD%D0%B0%D1%8F-%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F%D1%8A%D1%8A)
 
-2.2 [Классы пользователей](Классы-пользователей)
+2.2 [Классы пользователей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#22-%D0%9A%D0%BB%D0%B0%D1%81%D1%81%D1%8B-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9)
 
-2.3 [Интерфейс пользователя](Интерфейс-пользователя)
+2.3 [Интерфейс пользователя](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#23-%D0%98%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F)
+2.4 [Предположения и зависимости](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#24-%D0%9F%D1%80%D0%B5%D0%B4%D0%BF%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)
 
-3. [Системные требования](Системные-требования)
+3. [Системные требования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#3-%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 
- 3.1 [Функциональные требования](Функциональные-требования)
+ 3.1 [Функциональные требования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#31-%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
  
-3.2 [Нефункциональные требования](Нефункциональные-требования)
+3.2 [Нефункциональные требования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#32-%D0%9D%D0%B5%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 
-3.2.1 [Атрибуты качества](Атрибуты-качества)
+3.2.1 [Атрибуты качества](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#321-%D0%90%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%D1%8B-%D0%BA%D0%B0%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%B0)
 
-3.2.1.1 [Требования к безопасности](Требования-к-безопасности)
+3.2.1.1 [Требования к безопасности](Тhttps://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#3211-%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8)
 
-3.2.1.2 [Требования к интерфейсу пользователя](Требования-к-интерфейсу-пользователя)
+3.2.1.2 [Требования к интерфейсу пользователя](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#3212-%D0%A2%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D1%83-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F)
 
-3.2.2 [Ограничения](Ограничения)
+3.2.2 [Ограничения](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#322-%D0%9E%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%B8%D1%8F)
 
-4. [Аналоги](Аналоги)
+4. [Аналоги](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/srs.md#4-%D0%90%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3%D0%B8)
 
 ## 1. Бизнес требования
 ### 1.1 Исходные данные
@@ -44,7 +45,7 @@
 #### 2.1.1 Целевая аудитория
 * Предприниматели, испытывающие потребность в организации предоставления своих услуг.
 * Компании, использующие программные продукты для ведения своей деятельности. 
-#### 2.1.2 Побочная аудиторияъъ
+#### 2.1.2 Побочная аудитория
 * Разработчики программного обеспечения, которые рассматривают различные программные продукты в поиске идей для создания собственных продуктов.
 ### 2.2 Классы пользователей
 ***Клиенты фирмы*** 
