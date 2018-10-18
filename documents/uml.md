@@ -1,5 +1,5 @@
 ### 1. Use case
-![enter image description here](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/use_case.png0UML%20(1).png)
+![enter image description here](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/use_case.png?raw=true)
 #####  1.1 Просмотр статистики о выполненных заказах
 1. Руководитель или администратор нажимают на кнопку "Просмотреть статистику".
 2. Приложение отображает поля для заполнение(дата, имя работника).
