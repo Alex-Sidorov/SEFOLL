@@ -86,3 +86,18 @@
 6. Приложение сохраняет изменения в базе данных
 7. Администратор может вернуться к пункту 3, или нажимает кнопку "Назад" и переходят к пункту 8.
 8. Завершение.
+
+### 2. Диаграмма активности
+##### 1 [Просмотр статистики о выполненных заказах](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/1.pdf)
+##### 2 [Редактирование услуг](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/2.pdf)
+##### 3 [Добавление новой услуги](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/3.pdf)
+##### 4 [Удаление услуги](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/4.pdf)
+##### 5 [Подтвердить выполнение заказа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/5.pdf)
+##### 6 [Просмотреть список услуг](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/6.pdf)
+##### 7 [Просмотреть заказ](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/7.pdf)
+##### 8 [Оформление заказа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/8.pdf?raw=true)
+##### 9 [Добавление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/9.pdf)
+##### 10 [Удаление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/10.pdf)
+##### 10 [Изменение уровней доступа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/activity/11.pdf)
+
+
