@@ -2,6 +2,8 @@
 2. [Диаграмма активности](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#2-Диаграмма-активности)
 3. [Диаграмма последовательности](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#3-Диаграмма-последовательности)
 4. [Диаграмма классов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/class.png)
+5. [Диаграмма компонентов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/component.png)
+6. [Диаграмма развёртования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/deployment.png)
 ### 1. Use case
 ![enter image description here](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/use_case.png?raw=true)
 #####  1.1 Просмотр статистики о выполненных заказах
