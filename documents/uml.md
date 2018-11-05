@@ -1,9 +1,11 @@
 1. [Use case](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#1-use-case)
 2. [Диаграмма активности](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#2-Диаграмма-активности)
 3. [Диаграмма последовательности](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#3-Диаграмма-последовательности)
-4. [Диаграмма классов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/class.png)
-5. [Диаграмма компонентов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/component.png)
-6. [Диаграмма развёртывания](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/deployment.png)
+4. [Диаграммы состояний](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md#4-Диаграммы-состояний)
+5. [Диаграмма классов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/class.png)
+6. [Диаграмма компонентов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/component.png)
+7. [Диаграмма развёртывания](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/deployment.png)
+
 ### 1. Use case
 ![enter image description here](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/use_case.png?raw=true)
 #####  1.1 Просмотр статистики о выполненных заказах
@@ -118,4 +120,17 @@
 ##### 3.9 [Добавление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/sequence/9.pdf)
 ##### 3.10 [Удаление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/sequence/10.pdf)
 ##### 3.11 [Изменение уровней доступа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/sequence/11.pdf)
+
+### 4. Диаграммы состояний
+##### 4.1 [Просмотр статистики о выполненных заказах](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/show%20data.pdf)
+##### 4.2 [Редактирование услуг](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/change%20service.pdf)
+##### 4.3 [Добавление новой услуги](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/add%20new%20service.pdf)
+##### 4.4 [Удаление услуги](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/delete%20service.pdf)
+##### 4.5 [Подтвердить выполнение заказа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/complete%20order.pdf)
+##### 4.6 [Просмотреть список услуг](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/show%20services.pdf)
+##### 4.7 [Просмотреть заказ](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/show%20order.pdf)
+##### 4.8 [Оформление заказа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/take%20order.pdf)
+##### 4.9 [Добавление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/add%20new%20password.pdf)
+##### 4.10 [Удаление паролей](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/delete%20password.pdf)
+##### 4.11 [Изменение уровней доступа](https://github.com/Alex-Sidorov/SEFOLL/blob/master/UML/state/change%20access.pdf)
 
