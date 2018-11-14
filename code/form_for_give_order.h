@@ -6,6 +6,8 @@
 
 #include <QWidget>
 #include <QSignalMapper>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 namespace Ui {
 class Form_For_Give_Order;
@@ -35,6 +37,7 @@ private:
     QSignalMapper *_mapper;
     double _cost;
 
+    bool add_order(Order &order);
     void clear_form();
 
 };
