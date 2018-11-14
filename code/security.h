@@ -2,16 +2,20 @@
 #define SECURITY_H
 
 #include <QString>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QVariant>
 
-enum class Access { GUEST , CHIEF , WORKER_TAKE_ORDER, WORKER_CLOSE_ORDER, ADMIN};
+enum Access { GUEST = 0 , CHIEF , WORKER_TAKE_ORDER, WORKER_CLOSE_ORDER, ADMIN};
 
 class Security
 {
 public:
-    static void change_access();
-    static void delete_user();
-    static void add_user();
-    static void change_password();
+    static bool check_access(QString &id, QString &password, Access &access);
+    static bool change_access(QString &id, Access access);
+    static bool delete_user(QString &id);
+    static bool add_user(QString &id, QString &password, Access &access);
+    static bool change_password(QString &id, QString &password);
 };
 
 
