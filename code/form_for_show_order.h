@@ -4,6 +4,8 @@
 #include "order.h"
 
 #include <QWidget>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 namespace Ui {
 class Form_For_Show_Order;

@@ -19,6 +19,7 @@ void FormForShowOrder::clear_form()
 {
     _order.clear();
     ui->number_order->clear();
+    ui->number->setText(QString("Номер:"));
     ui->client->setText(QString("Клиент:"));
     ui->worker->setText(QString("Исполнитель:"));
     ui->date->setText(QString("Дата принятия заказа:"));
@@ -55,25 +56,33 @@ void FormForShowOrder::on_number_order_valueChanged(int number)
 void FormForShowOrder::on_enter_button_clicked()
 {
     clear_form();
-    _order = Order::find_order(ui->number_order->value());
 
-    if(!_order.data())
+    QSqlQuery query("SELECT * FROM orders;");
+    if(!query.isActive())
+    {
+        return;
+    }
+    int number_order = ui->number_order->value();
+    if(!query.seek(number_order - 1))
     {
         QMessageBox::warning(this,tr("ОШИБКА"),
                              tr("Неудалось найти заказ. Проверьте номер заказа."));
     }
     else
     {
-        ui->client->setText(QString("Клиент:")
-                            +_order.data()->get_name_client());
-        ui->worker->setText(QString("Исполнитель:")
-                            +_order.data()->get_name_worker());
-        ui->date->setText(QString("Дата принятия заказа:")
-                            +_order.data()->get_date().text());
-        ui->cost->setText(QString("Сумма:")
-                            +QString::number(_order.data()->get_cost()));
+        QSqlRecord record = query.record();
+        ui->number->setText(QString("Номер:")+
+                            QString::number(number_order));
+        ui->client->setText(QString("Клиент:") +
+                            query.value(record.indexOf("client")).toString());
+        ui->worker->setText(QString("Исполнитель:") +
+                            query.value(record.indexOf("worker")).toString());
+        ui->date->setText(QString("Дата принятия заказа:") +
+                            query.value(record.indexOf("date")).toString());
+        ui->cost->setText(QString("Сумма:") +
+                            query.value(record.indexOf("cost")).toString());
 
-        if(_order.data()->get_status())
+        if(query.value(record.indexOf("status")).toBool())
         {
             ui->status->setText(QString("Статус заказа: закончен."));
         }
@@ -83,13 +92,26 @@ void FormForShowOrder::on_enter_button_clicked()
             ui->complete_button->setEnabled(true);
         }
 
-        const QVector<Info_Of_Ordered_Service> &services = _order.data()->get_services();
-
-        for(int i=0; i<services.size(); i++)
+        QString request = "SELECT * FROM _%1_;";
+        request = request.arg(query.value(record.indexOf("services")).toInt());
+        if(!query.exec(request))
         {
-            QTableWidgetItem *item_cost = new QTableWidgetItem(QString::number(services[i].cost));
-            QTableWidgetItem *item_name = new QTableWidgetItem(services[i].name_service);
-            QTableWidgetItem *item_count = new QTableWidgetItem(QString::number(services[i].count));
+            clear_form();
+            return;
+        }
+
+        QString cost;
+        QString count;
+        QString name;
+        while(query.next())
+        {
+            record = query.record();
+            cost = query.value(record.indexOf("price")).toString();
+            count = query.value(record.indexOf("count")).toString();
+            name = query.value(record.indexOf("name")).toString();
+            QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
+            QTableWidgetItem *item_name = new QTableWidgetItem(name);
+            QTableWidgetItem *item_count = new QTableWidgetItem(count);
 
             ui->data_services->insertRow(ui->data_services->rowCount());
             ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_count);
@@ -101,7 +123,11 @@ void FormForShowOrder::on_enter_button_clicked()
 
 void FormForShowOrder::on_complete_button_clicked()
 {
-    if(!_order.data()->change_status_order())
+    QString request = "UPDATE orders SET status = 1 WHERE number = %1;";
+    QString number = ui->number->text();
+    request = request.arg(number.mid(number.indexOf(':')+1).toInt());
+    QSqlQuery query(request);
+    if(!query.exec())
     {
         QMessageBox::warning(this,tr("ОШИБКА"),
                              tr("В данный момент изменить состояние заказа не возможно."));
