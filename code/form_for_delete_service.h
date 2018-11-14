@@ -9,14 +9,14 @@ namespace Ui {
 class Form_For_Delete_Service;
 }
 
-class Form_For_Delete_Service : public QWidget
+class FormForDeleteService : public QWidget
 {
     Q_OBJECT
 
 public:
     void set_table(const QTableWidget*);
-    explicit Form_For_Delete_Service(QWidget *parent = 0);
-    ~Form_For_Delete_Service();
+    explicit FormForDeleteService(QWidget *parent = 0);
+    ~FormForDeleteService();
 
 signals:
     void to_main_window();

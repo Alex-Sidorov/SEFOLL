@@ -7,7 +7,7 @@ namespace Ui {
 class Form_For_Add_Service;
 }
 
-class Form_For_Add_Service : public QWidget
+class FormForAddService : public QWidget
 {
     Q_OBJECT
 
@@ -16,8 +16,8 @@ public:
     QString get_cost_service()const;
     void show();
 
-    explicit Form_For_Add_Service(QWidget *parent = 0);
-    ~Form_For_Add_Service();
+    explicit FormForAddService(QWidget *parent = 0);
+    ~FormForAddService();
 
 signals:
     void to_main_window();

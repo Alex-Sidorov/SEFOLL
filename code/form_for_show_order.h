@@ -9,13 +9,13 @@ namespace Ui {
 class Form_For_Show_Order;
 }
 
-class Form_For_Show_Order : public QWidget
+class FormForShowOrder : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Form_For_Show_Order(QWidget *parent = 0);
-    ~Form_For_Show_Order();
+    explicit FormForShowOrder(QWidget *parent = 0);
+    ~FormForShowOrder();
 
 signals:
     void to_main_window();

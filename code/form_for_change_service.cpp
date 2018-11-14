@@ -1,7 +1,7 @@
 #include "form_for_change_service.h"
 #include "ui_form_for_change_service.h"
 
-Form_For_Change_Service::Form_For_Change_Service(QWidget *parent) :
+FormForChangeService::FormForChangeService(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Change_Service)
 {
@@ -9,7 +9,7 @@ Form_For_Change_Service::Form_For_Change_Service(QWidget *parent) :
     ui->setupUi(this);
 }
 
-void Form_For_Change_Service::set_table(const QTableWidget *table)
+void FormForChangeService::set_table(const QTableWidget *table)
 {
     for(int i = 0; i < table->rowCount(); i++)
     {
@@ -22,24 +22,24 @@ void Form_For_Change_Service::set_table(const QTableWidget *table)
     }
 }
 
-const QTableWidget* Form_For_Change_Service::get_table()const
+const QTableWidget* FormForChangeService::get_table()const
 {
     return ui->data_services;
 }
 
-Form_For_Change_Service::~Form_For_Change_Service()
+FormForChangeService::~FormForChangeService()
 {
     delete ui;
 }
 
-void Form_For_Change_Service::on_back_button_clicked()
+void FormForChangeService::on_back_button_clicked()
 {
     this->close();
     clear_form();
     emit to_main_window();
 }
 
-void Form_For_Change_Service::on_data_services_clicked(const QModelIndex &index)
+void FormForChangeService::on_data_services_clicked(const QModelIndex &index)
 {
     ui->name->setEnabled(true);
     ui->cost->setEnabled(true);
@@ -53,7 +53,7 @@ void Form_For_Change_Service::on_data_services_clicked(const QModelIndex &index)
 
 }
 
-void Form_For_Change_Service::clear_form()const
+void FormForChangeService::clear_form()const
 {
     ui->name->clear();
     ui->cost->clear();
@@ -69,7 +69,7 @@ void Form_For_Change_Service::clear_form()const
     }
 }
 
-void Form_For_Change_Service::on_name_textChanged(const QString &name)
+void FormForChangeService::on_name_textChanged(const QString &name)
 {
     if(!name.isEmpty() && !ui->cost->text().isEmpty())
     {
@@ -81,7 +81,7 @@ void Form_For_Change_Service::on_name_textChanged(const QString &name)
     }
 }
 
-void Form_For_Change_Service::on_cost_valueChanged(const QString &value)
+void FormForChangeService::on_cost_valueChanged(const QString &value)
 {
     if(!value.isEmpty() && !ui->name->text().isEmpty())
     {
@@ -94,7 +94,7 @@ void Form_For_Change_Service::on_cost_valueChanged(const QString &value)
 }
 
 
-void Form_For_Change_Service::on_enter_change_button_clicked()
+void FormForChangeService::on_enter_change_button_clicked()
 {
     ui->data_services->item(_index_record,0)->setText(ui->cost->text());
     ui->data_services->item(_index_record,1)->setText(ui->name->text());

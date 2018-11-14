@@ -9,7 +9,7 @@ namespace Ui {
 class Form_For_Change_Service;
 }
 
-class Form_For_Change_Service : public QWidget
+class FormForChangeService : public QWidget
 {
     Q_OBJECT
 
@@ -17,8 +17,8 @@ public:
     void set_table(const QTableWidget *table);
     const QTableWidget* get_table()const;
 
-    explicit Form_For_Change_Service(QWidget *parent = 0);
-    ~Form_For_Change_Service();
+    explicit FormForChangeService(QWidget *parent = 0);
+    ~FormForChangeService();
 
 signals:
     void to_main_window();

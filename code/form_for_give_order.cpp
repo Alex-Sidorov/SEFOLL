@@ -1,7 +1,7 @@
 #include "form_for_give_order.h"
 #include "ui_form_for_give_order.h"
 
-Form_For_Give_Order::Form_For_Give_Order(QWidget *parent) :
+FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Give_Order),
     _mapper(new QSignalMapper)
@@ -14,13 +14,13 @@ Form_For_Give_Order::Form_For_Give_Order(QWidget *parent) :
     _cost = 0;
 }
 
-Form_For_Give_Order::~Form_For_Give_Order()
+FormForGiveOrder::~FormForGiveOrder()
 {
     delete _mapper;
     delete ui;
 }
 
-void Form_For_Give_Order::set_table(const QTableWidget* table)
+void FormForGiveOrder::set_table(const QTableWidget* table)
 {
     _boxs.reserve(table->rowCount());
     for(int i=0; i<table->rowCount(); i++)
@@ -44,7 +44,7 @@ void Form_For_Give_Order::set_table(const QTableWidget* table)
     connect(_mapper,SIGNAL(mapped(int)),SLOT(slot_change_box(int)));
 }
 
-void Form_For_Give_Order::clear_form()
+void FormForGiveOrder::clear_form()
 {
     _cost = 0;
     ui->cost->setText(QString("Сумма:0"));
@@ -65,14 +65,14 @@ void Form_For_Give_Order::clear_form()
     _boxs.clear();//
 }
 
-void Form_For_Give_Order::on_back_button_clicked()
+void FormForGiveOrder::on_back_button_clicked()
 {
     clear_form();
     this->close();
     emit to_main_window();
 }
 
-void Form_For_Give_Order::enabled_button()const
+void FormForGiveOrder::enabled_button()const
 {
     if(_cost!=0
        && !ui->name_client->text().isEmpty()
@@ -86,7 +86,7 @@ void Form_For_Give_Order::enabled_button()const
     }
 }
 
-void Form_For_Give_Order::slot_change_box(int row)
+void FormForGiveOrder::slot_change_box(int row)
 {
     _cost-=(_boxs[row]->get_prev_value()-_boxs[row]->value())
             * ui->data_services->item(row,1)->
@@ -97,7 +97,7 @@ void Form_For_Give_Order::slot_change_box(int row)
 }
 
 
-void Form_For_Give_Order::on_enter_button_clicked()
+void FormForGiveOrder::on_enter_button_clicked()
 {
     QVector<Info_Of_Ordered_Service> services;
     services.reserve(_boxs.size());

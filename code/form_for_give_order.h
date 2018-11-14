@@ -11,14 +11,14 @@ namespace Ui {
 class Form_For_Give_Order;
 }
 
-class Form_For_Give_Order : public QWidget
+class FormForGiveOrder : public QWidget
 {
     Q_OBJECT
 
 public:
     void set_table(const QTableWidget*);
-    explicit Form_For_Give_Order(QWidget *parent = 0);
-    ~Form_For_Give_Order();
+    explicit FormForGiveOrder(QWidget *parent = 0);
+    ~FormForGiveOrder();
 
 signals:
     void to_main_window();

@@ -4,14 +4,14 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _name_file_data("data")
+    _name_file_data("data.sqlite")
 {
 
-    window_for_give_order=new Form_For_Give_Order;
-    window_for_add_service=new Form_For_Add_Service;
-    window_for_change_service=new Form_For_Change_Service;
-    window_for_delete_service=new Form_For_Delete_Service;
-    window_for_show_order = new Form_For_Show_Order;
+    window_for_give_order = new FormForGiveOrder;
+    window_for_add_service = new FormForAddService;
+    window_for_change_service = new FormForChangeService;
+    window_for_delete_service = new FormForDeleteService;
+    window_for_show_order = new FormForShowOrder;
 
     connect(window_for_show_order,SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order,SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -24,17 +24,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    data = QSqlDatabase::addDatabase("QSQLITE");
+    data.setDatabaseName(_name_file_data);
     read_file_data();
 }
 
 MainWindow::~MainWindow()
 {
-    write_file_data();
-
+    data.close();
     while(ui->data_services->rowCount())
     {
-        delete ui->data_services->item(0,0);//
-        delete ui->data_services->item(0,1);//
+        delete ui->data_services->item(0,0);
+        delete ui->data_services->item(0,1);
         ui->data_services->removeRow(0);
     }
 
@@ -88,8 +89,19 @@ void MainWindow::add_service()
 {
     show_main_window();
 
-    QTableWidgetItem *item_cost = new QTableWidgetItem(window_for_add_service->get_cost_service());
-    QTableWidgetItem *item_name = new QTableWidgetItem(window_for_add_service->get_name_service());
+    QString cost = window_for_add_service->get_cost_service();
+    QString name = window_for_add_service->get_name_service();
+    QString request = QString("INSERT INTO services(price, name) VALUES(%1, '%2');");
+    request = request.arg(cost.replace(QChar(','),QChar('.'))).arg(name);
+    QSqlQuery query;
+    if(!query.exec(request))
+    {
+        ui->statusBar->setWindowTitle(QString("Error add service."));
+        return;
+    }
+
+    QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
+    QTableWidgetItem *item_name = new QTableWidgetItem(name);
 
     ui->data_services->insertRow(ui->data_services->rowCount());
     ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_cost);
@@ -119,47 +131,81 @@ void MainWindow::write_file_data()
 
 void MainWindow::read_file_data()
 {
-    QFile file(_name_file_data);
-    QDataStream stream(&file);
-    stream.setVersion(QDataStream::Qt_5_2);
-
-    if(!file.open(QIODevice::ReadOnly))
+    data.open();
+    if(!data.isOpen())
     {
-        ui->statusBar->setWindowTitle(QString("Cannot read file."));
+        ui->statusBar->setWindowTitle(QString("Cannot read data."));
         return;
     }
 
-    int count_services = 0;
-    QString cost;
-    QString name;
-
-    stream>>count_services;
-
-    for(int i=0; i<count_services; i++)
+    QSqlQuery query("SELECT * FROM services");
+    if(!query.isActive())
     {
-        stream>>cost;
-        stream>>name;
+        ui->statusBar->setWindowTitle(QString("Cannot read data."));
+        return;
+    }
 
-        QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
-        QTableWidgetItem *item_name = new QTableWidgetItem(name);
+    QSqlRecord record = query.record();
+    while(query.next())
+    {
+        QTableWidgetItem *item_cost = new QTableWidgetItem(query.value(record.indexOf("price")).toString());
+        QTableWidgetItem *item_name = new QTableWidgetItem(query.value(record.indexOf("name")).toString());
 
         ui->data_services->insertRow(ui->data_services->rowCount());
         ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_cost);
         ui->data_services->setItem(ui->data_services->rowCount()-1,1,item_name);
     }
-    file.close();
 }
 
 void MainWindow::upload_table(int index)
 {
     const QTableWidget *table = window_for_change_service->get_table();
-    ui->data_services->item(index,0)->setText(table->item(index,0)->text());
-    ui->data_services->item(index,1)->setText(table->item(index,1)->text());
+    QString cost = table->item(index,0)->text();
+    cost.replace(QChar(','),QChar('.'));
+    QString name = table->item(index,1)->text();
+
+    QString request = "UPDATE services SET price = %1 WHERE price = %2 AND name = '%3';";
+    request = request.arg(cost);
+    request = request.arg(ui->data_services->item(index,0)->text());
+    request = request.arg(ui->data_services->item(index,1)->text());
+    QSqlQuery query;
+    if(!query.exec(request))
+    {
+        ui->statusBar->setWindowTitle(QString("Cannot changed data."));
+        return;
+    }
+    request = "UPDATE services SET name = '%1' WHERE price = %2 AND name = '%3';";
+    request = request.arg(name);
+    request = request.arg(cost);
+    request = request.arg(ui->data_services->item(index,1)->text());
+    if(!query.exec(request))
+    {
+        ui->statusBar->setWindowTitle(QString("Cannot changed data."));
+        return;
+    }
+
+    ui->data_services->item(index,0)->setText(cost);
+    ui->data_services->item(index,1)->setText(name);
 }
 
 void MainWindow::upload_table(const QVector<int>& index_deleted_items)
 {
     int index = index_deleted_items.size()-1;
+    QString request;
+    QSqlQuery query;
+    while(index>=0)
+    {
+        request = "DELETE FROM services WHERE price = %1 AND name = '%2'";
+        request = request.arg(ui->data_services->item(index_deleted_items[index],0)->text());
+        request = request.arg(ui->data_services->item(index_deleted_items[index],1)->text());
+        if(!query.exec(request))
+        {
+            ui->statusBar->setWindowTitle(QString("Cannot delete data."));
+            return;
+        }
+        index--;
+    }
+    index = index_deleted_items.size()-1;
     while(index>=0)
     {
         ui->data_services->removeRow(index_deleted_items[index]);

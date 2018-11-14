@@ -1,7 +1,7 @@
 #include "form_for_delete_service.h"
 #include "ui_form_for_delete_service.h"
 
-Form_For_Delete_Service::Form_For_Delete_Service(QWidget *parent) :
+FormForDeleteService::FormForDeleteService(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Delete_Service)
 {
@@ -9,12 +9,12 @@ Form_For_Delete_Service::Form_For_Delete_Service(QWidget *parent) :
     _count_delete_items = 0;
 }
 
-Form_For_Delete_Service::~Form_For_Delete_Service()
+FormForDeleteService::~FormForDeleteService()
 {
     delete ui;
 }
 
-void Form_For_Delete_Service::set_table(const QTableWidget *table)
+void FormForDeleteService::set_table(const QTableWidget *table)
 {
     for(int i=0; i<table->rowCount(); i++)
     {
@@ -27,14 +27,14 @@ void Form_For_Delete_Service::set_table(const QTableWidget *table)
     }
 }
 
-void Form_For_Delete_Service::on_back_button_clicked()
+void FormForDeleteService::on_back_button_clicked()
 {
     clear_form();
     this->close();
     emit to_main_window();
 }
 
-void Form_For_Delete_Service::on_data_services_clicked(const QModelIndex &index)
+void FormForDeleteService::on_data_services_clicked(const QModelIndex &index)
 {
     if(ui->data_services->item(index.row(),0)->backgroundColor()!=Qt::blue)
     {
@@ -60,7 +60,7 @@ void Form_For_Delete_Service::on_data_services_clicked(const QModelIndex &index)
     }
 }
 
-void Form_For_Delete_Service::on_delete_button_clicked()
+void FormForDeleteService::on_delete_button_clicked()
 {
 
     if(request_for_delete() == QMessageBox::Ok)
@@ -72,7 +72,7 @@ void Form_For_Delete_Service::on_delete_button_clicked()
     emit changed_table(index_deleted_item);
 }
 
-void Form_For_Delete_Service::delete_items()
+void FormForDeleteService::delete_items()
 {
     index_deleted_item.clear();
     index_deleted_item.reserve(_count_delete_items);
@@ -100,7 +100,7 @@ void Form_For_Delete_Service::delete_items()
     }
 }
 
-void Form_For_Delete_Service::clear_form()const
+void FormForDeleteService::clear_form()const
 {
     while(ui->data_services->rowCount())
     {
@@ -110,7 +110,7 @@ void Form_For_Delete_Service::clear_form()const
     }
 }
 
-int Form_For_Delete_Service::request_for_delete()const
+int FormForDeleteService::request_for_delete()const
 {
     QMessageBox message;
     message.setText("Вы уверены, что хотите удалить выбранные элементы?");

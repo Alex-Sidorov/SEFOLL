@@ -12,6 +12,9 @@
 #include <QDoubleSpinBox>
 #include <QFile>
 #include <QDataStream>
+#include <qsqldatabase.h>
+#include <qsqlquery.h>
+#include <qsqlrecord.h>
 
 namespace Ui
 {
@@ -41,12 +44,13 @@ private:
     Ui::MainWindow *ui;
 
     QString _name_file_data;
+    QSqlDatabase data;
 
-    Form_For_Give_Order *window_for_give_order;
-    Form_For_Change_Service *window_for_change_service;
-    Form_For_Add_Service *window_for_add_service;
-    Form_For_Delete_Service *window_for_delete_service;
-    Form_For_Show_Order *window_for_show_order;
+    FormForGiveOrder *window_for_give_order;
+    FormForChangeService *window_for_change_service;
+    FormForAddService *window_for_add_service;
+    FormForDeleteService *window_for_delete_service;
+    FormForShowOrder *window_for_show_order;
 
     void write_file_data();
     void read_file_data();

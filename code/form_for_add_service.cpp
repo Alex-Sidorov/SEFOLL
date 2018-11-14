@@ -1,7 +1,7 @@
 #include "form_for_add_service.h"
 #include "ui_form_for_add_service.h"
 
-Form_For_Add_Service::Form_For_Add_Service(QWidget *parent) :
+FormForAddService::FormForAddService(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Add_Service)
 {
@@ -11,18 +11,18 @@ Form_For_Add_Service::Form_For_Add_Service(QWidget *parent) :
 
 }
 
-Form_For_Add_Service::~Form_For_Add_Service()
+FormForAddService::~FormForAddService()
 {
     delete ui;
 }
 
-void Form_For_Add_Service::on_back_button_clicked()
+void FormForAddService::on_back_button_clicked()
 {
     this->close();
     emit to_main_window();
 }
 
-void Form_For_Add_Service::on_name_service_textChanged(const QString &name)
+void FormForAddService::on_name_service_textChanged(const QString &name)
 {
     if(!name.isEmpty() && !ui->cost_service->text().isEmpty())
     {
@@ -34,7 +34,7 @@ void Form_For_Add_Service::on_name_service_textChanged(const QString &name)
     }
 }
 
-void Form_For_Add_Service::on_cost_service_valueChanged(const QString &cost)
+void FormForAddService::on_cost_service_valueChanged(const QString &cost)
 {
     if(!cost.isEmpty() && !ui->name_service->text().isEmpty())
     {
@@ -46,24 +46,24 @@ void Form_For_Add_Service::on_cost_service_valueChanged(const QString &cost)
     }
 }
 
-void Form_For_Add_Service::clear_form()const
+void FormForAddService::clear_form()const
 {
     ui->name_service->clear();
     ui->cost_service->clear();
 }
 
-void Form_For_Add_Service::show()
+void FormForAddService::show()
 {
     clear_form();
     QWidget::show();
 }
 
-QString Form_For_Add_Service::get_name_service()const
+QString FormForAddService::get_name_service()const
 {
     return ui->name_service->text();
 }
 
-QString Form_For_Add_Service::get_cost_service()const
+QString FormForAddService::get_cost_service()const
 {
     return ui->cost_service->text();
 }
