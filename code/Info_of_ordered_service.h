@@ -3,7 +3,7 @@
 
 #include <QString>
 
-struct Info_Of_Ordered_Service
+struct InfoOfOrderedService
 {
     QString name_service;
     int count;

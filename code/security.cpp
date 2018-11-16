@@ -3,6 +3,7 @@
 bool Security::check_access(QString &id, QString &password, Access &access)
 {
     QString request = "SELECT * FROM security WHERE id = %1 AND password = '%2';";
+    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
     request = request.arg(id,password);
     QSqlQuery query(request);
     if(!query.isActive() || !query.exec())
@@ -51,6 +52,7 @@ bool Security::add_user(QString &id, QString &password, Access &access)
     QString request = "INSERT INTO security(id, access, password) VALUES(%1,%2,'%3');";
     request = request.arg(id);
     request = request.arg(static_cast<int>(access));
+    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
     request = request.arg(password);
     QSqlQuery query(request);
     if(!query.isActive() || !query.exec())
@@ -63,6 +65,7 @@ bool Security::add_user(QString &id, QString &password, Access &access)
 bool Security::change_password(QString &id, QString &password)
 {
     QString request = "UPDATE security SET password = '%1' WHERE id = %2;";
+    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
     request = request.arg(password,id);
     QSqlQuery query(request);
     if(!query.isActive() || !query.exec())

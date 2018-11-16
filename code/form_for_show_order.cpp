@@ -17,7 +17,6 @@ void FormForShowOrder::on_back_button_clicked()
 
 void FormForShowOrder::clear_form()
 {
-    _order.clear();
     ui->number_order->clear();
     ui->number->setText(QString("Номер:"));
     ui->client->setText(QString("Клиент:"));

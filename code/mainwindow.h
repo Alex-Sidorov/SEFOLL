@@ -6,7 +6,9 @@
 #include "form_for_delete_service.h"
 #include "form_for_change_service.h"
 #include "form_for_show_order.h"
-
+#include "form_for_options.h"
+#include "form_for_show_data.h"
+#include "security.h"
 #include <QMainWindow>
 #include <QTableWidgetItem>
 #include <QDoubleSpinBox>
@@ -26,6 +28,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void set_access(Access access);
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
@@ -40,9 +43,12 @@ private slots:
     void upload_table(const QVector<int>&);
     void on_show_order_button_clicked();
 
+    void on_options_clicked();
+
 private:
     Ui::MainWindow *ui;
 
+    Access _access;
     QString _name_file_data;
     QSqlDatabase data;
 
@@ -51,6 +57,7 @@ private:
     FormForAddService *window_for_add_service;
     FormForDeleteService *window_for_delete_service;
     FormForShowOrder *window_for_show_order;
+    FormForOptions *window_for_options;
 
     void write_file_data();
     void read_file_data();

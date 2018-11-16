@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>FormForChangeAccess</class>
+ <widget class="QWidget" name="FormForChangeAccess">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>276</width>
-    <height>146</height>
+    <width>283</width>
+    <height>111</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -62,10 +62,20 @@
     </layout>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="access">
      <property name="enabled">
       <bool>true</bool>
      </property>
+     <item>
+      <property name="text">
+       <string>Гость</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Руководитель</string>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>Работник, который принимает заказы</string>
@@ -78,17 +88,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Руководитель</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>Администратор</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Гость</string>
       </property>
      </item>
     </widget>

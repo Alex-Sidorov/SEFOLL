@@ -174,4 +174,15 @@ void FormForGiveOrder::on_enter_button_clicked()
         const char* message = "Неудалось зарегистрировать заказ. Попробуйте позже.";
         QMessageBox::warning(this, tr("ОШИБКА"), tr(message));
     }
+    else
+    {
+        QSqlQuery query("SELECT * FROM orders;");
+        query.last();
+        int count_orders = query.at() + 1;
+        QString message = "Заказ оформлен.\n Номер:"
+                +QString::number(count_orders);
+        QMessageBox::information(this,tr("Регистрация."),
+                                 tr(message.toStdString().c_str()));
+        on_back_button_clicked();
+    }
 }

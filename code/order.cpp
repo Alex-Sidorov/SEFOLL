@@ -14,7 +14,7 @@ Order::Order()
 Order::Order(const QString &name_client,
              const QString &name_worker,
              const QDateEdit *date,
-             const QVector<Info_Of_Ordered_Service> &services,
+             const QVector<InfoOfOrderedService> &services,
              const double cost,
              const bool status):
     _name_client(name_client),
@@ -37,7 +37,7 @@ Order::Order(quint64 pos_in_file,
              const QString &name_client,
              const QString &name_worker,
              const QDateEdit *date,
-             const QVector<Info_Of_Ordered_Service> &services,
+             const QVector<InfoOfOrderedService> &services,
              const double cost,
              const bool status):
     _pos_in_file(pos_in_file),
@@ -60,7 +60,7 @@ void Order::set_data(quint64 pos_in_file,
                      const QString &name_client,
                      const QString &name_worker,
                      const QDateEdit *date,
-                     const QVector<Info_Of_Ordered_Service> &services,
+                     const QVector<InfoOfOrderedService> &services,
                      const double cost,
                      const bool status)
 {
@@ -125,7 +125,7 @@ const QDateEdit& Order::get_date()const
     return _date;
 }
 
-const QVector<Info_Of_Ordered_Service>& Order::get_services()
+const QVector<InfoOfOrderedService>& Order::get_services()
 {
     return _services;
 }
@@ -154,9 +154,9 @@ QSharedPointer<Order> Order::find_order(const unsigned long long int number)
     int day = 0;
     int month = 0;
     int year = 0;
-    Info_Of_Ordered_Service temp;
+    InfoOfOrderedService temp;
     int count_services = 0;
-    QVector<Info_Of_Ordered_Service> services;
+    QVector<InfoOfOrderedService> services;
     bool status = false;
     qint64 pos_in_file = 0;
 

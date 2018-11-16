@@ -4,7 +4,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _name_file_data("data.sqlite")
+    _name_file_data("data.sqlite"),
+    _access(GUEST)
 {
 
     window_for_give_order = new FormForGiveOrder;
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     window_for_change_service = new FormForChangeService;
     window_for_delete_service = new FormForDeleteService;
     window_for_show_order = new FormForShowOrder;
+    window_for_options = new FormForOptions;
 
     connect(window_for_show_order,SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order,SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -21,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(window_for_delete_service,SIGNAL(changed_table(QVector<int>)),SLOT(upload_table(QVector<int>)));
     connect(window_for_change_service,SIGNAL(changed_data(int)),SLOT(upload_table(int)));
     connect(window_for_change_service,SIGNAL(to_main_window()),SLOT(show_main_window()));
+    connect(window_for_options,SIGNAL(to_main_window()),SLOT(show_main_window()));
 
     ui->setupUi(this);
 
@@ -40,6 +43,7 @@ MainWindow::~MainWindow()
     }
 
     delete ui;
+    delete window_for_options;
     delete window_for_add_service;
     delete window_for_change_service;
     delete window_for_delete_service;
@@ -47,8 +51,21 @@ MainWindow::~MainWindow()
     delete window_for_show_order;
 }
 
+void MainWindow::set_access(Access access)
+{
+    _access = access;
+}
+
 void MainWindow::on_give_order_button_clicked()
 {
+    if(_access != ADMIN &&
+       _access != WORKER_TAKE_ORDER &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
+
     window_for_give_order->set_table(ui->data_services);
     window_for_give_order->show();
     this->close();
@@ -56,18 +73,37 @@ void MainWindow::on_give_order_button_clicked()
 
 void MainWindow::on_add_service_button_clicked()
 {
+    if(_access != ADMIN &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
     window_for_add_service->show();
     this->close();
 }
 
 void MainWindow::on_show_order_button_clicked()
 {
+    if(_access != ADMIN &&
+       _access != WORKER_CLOSE_ORDER &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
     window_for_show_order->show();
     this->close();
 }
 
 void MainWindow::on_change_service_button_clicked()
 {
+    if(_access != ADMIN &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
     window_for_change_service->set_table(ui->data_services);
     window_for_change_service->show();
     this->close();
@@ -75,6 +111,12 @@ void MainWindow::on_change_service_button_clicked()
 
 void MainWindow::on_delete_service_button_clicked()
 {
+    if(_access != ADMIN &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
     window_for_delete_service->set_table(ui->data_services);
     window_for_delete_service->show();
     this->close();
@@ -91,7 +133,7 @@ void MainWindow::add_service()
 
     QString cost = window_for_add_service->get_cost_service();
     QString name = window_for_add_service->get_name_service();
-    QString request = QString("INSERT INTO services(price, name) VALUES(%1, '%2');");
+    QString request = "INSERT INTO services(price, name) VALUES(%1, '%2');";
     request = request.arg(cost.replace(QChar(','),QChar('.'))).arg(name);
     QSqlQuery query;
     if(!query.exec(request))
@@ -213,3 +255,14 @@ void MainWindow::upload_table(const QVector<int>& index_deleted_items)
     }
 }
 
+
+void MainWindow::on_options_clicked()
+{
+    if(_access != ADMIN)
+    {
+        QMessageBox::warning(this,"Ошибка","Недостаточно прав доступа");
+        return;
+    }
+    window_for_options->show();
+    this->close();
+}

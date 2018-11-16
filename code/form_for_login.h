@@ -6,16 +6,16 @@
 #include "security.h"
 
 namespace Ui {
-class Form_For_Login;
+class FormForLogin;
 }
 
-class ForForLogin : public QWidget
+class FormForLogin : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ForForLogin(QWidget *parent = 0);
-    ~ForForLogin();
+    explicit FormForLogin(QWidget *parent = 0);
+    ~FormForLogin();
 
     bool is_close()const;
     Access get_access()const;
@@ -28,7 +28,7 @@ private slots:
     void on_button_for_guest_clicked();
 
 private:
-    Ui::Form_For_Login *ui;
+    Ui::FormForLogin *ui;
     QString _id;
     QString _password;
     bool _close;

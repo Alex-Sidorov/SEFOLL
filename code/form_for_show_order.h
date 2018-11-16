@@ -1,11 +1,10 @@
 #ifndef FORM_FOR_SHOW_ORDER_H
 #define FORM_FOR_SHOW_ORDER_H
 
-#include "order.h"
-
 #include <QWidget>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QMessageBox>
 
 namespace Ui {
 class Form_For_Show_Order;
@@ -30,8 +29,6 @@ private slots:
 
 private:
     Ui::Form_For_Show_Order *ui;
-    QSharedPointer<Order> _order;
-
     void clear_form();
 };
 

@@ -1,9 +1,9 @@
 #include "form_for_login.h"
 #include "ui_form_for_login.h"
 
-ForForLogin::ForForLogin(QWidget *parent) :
+FormForLogin::FormForLogin(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Login)
+    ui(new Ui::FormForLogin)
 {
     _close = false;
     _access = GUEST;
@@ -11,7 +11,7 @@ ForForLogin::ForForLogin(QWidget *parent) :
     connect(ui->ok,SIGNAL(clicked()),SLOT(input_ok()));
 }
 
-void ForForLogin::show()
+void FormForLogin::show()
 {
     _close = true;
     ui->id->clear();
@@ -20,34 +20,35 @@ void ForForLogin::show()
     QWidget::show();
 }
 
-void ForForLogin::input_ok()
+void FormForLogin::input_ok()
 {
     QString password = ui->password->text();
     QString id = ui->id->text();
     if(!Security::check_access(id, password, _access))
     {
         ui->error->setText("Ошибка. Проверьте id и пароль.");
+        return;
     }
     _close = false;
     QWidget::close();
 }
 
-bool ForForLogin::is_close()const
+bool FormForLogin::is_close()const
 {
     return _close;
 }
 
-ForForLogin::~ForForLogin()
+FormForLogin::~FormForLogin()
 {
     delete ui;
 }
 
-Access ForForLogin::get_access()const
+Access FormForLogin::get_access()const
 {
     return _access;
 }
 
-void ForForLogin::on_button_for_guest_clicked()
+void FormForLogin::on_button_for_guest_clicked()
 {
     _close = false;
     QWidget::close();
