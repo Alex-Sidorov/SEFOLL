@@ -15,7 +15,6 @@ public:
     QString get_name_service()const;
     QString get_cost_service()const;
     void show();
-
     explicit FormForAddService(QWidget *parent = 0);
     ~FormForAddService();
 
@@ -25,12 +24,13 @@ signals:
 
 private slots:
     void on_back_button_clicked();
-    void on_name_service_textChanged(const QString &name);
-    void on_cost_service_valueChanged(const QString &cost);
+    void slot_fields_form_changed();
 
 private:
     Ui::Form_For_Add_Service *ui;
+
     void clear_form()const;
+    bool is_empty_form()const;
 };
 
 #endif // FORM_FOR_ADD_SERVICE_H

@@ -33,13 +33,29 @@ private slots:
 
 private:
     Ui::Form_For_Give_Order *ui;
-    QVector<New_SpinBox*> _boxs;
+    QVector<NewSpinBox*> _boxs;
     QSignalMapper *_mapper;
     double _cost;
 
     bool add_order(Order &order);
     void clear_form();
+    bool check_input_fields()const;
 
+    static const int INDEX_COLUMN_COST;
+    static const int INDEX_COLUMN_NAME;
+    static const int INDEX_COLUMN_COUNT;
+    static const int INDEX_FIRST_ROW;
+    static const int OFFSET_INDEX;
+
+    static const char *COST_LABEL;
+    static const char *REQUEST_TAKE_TABLE_ORDERS;
+    static const char *REQUEST_INSERT_ORDERS;
+    static const char *REQUEST_CREATE_TABLE_ORDER;
+    static const char *REQUEST_INSERT_SERVICE_ORDER;
+    static const char *ERROR_MESSAGE;
+    static const char *ERROR;
+    static const char* REGISTRATION;
+    static const char* MESSAGE_NUMBER_ORDER;
 };
 
 #endif // FORM_FOR_GIVE_ORDER_H

@@ -36,6 +36,12 @@ private:
     int request_for_delete()const;
     void delete_items();
     void clear_form()const;
+
+    static const int INDEX_COLUMN_COST;
+    static const int INDEX_COLUMN_NAME;
+    static const int INDEX_FIRST_ROW;
+
+    static const char* MESSAGE_REQUEST_FOR_DELETE;
 };
 
 #endif // FORM_FOR_DELETE_SERVICE_H

@@ -8,7 +8,8 @@ FormForAddService::FormForAddService(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->ok_button, SIGNAL(clicked()), this, SIGNAL(new_data()));
     connect(this,SIGNAL(new_data()),this,SLOT(close()));
-
+    connect(ui->name_service,SIGNAL(textChanged(QString)),this,SLOT(slot_fields_form_changed()));
+    connect(ui->cost_service,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
 }
 
 FormForAddService::~FormForAddService()
@@ -22,21 +23,14 @@ void FormForAddService::on_back_button_clicked()
     emit to_main_window();
 }
 
-void FormForAddService::on_name_service_textChanged(const QString &name)
+bool FormForAddService::is_empty_form()const
 {
-    if(!name.isEmpty() && !ui->cost_service->text().isEmpty())
-    {
-        ui->ok_button->setEnabled(true);
-    }
-    else
-    {
-        ui->ok_button->setEnabled(false);
-    }
+    return !ui->name_service->text().isEmpty() && !ui->cost_service->value() == 0;
 }
 
-void FormForAddService::on_cost_service_valueChanged(const QString &cost)
+void FormForAddService::slot_fields_form_changed()
 {
-    if(!cost.isEmpty() && !ui->name_service->text().isEmpty())
+    if(is_empty_form())
     {
         ui->ok_button->setEnabled(true);
     }

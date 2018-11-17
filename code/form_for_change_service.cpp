@@ -1,24 +1,35 @@
 #include "form_for_change_service.h"
 #include "ui_form_for_change_service.h"
 
+const int FormForChangeService::INDEX_COLUMN_COST = 0;
+const int FormForChangeService::INDEX_COLUMN_NAME = 1;
+const int FormForChangeService::INDEX_FIRST_ROW = 0;
+
 FormForChangeService::FormForChangeService(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Change_Service)
 {
     _index_record = 0;
-    ui->setupUi(this);
+
+     ui->setupUi(this);
+
+    connect(ui->cost,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
+    connect(ui->name,SIGNAL(textChanged(QString)),this,SLOT(slot_fields_form_changed()));
 }
 
 void FormForChangeService::set_table(const QTableWidget *table)
 {
-    for(int i = 0; i < table->rowCount(); i++)
+    int count_row_table = table->rowCount();
+    int count_row_data_services = 0;
+    for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,0)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,1)));
+        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
-        ui->data_services->insertRow(ui->data_services->rowCount());
-        ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_cost);
-        ui->data_services->setItem(ui->data_services->rowCount()-1,1,item_name);
+        count_row_data_services = ui->data_services->rowCount();
+        ui->data_services->insertRow(count_row_data_services);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_COST,item_cost);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_NAME,item_name);
     }
 }
 
@@ -45,10 +56,9 @@ void FormForChangeService::on_data_services_clicked(const QModelIndex &index)
     ui->cost->setEnabled(true);
 
     _index_record = index.row();
-
-    ui->name->setText(ui->data_services->item(_index_record,1)->text());
+    ui->name->setText(ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->text());
     ui->cost->setValue(ui->data_services->
-                       item(_index_record,0)->
+                       item(_index_record,INDEX_COLUMN_COST)->
                        text().replace(QChar(','),QChar('.')).toDouble());
 
 }
@@ -63,15 +73,20 @@ void FormForChangeService::clear_form()const
 
     while(ui->data_services->rowCount())
     {
-        delete ui->data_services->item(0,0);//
-        delete ui->data_services->item(0,1);//
-        ui->data_services->removeRow(0);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME);
+        ui->data_services->removeRow(INDEX_FIRST_ROW);
     }
 }
 
-void FormForChangeService::on_name_textChanged(const QString &name)
+bool FormForChangeService::is_empty_form()const
 {
-    if(!name.isEmpty() && !ui->cost->text().isEmpty())
+    return !ui->name->text().isEmpty() && !ui->cost->value() == 0;
+}
+
+void FormForChangeService::slot_fields_form_changed()
+{
+    if(is_empty_form())
     {
         ui->enter_change_button->setEnabled(true);
     }
@@ -80,23 +95,10 @@ void FormForChangeService::on_name_textChanged(const QString &name)
         ui->enter_change_button->setEnabled(false);
     }
 }
-
-void FormForChangeService::on_cost_valueChanged(const QString &value)
-{
-    if(!value.isEmpty() && !ui->name->text().isEmpty())
-    {
-        ui->enter_change_button->setEnabled(true);
-    }
-    else
-    {
-        ui->enter_change_button->setEnabled(false);
-    }
-}
-
 
 void FormForChangeService::on_enter_change_button_clicked()
 {
-    ui->data_services->item(_index_record,0)->setText(ui->cost->text());
-    ui->data_services->item(_index_record,1)->setText(ui->name->text());
+    ui->data_services->item(_index_record,INDEX_COLUMN_COST)->setText(ui->cost->text());
+    ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->setText(ui->name->text());
     emit changed_data(_index_record);
 }

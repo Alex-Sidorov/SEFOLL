@@ -1,6 +1,12 @@
 #include "form_for_delete_service.h"
 #include "ui_form_for_delete_service.h"
 
+const int FormForDeleteService::INDEX_COLUMN_COST = 0;
+const int FormForDeleteService::INDEX_COLUMN_NAME = 1;
+const int FormForDeleteService::INDEX_FIRST_ROW = 0;
+
+const char* FormForDeleteService::MESSAGE_REQUEST_FOR_DELETE = "Вы уверены, что хотите удалить выбранные элементы?";
+
 FormForDeleteService::FormForDeleteService(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Delete_Service)
@@ -16,14 +22,17 @@ FormForDeleteService::~FormForDeleteService()
 
 void FormForDeleteService::set_table(const QTableWidget *table)
 {
-    for(int i=0; i<table->rowCount(); i++)
+    int count_row_table = table->rowCount();
+    int count_row_data_services = 0;
+    for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,0)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,1)));
+        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
-        ui->data_services->insertRow(ui->data_services->rowCount());
-        ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_cost);
-        ui->data_services->setItem(ui->data_services->rowCount()-1,1,item_name);
+        count_row_data_services = ui->data_services->rowCount();
+        ui->data_services->insertRow(count_row_data_services);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_COST,item_cost);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_NAME,item_name);
     }
 }
 
@@ -36,21 +45,21 @@ void FormForDeleteService::on_back_button_clicked()
 
 void FormForDeleteService::on_data_services_clicked(const QModelIndex &index)
 {
-    if(ui->data_services->item(index.row(),0)->backgroundColor()!=Qt::blue)
+    int index_item = index.row();
+    if(ui->data_services->item(index_item,INDEX_COLUMN_NAME)->backgroundColor()!=Qt::blue)
     {
-        ui->data_services->item(index.row(),0)->setBackgroundColor(QColor(Qt::blue));
-        ui->data_services->item(index.row(),1)->setBackgroundColor(QColor(Qt::blue));
+        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(QColor(Qt::blue));
+        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(QColor(Qt::blue));
         _count_delete_items++;
-
     }
     else
     {
-        ui->data_services->item(index.row(),0)->setBackgroundColor(QColor(Qt::white));
-        ui->data_services->item(index.row(),1)->setBackgroundColor(QColor(Qt::white));
+        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(QColor(Qt::white));
+        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(QColor(Qt::white));
         _count_delete_items--;
     }
 
-    if(_count_delete_items==0)
+    if(_count_delete_items == 0)
     {
         ui->delete_button->setEnabled(false);
     }
@@ -80,15 +89,13 @@ void FormForDeleteService::delete_items()
     int index_main_table=0;
     int index = 0;
 
-    while(_count_delete_items!=0)
+    while(_count_delete_items != 0)
     {
-        if(ui->data_services->item(index,0)->backgroundColor()==Qt::blue)
+        if(ui->data_services->item(index,INDEX_COLUMN_NAME)->backgroundColor()==Qt::blue)
         {
             index_deleted_item.push_back(index_main_table);
-
-            delete ui->data_services->item(index,0);//
-            delete ui->data_services->item(index,1);//
-
+            delete ui->data_services->item(index,INDEX_COLUMN_COST);
+            delete ui->data_services->item(index,INDEX_COLUMN_NAME);
             ui->data_services->removeRow(index);
             _count_delete_items--;
         }
@@ -104,16 +111,16 @@ void FormForDeleteService::clear_form()const
 {
     while(ui->data_services->rowCount())
     {
-        delete ui->data_services->item(0,0);//
-        delete ui->data_services->item(0,1);//
-        ui->data_services->removeRow(0);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME);
+        ui->data_services->removeRow(INDEX_FIRST_ROW);
     }
 }
 
 int FormForDeleteService::request_for_delete()const
 {
     QMessageBox message;
-    message.setText("Вы уверены, что хотите удалить выбранные элементы?");
+    message.setText(MESSAGE_REQUEST_FOR_DELETE);
     message.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
     return message.exec();
 }

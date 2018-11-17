@@ -1,6 +1,7 @@
 #include "form_for_login.h"
 #include "ui_form_for_login.h"
 
+const char* FormForLogin::MESSAGE_ERROR = "Ошибка. Проверьте id и пароль.";
 FormForLogin::FormForLogin(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForLogin)
@@ -26,7 +27,7 @@ void FormForLogin::input_ok()
     QString id = ui->id->text();
     if(!Security::check_access(id, password, _access))
     {
-        ui->error->setText("Ошибка. Проверьте id и пароль.");
+        ui->error->setText(MESSAGE_ERROR);
         return;
     }
     _close = false;
@@ -50,6 +51,7 @@ Access FormForLogin::get_access()const
 
 void FormForLogin::on_button_for_guest_clicked()
 {
+    _access = GUEST;
     _close = false;
     QWidget::close();
 }

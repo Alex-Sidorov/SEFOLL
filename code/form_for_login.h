@@ -35,6 +35,8 @@ private:
     Access _access;
 
     void check_access();
+
+    static const char* MESSAGE_ERROR;
 };
 
 #endif // FORM_FOR_LOGIN_H

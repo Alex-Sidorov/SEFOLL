@@ -1,6 +1,27 @@
 #include "form_for_give_order.h"
 #include "ui_form_for_give_order.h"
 
+const int FormForGiveOrder::INDEX_COLUMN_COST = 0;
+const int FormForGiveOrder::INDEX_COLUMN_NAME = 1;
+const int FormForGiveOrder::INDEX_COLUMN_COUNT = 0;
+const int FormForGiveOrder::OFFSET_INDEX = 1;
+const int FormForGiveOrder::INDEX_FIRST_ROW = 0;
+
+const char* FormForGiveOrder::COST_LABEL = "Сумма:";
+const char* FormForGiveOrder::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
+const char* FormForGiveOrder::REQUEST_INSERT_ORDERS =
+        "INSERT INTO orders(number, client, worker, date, status, cost, services)"
+        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7);";
+const char* FormForGiveOrder::REQUEST_CREATE_TABLE_ORDER =
+        "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
+const char* FormForGiveOrder::REQUEST_INSERT_SERVICE_ORDER =
+        "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
+const char* FormForGiveOrder::ERROR_MESSAGE =
+        "Неудалось зарегистрировать заказ. Попробуйте позже.";
+const char* FormForGiveOrder::ERROR = "ОШИБКА";
+const char* FormForGiveOrder::REGISTRATION = "Регистрация";
+const char* FormForGiveOrder::MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
+
 FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Give_Order),
@@ -22,24 +43,26 @@ FormForGiveOrder::~FormForGiveOrder()
 
 void FormForGiveOrder::set_table(const QTableWidget* table)
 {
-    _boxs.reserve(table->rowCount());
-    for(int i=0; i<table->rowCount(); i++)
+    int count_row_table = table->rowCount();
+    _boxs.reserve(count_row_table);
+    int count_row_data_services = 0;
+    for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,0)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,1)));
+        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
-        ui->data_services->insertRow(ui->data_services->rowCount());
-        ui->data_services->setItem(ui->data_services->rowCount()-1,1,item_cost);
-        ui->data_services->setItem(ui->data_services->rowCount()-1,2,item_name);
+        count_row_data_services = ui->data_services->rowCount();
+        ui->data_services->insertRow(count_row_data_services);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_COST+OFFSET_INDEX,item_cost);
+        ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_NAME+OFFSET_INDEX,item_name);
 
-        New_SpinBox *new_box = new New_SpinBox;
-        new_box->setMaximum(1000);
+        NewSpinBox *new_box = new NewSpinBox;
         _boxs.push_back(new_box);
 
         connect(new_box,SIGNAL(valueChanged(int)),_mapper,SLOT(map()));
         _mapper->setMapping(new_box,i);
 
-        ui->data_services->setCellWidget(ui->data_services->rowCount()-1,0,new_box);
+        ui->data_services->setCellWidget(count_row_data_services,INDEX_COLUMN_COUNT,new_box);
     }
     connect(_mapper,SIGNAL(mapped(int)),SLOT(slot_change_box(int)));
 }
@@ -47,15 +70,15 @@ void FormForGiveOrder::set_table(const QTableWidget* table)
 void FormForGiveOrder::clear_form()
 {
     _cost = 0;
-    ui->cost->setText(QString("Сумма:0"));
+    ui->cost->setText(QString(COST_LABEL) + '0');
     ui->name_client->clear();
     ui->name_worker->clear();
     ui->date->setDate(QDate::currentDate());
     while(ui->data_services->rowCount())
     {
-        delete ui->data_services->item(0,1);//
-        delete ui->data_services->item(0,2);//
-        ui->data_services->removeRow(0);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST + OFFSET_INDEX);
+        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME + OFFSET_INDEX);
+        ui->data_services->removeRow(INDEX_FIRST_ROW);
     }
 
     for(int i=0; i<_boxs.size();i++)
@@ -72,11 +95,14 @@ void FormForGiveOrder::on_back_button_clicked()
     emit to_main_window();
 }
 
+bool FormForGiveOrder::check_input_fields()const
+{
+    return _cost!=0 && !ui->name_client->text().isEmpty() && !ui->name_worker->text().isEmpty();
+}
+
 void FormForGiveOrder::enabled_button()const
 {
-    if(_cost!=0 &&
-       !ui->name_client->text().isEmpty() &&
-       !ui->name_worker->text().isEmpty())
+    if(check_input_fields())
     {
         ui->enter_button->setEnabled(true);
     }
@@ -88,17 +114,23 @@ void FormForGiveOrder::enabled_button()const
 
 void FormForGiveOrder::slot_change_box(int row)
 {
-    _cost-=(_boxs[row]->get_prev_value()-_boxs[row]->value())
-            * ui->data_services->item(row,1)->
-            text().replace(QChar(','),QChar('.')).toDouble();
+    double cost_service = ui->
+           data_services->
+           item(row,INDEX_COLUMN_COST + OFFSET_INDEX)->
+           text().replace(QChar(','),QChar('.')).toDouble();
+
+    _cost-=(_boxs[row]->get_prev_value() -
+            _boxs[row]->value()) *
+            cost_service;
+
     _boxs[row]->set_prev_value(_boxs[row]->value());
-    ui->cost->setText("Сумма:"+QString::number(_cost));
+    ui->cost->setText(COST_LABEL + QString::number(_cost));
     enabled_button();
 }
 
 bool FormForGiveOrder::add_order(Order &order)
 {
-    QSqlQuery query("SELECT * FROM orders;");
+    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
     if(!query.isActive())
     {
         return false;
@@ -113,8 +145,7 @@ bool FormForGiveOrder::add_order(Order &order)
     const QDateEdit &date = order.get_date();
     bool status = order.get_status();
     double cost = order.get_cost();
-    QString request = "INSERT INTO orders(number, client, worker, date, status, cost, services)";
-    request += " VALUES(%1, '%2', '%3', '%4', %5, %6, %7);";
+    QString request = REQUEST_INSERT_ORDERS;
     request = request.arg(count_orders);
     request = request.arg(name_client);
     request = request.arg(name_worker);
@@ -128,14 +159,14 @@ bool FormForGiveOrder::add_order(Order &order)
     {
         return false;
     }
-    request = QString("CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);").arg(count_orders);
+    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(count_orders);
     if(!query.exec(request))
     {
         return false;
     }
     for(int i = 0; i < services.size(); i++)
     {
-        request = "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
+        request = REQUEST_INSERT_SERVICE_ORDER;
         request = request.arg(count_orders);
         request = request.arg(services[i].cost);
         request = request.arg(services[i].count);
@@ -153,36 +184,37 @@ void FormForGiveOrder::on_enter_button_clicked()
     QVector<InfoOfOrderedService> services;
     services.reserve(_boxs.size());
 
+    InfoOfOrderedService temp;
     for(int i=0; i<_boxs.size(); i++)
     {
         if(_boxs[i]->value()!=0)
         {
-            services.push_back(InfoOfOrderedService{
-                                   ui->data_services->item(i,2)->text(),
-                                   _boxs[i]->value(),
-                                   ui->data_services->item(i,1)->
-                                   text().replace(QChar(','),QChar('.')).
-                                   toDouble()});
+            temp = InfoOfOrderedService{
+                    ui->data_services->item(i,INDEX_COLUMN_NAME + OFFSET_INDEX)->text(),
+                    _boxs[i]->value(),
+                    ui->data_services->item(i,INDEX_COLUMN_COST + OFFSET_INDEX)->
+                    text().replace(QChar(','),QChar('.')).
+                    toDouble()};
+            services.push_back(temp);
         }
     }
 
     Order order(ui->name_client->text(),
                 ui->name_worker->text(),
-                ui->date,services,_cost,false);
+                ui->date,services,
+                _cost,
+                false);
+
     if(!add_order(order))
     {
-        const char* message = "Неудалось зарегистрировать заказ. Попробуйте позже.";
-        QMessageBox::warning(this, tr("ОШИБКА"), tr(message));
+        QMessageBox::warning(this, tr(ERROR), tr(ERROR_MESSAGE));
     }
     else
     {
-        QSqlQuery query("SELECT * FROM orders;");
+        QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
         query.last();
-        int count_orders = query.at() + 1;
-        QString message = "Заказ оформлен.\n Номер:"
-                +QString::number(count_orders);
-        QMessageBox::information(this,tr("Регистрация."),
-                                 tr(message.toStdString().c_str()));
+        QString message = MESSAGE_NUMBER_ORDER + QString::number(query.at() + 1);
+        QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
         on_back_button_clicked();
     }
 }
