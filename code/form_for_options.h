@@ -9,6 +9,7 @@
 
 #include <QMessageBox>
 #include <QWidget>
+#include <QSharedPointer>
 
 namespace Ui {
 class FormForOptions;
@@ -20,7 +21,8 @@ class FormForOptions : public QWidget
 
 public:
     explicit FormForOptions(QWidget *parent = 0);
-    ~FormForOptions();
+    FormForOptions(const FormForOptions&) = delete;
+    virtual ~FormForOptions(){}
 
 signals:
     void to_main_window();
@@ -41,17 +43,28 @@ private slots:
     void slot_change_access_back_button_clicked();
 
 private:
-    Ui::FormForOptions *ui;
+    QSharedPointer<Ui::FormForOptions>ui;
+    QSharedPointer<Ui::FormForAddPassword> window_for_add_password;
+    QSharedPointer<Ui::FormForChangePassword> window_for_change_password;
+    QSharedPointer<Ui::FormForChangeAccess> window_for_change_access;
+    QSharedPointer<Ui::FormForDeletePassword> window_for_delete_password;
 
-    Ui::FormForAddPassword *window_for_add_password;
-    Ui::FormForChangePassword *window_for_change_password;
-    Ui::FormForChangeAccess *window_for_change_access;
-    Ui::FormForDeletePassword *window_for_delete_password;
+    QSharedPointer<QWidget> _widget_for_add_password;
+    QSharedPointer<QWidget> _widget_for_change_password;
+    QSharedPointer<QWidget> _widget_for_change_access;
+    QSharedPointer<QWidget> _widget_for_delete_password;
 
-    QWidget *_widget_for_add_password;
-    QWidget *_widget_for_change_password;
-    QWidget *_widget_for_change_access;
-    QWidget *_widget_for_delete_password;
+    static const char* RESUALT;
+    static const char* ERROR;
+    static const char* MESSAGE_ERROR_ADD_USER;
+    static const char* MESSAGE_ERROR_DELETE_USER;
+    static const char* MESSAGE_USER_WAS_ADD;
+    static const char* MESSAGE_USER_WAS_DELETE;
+    static const char* MESSAGE_ERROR_CHANGE_DATA;
+    static const char* MESSAGE_DATA_CHANGED;
+
+    static const int INDEX_FIRST_ACCESS;
+
 };
 
 #endif // FORM_FOR_OPTIONS_H

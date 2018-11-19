@@ -5,6 +5,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QMessageBox>
+#include <QSharedPointer>
 
 namespace Ui {
 class Form_For_Show_Order;
@@ -16,7 +17,7 @@ class FormForShowOrder : public QWidget
 
 public:
     explicit FormForShowOrder(QWidget *parent = 0);
-    ~FormForShowOrder();
+    virtual ~FormForShowOrder(){}
 
 signals:
     void to_main_window();
@@ -28,7 +29,39 @@ private slots:
     void on_complete_button_clicked();
 
 private:
-    Ui::Form_For_Show_Order *ui;
+    QSharedPointer<Ui::Form_For_Show_Order> ui;
+
+    static const char* ERROR;
+    static const char* ERROR_FIND_ORDER;
+    static const char* ERROR_COMPLETE_ORDER;
+
+    static const char* LABEL_NUMBER_ORDER;
+    static const char* LABEL_CLIENT;
+    static const char* LABEL_WORKER;
+    static const char* LABEL_DATE_ORDER;
+    static const char* LABEL_COST;
+    static const char* LABEL_STATUS;
+    static const char* LABEL_STATUS_COMPLETE;
+    static const char* LABEL_STATUS_NOT_COMPLETE;
+
+    static const char* REQUEST_TAKE_TABLE_ORDERS;
+    static const char* REQUEST_TAKE_TABLE_SERVICES_ORDER;
+    static const char* REQUEST_COMPLETE_ORDER;
+
+    static const char* COLUMN_CLIENT;
+    static const char* COLUMN_WORKER;
+    static const char* COLUMN_DATE;
+    static const char* COLUMN_COST;
+    static const char* COLUMN_STATUS;
+    static const char* COLUMN_SERVICES;
+    static const char* COLUMN_PRICE_SERVICE;
+    static const char* COLUMN_COUNT_SERVICES;
+    static const char* COLUMN_NAME_SERVICE;
+
+    static const int INDEX_COLUMN_COUNT;
+    static const int INDEX_COLUMN_COST;
+    static const int INDEX_COLUMN_NAME;
+
     void clear_form();
 };
 

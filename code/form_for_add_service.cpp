@@ -12,11 +12,6 @@ FormForAddService::FormForAddService(QWidget *parent) :
     connect(ui->cost_service,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
 }
 
-FormForAddService::~FormForAddService()
-{
-    delete ui;
-}
-
 void FormForAddService::on_back_button_clicked()
 {
     this->close();
@@ -43,7 +38,7 @@ void FormForAddService::slot_fields_form_changed()
 void FormForAddService::clear_form()const
 {
     ui->name_service->clear();
-    ui->cost_service->clear();
+    ui->cost_service->setValue(0);
 }
 
 void FormForAddService::show()

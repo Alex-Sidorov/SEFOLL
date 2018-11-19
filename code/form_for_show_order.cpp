@@ -1,6 +1,37 @@
 #include "form_for_show_order.h"
 #include "ui_form_for_show_order.h"
 
+const char* FormForShowOrder::ERROR =                "ОШИБКА";
+const char* FormForShowOrder::ERROR_FIND_ORDER =     "Неудалось найти заказ. Проверьте номер заказа.";
+const char* FormForShowOrder::ERROR_COMPLETE_ORDER = "В данный момент изменить состояние заказа не возможно.";
+
+const char* FormForShowOrder::LABEL_NUMBER_ORDER =        "Номер:";
+const char* FormForShowOrder::LABEL_CLIENT =              "Клиент:";
+const char* FormForShowOrder::LABEL_WORKER =              "Исполнитель:";
+const char* FormForShowOrder::LABEL_DATE_ORDER =          "Дата принятия заказа:";
+const char* FormForShowOrder::LABEL_COST =                "Сумма:";
+const char* FormForShowOrder::LABEL_STATUS =              "Статус заказа:";
+const char* FormForShowOrder::LABEL_STATUS_COMPLETE =     "Статус заказа: закончен.";
+const char* FormForShowOrder::LABEL_STATUS_NOT_COMPLETE = "Статус заказа: не закончен.";
+
+const char* FormForShowOrder::REQUEST_TAKE_TABLE_ORDERS =         "SELECT * FROM orders;";
+const char* FormForShowOrder::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
+const char* FormForShowOrder::REQUEST_COMPLETE_ORDER =            "UPDATE orders SET status = 1 WHERE number = %1;";
+
+const char* FormForShowOrder::COLUMN_CLIENT =         "client";
+const char* FormForShowOrder::COLUMN_WORKER =         "worker";
+const char* FormForShowOrder::COLUMN_DATE =           "date";
+const char* FormForShowOrder::COLUMN_COST =           "cost";
+const char* FormForShowOrder::COLUMN_STATUS =         "status";
+const char* FormForShowOrder::COLUMN_SERVICES =       "services";
+const char* FormForShowOrder::COLUMN_PRICE_SERVICE =  "price";
+const char* FormForShowOrder::COLUMN_COUNT_SERVICES = "count";
+const char* FormForShowOrder::COLUMN_NAME_SERVICE =   "name";
+
+const int FormForShowOrder::INDEX_COLUMN_COUNT = 0;
+const int FormForShowOrder::INDEX_COLUMN_COST =  1;
+const int FormForShowOrder::INDEX_COLUMN_NAME =  2;
+
 FormForShowOrder::FormForShowOrder(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Show_Order)
@@ -18,31 +49,19 @@ void FormForShowOrder::on_back_button_clicked()
 void FormForShowOrder::clear_form()
 {
     ui->number_order->clear();
-    ui->number->setText(QString("Номер:"));
-    ui->client->setText(QString("Клиент:"));
-    ui->worker->setText(QString("Исполнитель:"));
-    ui->date->setText(QString("Дата принятия заказа:"));
-    ui->cost->setText(QString("Сумма:"));
-    ui->status->setText(QString("Статус заказа:"));
+    ui->number->setText(LABEL_NUMBER_ORDER);
+    ui->client->setText(LABEL_CLIENT);
+    ui->worker->setText(LABEL_WORKER);
+    ui->date->setText(LABEL_DATE_ORDER);
+    ui->cost->setText(LABEL_COST);
+    ui->status->setText(LABEL_STATUS);
     ui->complete_button->setEnabled(false);
-    while(ui->data_services->rowCount())
-    {
-        delete ui->data_services->item(0,0);//
-        delete ui->data_services->item(0,1);//
-        delete ui->data_services->item(0,2);//
-        ui->data_services->removeRow(0);
-    }
-}
-
-
-FormForShowOrder::~FormForShowOrder()
-{
-    delete ui;
+    ui->data_services->setRowCount(0);
 }
 
 void FormForShowOrder::on_number_order_valueChanged(int number)
 {
-    if(number!=0)
+    if(number != 0)
     {
         ui->enter_button->setEnabled(true);
     }
@@ -56,7 +75,7 @@ void FormForShowOrder::on_enter_button_clicked()
 {
     clear_form();
 
-    QSqlQuery query("SELECT * FROM orders;");
+    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
     if(!query.isActive())
     {
         return;
@@ -64,35 +83,34 @@ void FormForShowOrder::on_enter_button_clicked()
     int number_order = ui->number_order->value();
     if(!query.seek(number_order - 1))
     {
-        QMessageBox::warning(this,tr("ОШИБКА"),
-                             tr("Неудалось найти заказ. Проверьте номер заказа."));
+        QMessageBox::warning(this, tr(ERROR), tr(ERROR_FIND_ORDER));
     }
     else
     {
         QSqlRecord record = query.record();
-        ui->number->setText(QString("Номер:")+
+        ui->number->setText(LABEL_NUMBER_ORDER +
                             QString::number(number_order));
-        ui->client->setText(QString("Клиент:") +
-                            query.value(record.indexOf("client")).toString());
-        ui->worker->setText(QString("Исполнитель:") +
-                            query.value(record.indexOf("worker")).toString());
-        ui->date->setText(QString("Дата принятия заказа:") +
-                            query.value(record.indexOf("date")).toString());
-        ui->cost->setText(QString("Сумма:") +
-                            query.value(record.indexOf("cost")).toString());
+        ui->client->setText(LABEL_CLIENT +
+                            query.value(record.indexOf(COLUMN_CLIENT)).toString());
+        ui->worker->setText(LABEL_WORKER +
+                            query.value(record.indexOf(COLUMN_WORKER)).toString());
+        ui->date->setText(LABEL_DATE_ORDER +
+                            query.value(record.indexOf(COLUMN_DATE)).toString());
+        ui->cost->setText(LABEL_COST +
+                            query.value(record.indexOf(COLUMN_COST)).toString());
 
-        if(query.value(record.indexOf("status")).toBool())
+        if(query.value(record.indexOf(COLUMN_STATUS)).toBool())
         {
-            ui->status->setText(QString("Статус заказа: закончен."));
+            ui->status->setText(LABEL_STATUS_COMPLETE);
         }
         else
         {
-            ui->status->setText(QString("Статус заказа: не закончен."));
+            ui->status->setText(LABEL_STATUS_NOT_COMPLETE);
             ui->complete_button->setEnabled(true);
         }
 
-        QString request = "SELECT * FROM _%1_;";
-        request = request.arg(query.value(record.indexOf("services")).toInt());
+        QString request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
+        request = request.arg(query.value(record.indexOf(COLUMN_SERVICES)).toInt());
         if(!query.exec(request))
         {
             clear_form();
@@ -102,38 +120,39 @@ void FormForShowOrder::on_enter_button_clicked()
         QString cost;
         QString count;
         QString name;
+        int count_row = 0;
         while(query.next())
         {
             record = query.record();
-            cost = query.value(record.indexOf("price")).toString();
-            count = query.value(record.indexOf("count")).toString();
-            name = query.value(record.indexOf("name")).toString();
+            cost = query.value(record.indexOf(COLUMN_PRICE_SERVICE)).toString();
+            count = query.value(record.indexOf(COLUMN_COUNT_SERVICES)).toString();
+            name = query.value(record.indexOf(COLUMN_NAME_SERVICE)).toString();
             QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
             QTableWidgetItem *item_name = new QTableWidgetItem(name);
             QTableWidgetItem *item_count = new QTableWidgetItem(count);
 
-            ui->data_services->insertRow(ui->data_services->rowCount());
-            ui->data_services->setItem(ui->data_services->rowCount()-1,0,item_count);
-            ui->data_services->setItem(ui->data_services->rowCount()-1,1,item_cost);
-            ui->data_services->setItem(ui->data_services->rowCount()-1,2,item_name);
+            count_row = ui->data_services->rowCount();
+            ui->data_services->insertRow(count_row);
+            ui->data_services->setItem(count_row,INDEX_COLUMN_COUNT,item_count);
+            ui->data_services->setItem(count_row,INDEX_COLUMN_COST,item_cost);
+            ui->data_services->setItem(count_row,INDEX_COLUMN_NAME,item_name);
         }
     }
 }
 
 void FormForShowOrder::on_complete_button_clicked()
 {
-    QString request = "UPDATE orders SET status = 1 WHERE number = %1;";
+    QString request = REQUEST_COMPLETE_ORDER;
     QString number = ui->number->text();
     request = request.arg(number.mid(number.indexOf(':')+1).toInt());
     QSqlQuery query(request);
     if(!query.exec())
     {
-        QMessageBox::warning(this,tr("ОШИБКА"),
-                             tr("В данный момент изменить состояние заказа не возможно."));
+        QMessageBox::warning(this,tr(ERROR),tr(ERROR_COMPLETE_ORDER));
     }
     else
     {
-        ui->status->setText(QString("Статус заказа: закончен."));
+        ui->status->setText(LABEL_STATUS_COMPLETE);
         ui->complete_button->setEnabled(false);
     }
 }

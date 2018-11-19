@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTableWidget>
+#include <QSharedPointer>
 #include <QMessageBox>
 
 namespace Ui {
@@ -16,7 +17,8 @@ class FormForDeleteService : public QWidget
 public:
     void set_table(const QTableWidget*);
     explicit FormForDeleteService(QWidget *parent = 0);
-    ~FormForDeleteService();
+    FormForDeleteService(const FormForDeleteService&) = delete;
+    virtual ~FormForDeleteService(){}
 
 signals:
     void to_main_window();
@@ -28,20 +30,20 @@ private slots:
     void on_delete_button_clicked();
 
 private:
-    Ui::Form_For_Delete_Service *ui;
+    QSharedPointer<Ui::Form_For_Delete_Service> ui;
 
     int _count_delete_items;
     QVector<int> index_deleted_item;
-
-    int request_for_delete()const;
-    void delete_items();
-    void clear_form()const;
 
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_NAME;
     static const int INDEX_FIRST_ROW;
 
     static const char* MESSAGE_REQUEST_FOR_DELETE;
+
+    int request_for_delete()const;
+    void delete_items();
+    void clear_form()const;
 };
 
 #endif // FORM_FOR_DELETE_SERVICE_H

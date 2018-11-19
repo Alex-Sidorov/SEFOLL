@@ -2,6 +2,7 @@
 #define FORM_FOR_ADD_SERVICE_H
 
 #include <QWidget>
+#include <QSharedPointer>
 
 namespace Ui {
 class Form_For_Add_Service;
@@ -16,7 +17,8 @@ public:
     QString get_cost_service()const;
     void show();
     explicit FormForAddService(QWidget *parent = 0);
-    ~FormForAddService();
+    FormForAddService(const FormForAddService&) = delete;
+    virtual ~FormForAddService(){}
 
 signals:
     void to_main_window();
@@ -27,7 +29,7 @@ private slots:
     void slot_fields_form_changed();
 
 private:
-    Ui::Form_For_Add_Service *ui;
+    QSharedPointer<Ui::Form_For_Add_Service> ui;
 
     void clear_form()const;
     bool is_empty_form()const;

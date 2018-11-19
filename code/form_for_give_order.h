@@ -8,6 +8,8 @@
 #include <QSignalMapper>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSharedPointer>
+#include <QMessageBox>
 
 namespace Ui {
 class Form_For_Give_Order;
@@ -20,7 +22,8 @@ class FormForGiveOrder : public QWidget
 public:
     void set_table(const QTableWidget*);
     explicit FormForGiveOrder(QWidget *parent = 0);
-    ~FormForGiveOrder();
+    FormForGiveOrder(const FormForGiveOrder&) = delete;
+    virtual ~FormForGiveOrder(){}
 
 signals:
     void to_main_window();
@@ -32,14 +35,10 @@ private slots:
     void on_enter_button_clicked();
 
 private:
-    Ui::Form_For_Give_Order *ui;
-    QVector<NewSpinBox*> _boxs;
-    QSignalMapper *_mapper;
+    QSharedPointer<Ui::Form_For_Give_Order> ui;
+    QVector< QSharedPointer<NewSpinBox> > _boxs;
+    QSharedPointer<QSignalMapper> _mapper;
     double _cost;
-
-    bool add_order(Order &order);
-    void clear_form();
-    bool check_input_fields()const;
 
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_NAME;
@@ -54,8 +53,12 @@ private:
     static const char *REQUEST_INSERT_SERVICE_ORDER;
     static const char *ERROR_MESSAGE;
     static const char *ERROR;
-    static const char* REGISTRATION;
-    static const char* MESSAGE_NUMBER_ORDER;
+    static const char *REGISTRATION;
+    static const char *MESSAGE_NUMBER_ORDER;
+
+    bool add_order(Order &order);
+    void clear_form();
+    bool check_input_fields()const;
 };
 
 #endif // FORM_FOR_GIVE_ORDER_H

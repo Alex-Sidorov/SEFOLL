@@ -35,12 +35,6 @@ FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
     _cost = 0;
 }
 
-FormForGiveOrder::~FormForGiveOrder()
-{
-    delete _mapper;
-    delete ui;
-}
-
 void FormForGiveOrder::set_table(const QTableWidget* table)
 {
     int count_row_table = table->rowCount();
@@ -56,15 +50,15 @@ void FormForGiveOrder::set_table(const QTableWidget* table)
         ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_COST+OFFSET_INDEX,item_cost);
         ui->data_services->setItem(count_row_data_services,INDEX_COLUMN_NAME+OFFSET_INDEX,item_name);
 
-        NewSpinBox *new_box = new NewSpinBox;
+        QSharedPointer<NewSpinBox> new_box(new NewSpinBox);
         _boxs.push_back(new_box);
 
-        connect(new_box,SIGNAL(valueChanged(int)),_mapper,SLOT(map()));
-        _mapper->setMapping(new_box,i);
+        connect(new_box.data(),SIGNAL(valueChanged(int)),_mapper.data(),SLOT(map()));
+        _mapper->setMapping(new_box.data(),i);
 
-        ui->data_services->setCellWidget(count_row_data_services,INDEX_COLUMN_COUNT,new_box);
+        ui->data_services->setCellWidget(count_row_data_services,INDEX_COLUMN_COUNT,new_box.data());
     }
-    connect(_mapper,SIGNAL(mapped(int)),SLOT(slot_change_box(int)));
+    connect(_mapper.data(),SIGNAL(mapped(int)),SLOT(slot_change_box(int)));
 }
 
 void FormForGiveOrder::clear_form()
@@ -74,17 +68,7 @@ void FormForGiveOrder::clear_form()
     ui->name_client->clear();
     ui->name_worker->clear();
     ui->date->setDate(QDate::currentDate());
-    while(ui->data_services->rowCount())
-    {
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST + OFFSET_INDEX);
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME + OFFSET_INDEX);
-        ui->data_services->removeRow(INDEX_FIRST_ROW);
-    }
-
-    for(int i=0; i<_boxs.size();i++)
-    {
-        delete _boxs[i];
-    }
+    ui->data_services->setRowCount(0);
     _boxs.clear();
 }
 

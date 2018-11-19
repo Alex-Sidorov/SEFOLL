@@ -1,9 +1,11 @@
 #ifndef FORM_FOR_LOGIN_H
 #define FORM_FOR_LOGIN_H
 
+#include "security.h"
+
+#include <QSharedPointer>
 #include <QWidget>
 #include <QString>
-#include "security.h"
 
 namespace Ui {
 class FormForLogin;
@@ -14,11 +16,11 @@ class FormForLogin : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormForLogin(QWidget *parent = 0);
-    ~FormForLogin();
-
     bool is_close()const;
     Access get_access()const;
+    explicit FormForLogin(QWidget *parent = 0);
+    FormForLogin(const FormForLogin&) = delete;
+    virtual ~FormForLogin(){}
 
 public slots:
     void show();
@@ -28,15 +30,16 @@ private slots:
     void on_button_for_guest_clicked();
 
 private:
-    Ui::FormForLogin *ui;
+    QSharedPointer<Ui::FormForLogin> ui;
     QString _id;
     QString _password;
-    bool _close;
     Access _access;
 
-    void check_access();
-
     static const char* MESSAGE_ERROR;
+    bool _close;
+
+    void check_access();
+    void clear_form()const;
 };
 
 #endif // FORM_FOR_LOGIN_H

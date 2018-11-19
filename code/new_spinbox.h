@@ -9,9 +9,9 @@ class NewSpinBox : public QSpinBox
 public:
     void set_prev_value(int value);
     int get_prev_value()const;
-
     explicit NewSpinBox(QWidget *parent = 0);
-    virtual ~NewSpinBox();
+    NewSpinBox(const NewSpinBox&) = delete;
+    virtual ~NewSpinBox(){}
 
 private:
     int _prev_value;

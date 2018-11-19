@@ -15,11 +15,6 @@ FormForDeleteService::FormForDeleteService(QWidget *parent) :
     _count_delete_items = 0;
 }
 
-FormForDeleteService::~FormForDeleteService()
-{
-    delete ui;
-}
-
 void FormForDeleteService::set_table(const QTableWidget *table)
 {
     int count_row_table = table->rowCount();
@@ -94,8 +89,6 @@ void FormForDeleteService::delete_items()
         if(ui->data_services->item(index,INDEX_COLUMN_NAME)->backgroundColor()==Qt::blue)
         {
             index_deleted_item.push_back(index_main_table);
-            delete ui->data_services->item(index,INDEX_COLUMN_COST);
-            delete ui->data_services->item(index,INDEX_COLUMN_NAME);
             ui->data_services->removeRow(index);
             _count_delete_items--;
         }
@@ -109,12 +102,7 @@ void FormForDeleteService::delete_items()
 
 void FormForDeleteService::clear_form()const
 {
-    while(ui->data_services->rowCount())
-    {
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST);
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME);
-        ui->data_services->removeRow(INDEX_FIRST_ROW);
-    }
+    ui->data_services->setRowCount(0);
 }
 
 int FormForDeleteService::request_for_delete()const

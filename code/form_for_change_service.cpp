@@ -38,11 +38,6 @@ const QTableWidget* FormForChangeService::get_table()const
     return ui->data_services;
 }
 
-FormForChangeService::~FormForChangeService()
-{
-    delete ui;
-}
-
 void FormForChangeService::on_back_button_clicked()
 {
     this->close();
@@ -66,17 +61,10 @@ void FormForChangeService::on_data_services_clicked(const QModelIndex &index)
 void FormForChangeService::clear_form()const
 {
     ui->name->clear();
-    ui->cost->clear();
-
+    ui->cost->setValue(0);
     ui->name->setEnabled(false);
     ui->cost->setEnabled(false);
-
-    while(ui->data_services->rowCount())
-    {
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_COST);
-        delete ui->data_services->item(INDEX_FIRST_ROW,INDEX_COLUMN_NAME);
-        ui->data_services->removeRow(INDEX_FIRST_ROW);
-    }
+    ui->data_services->setRowCount(0);
 }
 
 bool FormForChangeService::is_empty_form()const

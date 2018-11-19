@@ -18,8 +18,3 @@ NewSpinBox::NewSpinBox(QWidget *parent) :
 {
     this->setMaximum(MAX_COUNT);
 }
-
-NewSpinBox::~NewSpinBox()
-{
-
-}

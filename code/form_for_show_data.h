@@ -7,13 +7,14 @@ namespace Ui {
 class Form_For_Show_Data;
 }
 
-class Form_For_Show_Data : public QWidget
+class FormForShowData : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Form_For_Show_Data(QWidget *parent = 0);
-    ~Form_For_Show_Data();
+    explicit FormForShowData(QWidget *parent = 0);
+    FormForShowData(const FormForShowData&) = delete;
+    ~FormForShowData();
 
 signals:
     void to_main_window();
