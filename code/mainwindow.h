@@ -9,6 +9,7 @@
 #include "form_for_options.h"
 #include "form_for_show_data.h"
 #include "security.h"
+#include "ui_mainwindow.h"
 
 #include <QMainWindow>
 #include <QSharedPointer>
@@ -47,6 +48,8 @@ private slots:
     void on_show_order_button_clicked();
     void on_options_clicked();
 
+    void on_show_data_button_clicked();
+
 private:
     QSharedPointer<Ui::MainWindow> ui;
 
@@ -56,6 +59,7 @@ private:
     QSharedPointer<FormForDeleteService> window_for_delete_service;
     QSharedPointer<FormForShowOrder> window_for_show_order;
     QSharedPointer<FormForOptions> window_for_options;
+    QSharedPointer<FormForShowData> window_for_show_data;
 
     Access _access;
     QString _name_file_data;

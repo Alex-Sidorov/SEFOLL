@@ -11,8 +11,8 @@ class Order
 {
 public:
     void set_data(const QString &name_client, const QString &name_worker,
-                  const QDateEdit *date,const QVector<InfoOfOrderedService> &services,const double cost, const bool status);
-
+                  const QDateEdit *date,const QVector<InfoOfOrderedService> &services,
+                  const double cost, const bool status);
     double get_cost()const;
     const QString& get_name_worker()const;
     const QString& get_name_client()const;

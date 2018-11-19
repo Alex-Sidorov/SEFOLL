@@ -31,7 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     window_for_change_service(new FormForChangeService),
     window_for_delete_service( new FormForDeleteService),
     window_for_show_order(new FormForShowOrder),
-    window_for_options(new FormForOptions)
+    window_for_options(new FormForOptions),
+    window_for_show_data(new FormForShowData)
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -42,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(window_for_change_service.data(),SIGNAL(changed_data(int)),SLOT(upload_table(int)));
     connect(window_for_change_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_options.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
+    connect(window_for_show_data.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
 
     ui->setupUi(this);
 
@@ -245,5 +247,17 @@ void MainWindow::on_options_clicked()
         return;
     }
     window_for_options->show();
+    this->close();
+}
+
+void MainWindow::on_show_data_button_clicked()
+{
+    if(_access != ADMIN &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,ERROR,ERROR_ACCESS);
+        return;
+    }
+    window_for_show_data->show();
     this->close();
 }
