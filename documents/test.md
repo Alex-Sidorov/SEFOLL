@@ -2,19 +2,19 @@
 
 ### Содержание
 
-1.  Введение
+1.  [Введение](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#1-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5)
     
-2.  Объект тестирования
+2.  [Объект тестирования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#2-%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
     
-3.  Риски
+3.  [Риски](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#3-%D1%80%D0%B8%D1%81%D0%BA%D0%B8)
     
-4.  Аспекты тестирования
+4.  [Аспекты тестирования](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#4-%D0%B0%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D1%8B-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 
-5.  Подходы к тестированию
+5.  [Подходы к тестированию](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#5-%D0%BF%D0%BE%D0%B4%D1%85%D0%BE%D0%B4%D1%8B-%D0%BA-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8E)
 
-6.  Представление результатов
+6.  [Представление результатов](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#6-%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2)
     
-7.  Выводы
+7.  [Выводы](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#7-%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B)
     
 
 ## 1. Введение
