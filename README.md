@@ -9,3 +9,5 @@
 [**UML**](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/uml.md)
 
 [**CODE**](https://github.com/Alex-Sidorov/SEFOLL/tree/master/code)
+
+[**Test plan**](https://github.com/Alex-Sidorov/SEFOLL/blob/master/documents/test.md#3-риски)
