@@ -12,11 +12,11 @@ Order::Order(const QString &name_client,
              const QVector<InfoOfOrderedService> &services,
              const double cost,
              const bool status):
-    _name_client(name_client),
-    _name_worker(name_worker),
-    _date(date->date()),
-    _cost(cost),
-    _status(status)
+            _name_client(name_client),
+            _name_worker(name_worker),
+            _date(date->date()),
+            _cost(cost),
+            _status(status)
 {
     _services.reserve(services.size());
     for(int i=0; i<services.size(); i++)
