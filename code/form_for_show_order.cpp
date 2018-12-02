@@ -121,15 +121,18 @@ void FormForShowOrder::on_enter_button_clicked()
         QString count;
         QString name;
         int count_row = 0;
+        QTableWidgetItem *item_cost = NULL;
+        QTableWidgetItem *item_name = NULL;
+        QTableWidgetItem *item_count = NULL;
         while(query.next())
         {
             record = query.record();
             cost = query.value(record.indexOf(COLUMN_PRICE_SERVICE)).toString();
             count = query.value(record.indexOf(COLUMN_COUNT_SERVICES)).toString();
             name = query.value(record.indexOf(COLUMN_NAME_SERVICE)).toString();
-            QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
-            QTableWidgetItem *item_name = new QTableWidgetItem(name);
-            QTableWidgetItem *item_count = new QTableWidgetItem(count);
+            item_cost = new QTableWidgetItem(cost);
+            item_name = new QTableWidgetItem(name);
+            item_count = new QTableWidgetItem(count);
 
             count_row = ui->data_services->rowCount();
             ui->data_services->insertRow(count_row);
@@ -144,7 +147,7 @@ void FormForShowOrder::on_complete_button_clicked()
 {
     QString request = REQUEST_COMPLETE_ORDER;
     QString number = ui->number->text();
-    request = request.arg(number.mid(number.indexOf(':')+1).toInt());
+    request = request.arg(number.mid(number.indexOf(':') + 1).toInt());
     QSqlQuery query(request);
     if(!query.exec())
     {

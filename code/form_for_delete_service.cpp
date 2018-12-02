@@ -3,9 +3,10 @@
 
 const int FormForDeleteService::INDEX_COLUMN_COST = 0;
 const int FormForDeleteService::INDEX_COLUMN_NAME = 1;
-const int FormForDeleteService::INDEX_FIRST_ROW = 0;
+const int FormForDeleteService::INDEX_FIRST_ROW =   0;
 
-const char* FormForDeleteService::MESSAGE_REQUEST_FOR_DELETE = "Вы уверены, что хотите удалить выбранные элементы?";
+const char* FormForDeleteService::MESSAGE_REQUEST_FOR_DELETE =
+        "Вы уверены, что хотите удалить выбранные элементы?";
 
 FormForDeleteService::FormForDeleteService(QWidget *parent) :
     QWidget(parent),
@@ -19,10 +20,12 @@ void FormForDeleteService::set_table(const QTableWidget *table)
 {
     int count_row_table = table->rowCount();
     int count_row_data_services = 0;
+    QTableWidgetItem *item_cost = NULL;
+    QTableWidgetItem *item_name = NULL;
     for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
+        item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
         count_row_data_services = ui->data_services->rowCount();
         ui->data_services->insertRow(count_row_data_services);

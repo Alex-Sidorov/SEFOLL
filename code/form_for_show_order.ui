@@ -14,23 +14,23 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Заказы</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="leftMargin">
-    <number>9</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>9</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>9</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>9</number>
+    <number>2</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -246,7 +246,7 @@
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>true</bool>

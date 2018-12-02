@@ -2,6 +2,7 @@
 #include "ui_form_for_login.h"
 
 const char* FormForLogin::MESSAGE_ERROR = "Ошибка. Проверьте id и пароль.";
+
 FormForLogin::FormForLogin(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForLogin)
@@ -10,6 +11,7 @@ FormForLogin::FormForLogin(QWidget *parent) :
     _access = GUEST;
     ui->setupUi(this);
     connect(ui->ok,SIGNAL(clicked()),SLOT(input_ok()));
+    connect(ui->password,SIGNAL(returnPressed()),SLOT(input_ok()));
 }
 
 void FormForLogin::clear_form()const

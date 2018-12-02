@@ -4,13 +4,14 @@
 const int FormForOptions::INDEX_FIRST_ACCESS = 0;
 
 const char* FormForOptions::RESUALT = "Результат";
-const char* FormForOptions::ERROR = "ОШИБКА";
+const char* FormForOptions::ERROR =   "ОШИБКА";
+
 const char* FormForOptions::MESSAGE_ERROR_DELETE_USER = "В данный момент нельзя удалить пользователя.";
-const char* FormForOptions::MESSAGE_USER_WAS_DELETE = "Пользователь id:%1 удален.";
-const char* FormForOptions::MESSAGE_ERROR_ADD_USER = "В данный момент нельзя добавить пользователя.";
-const char* FormForOptions::MESSAGE_USER_WAS_ADD = "Пользователь id:%1 добавлен.";
+const char* FormForOptions::MESSAGE_USER_WAS_DELETE =   "Пользователь id:%1 удален.";
+const char* FormForOptions::MESSAGE_ERROR_ADD_USER =    "В данный момент нельзя добавить пользователя.";
+const char* FormForOptions::MESSAGE_USER_WAS_ADD =      "Пользователь id:%1 добавлен.";
 const char* FormForOptions::MESSAGE_ERROR_CHANGE_DATA = "В данный момент нельзя изменить данные.";
-const char* FormForOptions::MESSAGE_DATA_CHANGED = "Данные изменены";
+const char* FormForOptions::MESSAGE_DATA_CHANGED =      "Данные изменены";
 
 FormForOptions::FormForOptions(QWidget *parent) :
     QWidget(parent),

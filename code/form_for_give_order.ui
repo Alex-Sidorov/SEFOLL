@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>441</height>
+    <width>667</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Оформление заказа</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -141,7 +141,7 @@
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>

@@ -9,7 +9,7 @@ const char* FormForShowData::COLUMN_DATE =   "date";
 const char* FormForShowData::COLUMN_COST =   "cost";
 const char* FormForShowData::COLUMN_STATUS = "status";
 
-const char* FormForShowData::COMPLETE_ORDER =   "Выполнен";
+const char* FormForShowData::COMPLETE_ORDER =     "Выполнен";
 const char* FormForShowData::NOT_COMPLETE_ORDER = "Выполняется";
 
 const int FormForShowData::INDEX_COLUMN_CLIENT = 0;
@@ -17,6 +17,8 @@ const int FormForShowData::INDEX_COLUMN_WORKER = 1;
 const int FormForShowData::INDEX_COLUMN_DATE =   2;
 const int FormForShowData::INDEX_COLUMN_COST =   3;
 const int FormForShowData::INDEX_COLUMN_STATUS = 4;
+
+const int FormForShowData::CODE_NOT_FIND = -1;
 
 FormForShowData::FormForShowData(QWidget *parent) :
     QWidget(parent),
@@ -34,19 +36,27 @@ void FormForShowData::on_back_button_clicked()
 bool FormForShowData::is_need_order(QSqlQuery &query, QSqlRecord &record)const
 {
     int date_before = (QString::number(ui->before_date->date().year()) +
-                       QString::number(ui->before_date->date().month()) +
-                       QString::number(ui->before_date->date().day())).toInt();
+                       (ui->before_date->date().month()< 10 ? '0' +
+                       QString::number(ui->before_date->date().month()):
+                       QString::number(ui->before_date->date().month())) +
+                       (ui->before_date->date().day() < 10 ? '0' +
+                       QString::number(ui->before_date->date().day()):
+                       QString::number(ui->before_date->date().day()))).toInt();
     int date_after = (QString::number(ui->after_date->date().year()) +
-                      QString::number(ui->after_date->date().month()) +
-                      QString::number(ui->after_date->date().day())).toInt();;
+                      (ui->after_date->date().month()< 10 ? '0' +
+                      QString::number(ui->after_date->date().month()):
+                      QString::number(ui->after_date->date().month())) +
+                      (ui->after_date->date().day()< 10 ? '0' +
+                      QString::number(ui->after_date->date().day()):
+                      QString::number(ui->after_date->date().day()))).toInt() ;
     QString temp = query.value(record.indexOf(COLUMN_DATE)).toString();
-    while(temp.indexOf('.') != -1)
+    while(temp.indexOf('.') != CODE_NOT_FIND)
     {
         temp.remove(temp.indexOf('.'),1);
     }
     int date = temp.toInt();
     QString worker = query.value(record.indexOf(COLUMN_WORKER)).toString();
-    if(!(date_before >= date && date <= date_after))
+    if(!(date_before <= date && date <= date_after))
     {
         return false;
     }
@@ -79,7 +89,7 @@ void FormForShowData::on_ok_button_clicked()
     QTableWidgetItem *item_status = NULL;
     QTableWidgetItem *item_date = NULL;
     int count_row = 0;
-    ui->data->clear();
+    ui->data->setRowCount(0);
     while(query.next())
     {
         record = query.record();
@@ -110,9 +120,9 @@ void FormForShowData::on_ok_button_clicked()
 
 }
 
-void FormForShowData::on_pushButton_clicked()
+void FormForShowData::on_clear_button_clicked()
 {
-    ui->data->removeRow(0);
+    ui->data->setRowCount(0);
     ui->worker_line->clear();
 }
 
@@ -130,5 +140,5 @@ void FormForShowData::on_worker_list_doubleClicked(const QModelIndex &index)
     {
         return;
     }
-    ui->worker_list->removeItemWidget(ui->worker_list->item(index.row()));
+    delete ui->worker_list->takeItem(index.row());
 }

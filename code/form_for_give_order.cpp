@@ -1,13 +1,15 @@
 #include "form_for_give_order.h"
 #include "ui_form_for_give_order.h"
 
-const int FormForGiveOrder::INDEX_COLUMN_COST = 0;
-const int FormForGiveOrder::INDEX_COLUMN_NAME = 1;
+const int FormForGiveOrder::INDEX_COLUMN_COST =  0;
+const int FormForGiveOrder::INDEX_COLUMN_NAME =  1;
 const int FormForGiveOrder::INDEX_COLUMN_COUNT = 0;
+const int FormForGiveOrder::INDEX_FIRST_ROW =    0;
+
 const int FormForGiveOrder::OFFSET_INDEX = 1;
-const int FormForGiveOrder::INDEX_FIRST_ROW = 0;
 
 const char* FormForGiveOrder::COST_LABEL = "Сумма:";
+
 const char* FormForGiveOrder::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
 const char* FormForGiveOrder::REQUEST_INSERT_ORDERS =
         "INSERT INTO orders(number, client, worker, date, status, cost, services)"
@@ -16,9 +18,11 @@ const char* FormForGiveOrder::REQUEST_CREATE_TABLE_ORDER =
         "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
 const char* FormForGiveOrder::REQUEST_INSERT_SERVICE_ORDER =
         "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
+
 const char* FormForGiveOrder::ERROR_MESSAGE =
         "Неудалось зарегистрировать заказ. Попробуйте позже.";
 const char* FormForGiveOrder::ERROR = "ОШИБКА";
+
 const char* FormForGiveOrder::REGISTRATION = "Регистрация";
 const char* FormForGiveOrder::MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
 
@@ -40,10 +44,12 @@ void FormForGiveOrder::set_table(const QTableWidget* table)
     int count_row_table = table->rowCount();
     _boxs.reserve(count_row_table);
     int count_row_data_services = 0;
+    QTableWidgetItem *item_cost = NULL;
+    QTableWidgetItem *item_name = NULL;
     for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
+        item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
         count_row_data_services = ui->data_services->rowCount();
         ui->data_services->insertRow(count_row_data_services);

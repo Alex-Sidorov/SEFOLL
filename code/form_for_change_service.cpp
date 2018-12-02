@@ -3,7 +3,7 @@
 
 const int FormForChangeService::INDEX_COLUMN_COST = 0;
 const int FormForChangeService::INDEX_COLUMN_NAME = 1;
-const int FormForChangeService::INDEX_FIRST_ROW = 0;
+const int FormForChangeService::INDEX_FIRST_ROW =   0;
 
 FormForChangeService::FormForChangeService(QWidget *parent) :
     QWidget(parent),
@@ -21,10 +21,12 @@ void FormForChangeService::set_table(const QTableWidget *table)
 {
     int count_row_table = table->rowCount();
     int count_row_data_services = 0;
+    QTableWidgetItem *item_cost = NULL;
+    QTableWidgetItem *item_name = NULL;
     for(int i = 0; i < count_row_table; i++)
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
-        QTableWidgetItem *item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
+        item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
+        item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));
 
         count_row_data_services = ui->data_services->rowCount();
         ui->data_services->insertRow(count_row_data_services);
@@ -54,7 +56,7 @@ void FormForChangeService::on_data_services_clicked(const QModelIndex &index)
     ui->name->setText(ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->text());
     ui->cost->setValue(ui->data_services->
                        item(_index_record,INDEX_COLUMN_COST)->
-                       text().replace(QChar(','),QChar('.')).toDouble());
+                       text().replace(',','.').toDouble());
 
 }
 

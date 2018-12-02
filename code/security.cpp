@@ -1,11 +1,12 @@
 #include "security.h"
 
-const char* Security::REQUESTE_TAKE_USER = "SELECT * FROM security WHERE id = %1 AND password = '%2';";
-const char* Security::REQUESTE_CHANGE_ACCESS = "UPDATE security SET access = %1 WHERE id = %2;";
-const char* Security::REQUESTE_DELETE_USER = "DELETE FROM security WHERE id = %1;";
-const char* Security::REQUESTE_ADD_USER = "INSERT INTO security(id, access, password) VALUES(%1,%2,'%3');";
-const char* Security::REQUESTE_FIND_USER = "SELECT * FROM security WHERE id = %1;";
+const char* Security::REQUESTE_TAKE_USER =       "SELECT * FROM security WHERE id = %1 AND password = '%2';";
+const char* Security::REQUESTE_CHANGE_ACCESS =   "UPDATE security SET access = %1 WHERE id = %2;";
+const char* Security::REQUESTE_DELETE_USER =     "DELETE FROM security WHERE id = %1;";
+const char* Security::REQUESTE_ADD_USER =        "INSERT INTO security(id, access, password) VALUES(%1,%2,'%3');";
+const char* Security::REQUESTE_FIND_USER =       "SELECT * FROM security WHERE id = %1;";
 const char* Security::REQUESTE_CHANGE_PASSWORD = "UPDATE security SET password = '%1' WHERE id = %2;";
+
 const char* Security::COLUMN_ACCESS = "access";
 
 bool Security::check_access(QString &id, QString &password, Access &access)

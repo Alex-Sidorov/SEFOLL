@@ -1,22 +1,23 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const char* MainWindow::ERROR = "Ошибка";
-const char* MainWindow::ERROR_ACCESS = "Недостаточно прав доступа";
-const char* MainWindow::ERROR_ADD_SERVICE = "В данный момент нельзя добавить данные.";
+const char* MainWindow::ERROR =                "Ошибка";
+const char* MainWindow::ERROR_ACCESS =         "Недостаточно прав доступа";
+const char* MainWindow::ERROR_ADD_SERVICE =    "В данный момент нельзя добавить данные.";
 const char* MainWindow::ERROR_CHANGE_SERVICE = "В данный момент нельзя изменить данные.";
 const char* MainWindow::ERROR_OPEN_DATA_BASE = "В данный момент база данных недоступна.";
+
 const char* MainWindow::NAME_DATA_BASE = "data.sqlite";
 const char* MainWindow::TYPE_DATA_BASE = "QSQLITE";
 
-const char* MainWindow::REQUESTE_DATA_SERVICE = "INSERT INTO services(price, name) VALUES(%1, '%2');";
-const char* MainWindow::REQUESTE_TAKE_SERVICES = "SELECT * FROM services";
-const char* MainWindow::REQUESTE_UPDATE_NAME = "UPDATE services SET name = '%1' WHERE price = %2 AND name = '%3';";
-const char* MainWindow::REQUESTE_UPDATE_PRICE = "UPDATE services SET price = %1 WHERE price = %2 AND name = '%3';";
+const char* MainWindow::REQUESTE_DATA_SERVICE =   "INSERT INTO services(price, name) VALUES(%1, '%2');";
+const char* MainWindow::REQUESTE_TAKE_SERVICES =  "SELECT * FROM services";
+const char* MainWindow::REQUESTE_UPDATE_NAME =    "UPDATE services SET name = '%1' WHERE price = %2 AND name = '%3';";
+const char* MainWindow::REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = %1 WHERE price = %2 AND name = '%3';";
 const char* MainWindow::REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE price = %1 AND name = '%2'";
 
 const char* MainWindow::COLUMN_PRICE = "price";
-const char* MainWindow::COLUMN_NAME = "name";
+const char* MainWindow::COLUMN_NAME =  "name";
 
 const int MainWindow::INDEX_COLUMN_COST = 0;
 const int MainWindow::INDEX_COLUMN_NAME = 1;
@@ -170,10 +171,12 @@ void MainWindow::read_file_data()
 
     int count_row = 0;
     QSqlRecord record = query.record();
+    QTableWidgetItem *item_cost = NULL;
+    QTableWidgetItem *item_name = NULL;
     while(query.next())
     {
-        QTableWidgetItem *item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_PRICE)).toString());
-        QTableWidgetItem *item_name = new QTableWidgetItem(query.value(record.indexOf(COLUMN_NAME)).toString());
+        item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_PRICE)).toString());
+        item_name = new QTableWidgetItem(query.value(record.indexOf(COLUMN_NAME)).toString());
 
         count_row = ui->data_services->rowCount();
         ui->data_services->insertRow(count_row);

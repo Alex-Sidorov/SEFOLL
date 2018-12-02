@@ -7,27 +7,27 @@
     <x>0</x>
     <y>0</y>
     <width>263</width>
-    <height>161</height>
+    <height>154</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>login</string>
+   <string>Вход</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="leftMargin">
-    <number>7</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>7</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>5</number>
+    <number>2</number>
    </property>
    <item>
     <widget class="QLabel" name="label">
@@ -68,12 +68,21 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="id">
+      <widget class="QSpinBox" name="id">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>133</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
        </property>
       </widget>
      </item>
@@ -116,6 +125,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="ok">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
       <string>Далее</string>
      </property>
@@ -130,6 +142,9 @@
    </item>
    <item>
     <widget class="QLabel" name="error">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="text">
       <string/>
      </property>

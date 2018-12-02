@@ -27,7 +27,7 @@ signals:
 private slots:
     void on_back_button_clicked();
     void on_ok_button_clicked();
-    void on_pushButton_clicked();
+    void on_clear_button_clicked();
     void on_add_worker_button_clicked();
     void on_worker_list_doubleClicked(const QModelIndex &index);
 
@@ -50,6 +50,8 @@ private:
     static const int INDEX_COLUMN_DATE;
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_STATUS;
+
+    static const int CODE_NOT_FIND;
 
     bool is_need_order(QSqlQuery &query, QSqlRecord &record)const;
 };

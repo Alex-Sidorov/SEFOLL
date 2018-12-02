@@ -64,7 +64,6 @@ private:
     static const char* MESSAGE_DATA_CHANGED;
 
     static const int INDEX_FIRST_ACCESS;
-
 };
 
 #endif // FORM_FOR_OPTIONS_H
