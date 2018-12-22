@@ -48,13 +48,11 @@ bool FormForShowData::is_need_order(QSqlQuery &query, QSqlRecord &record)const
                       QString::number(ui->after_date->date().month())) +
                       (ui->after_date->date().day()< 10 ? '0' +
                       QString::number(ui->after_date->date().day()):
-                      QString::number(ui->after_date->date().day()))).toInt() ;
-    QString temp = query.value(record.indexOf(COLUMN_DATE)).toString();
-    while(temp.indexOf('.') != CODE_NOT_FIND)
-    {
-        temp.remove(temp.indexOf('.'),1);
-    }
-    int date = temp.toInt();
+                      QString::number(ui->after_date->date().day()))).toInt();
+
+    QStringList temp = query.value(record.indexOf(COLUMN_DATE)).toString().split('.');
+    int date = ((temp.at(0).toInt()*100) + temp.at(1).toInt())*100 + temp.at(2).toInt();
+
     QString worker = query.value(record.indexOf(COLUMN_WORKER)).toString();
     if(!(date_before <= date && date <= date_after))
     {
