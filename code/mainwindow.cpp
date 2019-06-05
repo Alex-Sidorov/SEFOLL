@@ -171,8 +171,8 @@ void MainWindow::read_file_data()
 
     int count_row = 0;
     QSqlRecord record = query.record();
-    QTableWidgetItem *item_cost = NULL;
-    QTableWidgetItem *item_name = NULL;
+    QTableWidgetItem *item_cost = nullptr;
+    QTableWidgetItem *item_name = nullptr;
     while(query.next())
     {
         item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_PRICE)).toString());

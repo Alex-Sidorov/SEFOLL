@@ -41,6 +41,7 @@ private:
     static const char* COLUMN_DATE;
     static const char* COLUMN_COST;
     static const char* COLUMN_STATUS;
+    static const char* COLUMN_DISCOUNT;
 
     static const char* COMPLETE_ORDER;
     static const char* NOT_COMPLETE_ORDER;
@@ -50,6 +51,7 @@ private:
     static const int INDEX_COLUMN_DATE;
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_STATUS;
+    static const int INDEX_COLUMN_DISCOUNT;
 
     static const int CODE_NOT_FIND;
 

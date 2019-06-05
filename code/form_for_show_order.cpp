@@ -10,6 +10,7 @@ const char* FormForShowOrder::LABEL_CLIENT =              "Клиент:";
 const char* FormForShowOrder::LABEL_WORKER =              "Исполнитель:";
 const char* FormForShowOrder::LABEL_DATE_ORDER =          "Дата принятия заказа:";
 const char* FormForShowOrder::LABEL_COST =                "Сумма:";
+const char* FormForShowOrder::LABEL_DISCOUNT =            "Скидка %:";
 const char* FormForShowOrder::LABEL_STATUS =              "Статус заказа:";
 const char* FormForShowOrder::LABEL_STATUS_COMPLETE =     "Статус заказа: закончен.";
 const char* FormForShowOrder::LABEL_STATUS_NOT_COMPLETE = "Статус заказа: не закончен.";
@@ -22,6 +23,7 @@ const char* FormForShowOrder::COLUMN_CLIENT =         "client";
 const char* FormForShowOrder::COLUMN_WORKER =         "worker";
 const char* FormForShowOrder::COLUMN_DATE =           "date";
 const char* FormForShowOrder::COLUMN_COST =           "cost";
+const char* FormForShowOrder::COLUMN_DISCOUNT =       "discount";
 const char* FormForShowOrder::COLUMN_STATUS =         "status";
 const char* FormForShowOrder::COLUMN_SERVICES =       "services";
 const char* FormForShowOrder::COLUMN_PRICE_SERVICE =  "price";
@@ -55,6 +57,7 @@ void FormForShowOrder::clear_form()
     ui->date->setText(LABEL_DATE_ORDER);
     ui->cost->setText(LABEL_COST);
     ui->status->setText(LABEL_STATUS);
+    ui->discount->setText(LABEL_DISCOUNT);
     ui->complete_button->setEnabled(false);
     ui->data_services->setRowCount(0);
 }
@@ -98,6 +101,8 @@ void FormForShowOrder::on_enter_button_clicked()
                             query.value(record.indexOf(COLUMN_DATE)).toString());
         ui->cost->setText(LABEL_COST +
                             query.value(record.indexOf(COLUMN_COST)).toString());
+        ui->discount->setText(LABEL_DISCOUNT +
+                            query.value(record.indexOf(COLUMN_DISCOUNT)).toString());
 
         if(query.value(record.indexOf(COLUMN_STATUS)).toBool())
         {
@@ -121,9 +126,9 @@ void FormForShowOrder::on_enter_button_clicked()
         QString count;
         QString name;
         int count_row = 0;
-        QTableWidgetItem *item_cost = NULL;
-        QTableWidgetItem *item_name = NULL;
-        QTableWidgetItem *item_count = NULL;
+        QTableWidgetItem *item_cost = nullptr;
+        QTableWidgetItem *item_name = nullptr;
+        QTableWidgetItem *item_count = nullptr;
         while(query.next())
         {
             record = query.record();

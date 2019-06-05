@@ -40,6 +40,7 @@ private:
     static const char* LABEL_WORKER;
     static const char* LABEL_DATE_ORDER;
     static const char* LABEL_COST;
+    static const char* LABEL_DISCOUNT;
     static const char* LABEL_STATUS;
     static const char* LABEL_STATUS_COMPLETE;
     static const char* LABEL_STATUS_NOT_COMPLETE;
@@ -57,6 +58,7 @@ private:
     static const char* COLUMN_PRICE_SERVICE;
     static const char* COLUMN_COUNT_SERVICES;
     static const char* COLUMN_NAME_SERVICE;
+    static const char* COLUMN_DISCOUNT;
 
     static const int INDEX_COLUMN_COUNT;
     static const int INDEX_COLUMN_COST;

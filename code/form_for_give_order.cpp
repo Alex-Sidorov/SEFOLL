@@ -6,21 +6,23 @@ const int FormForGiveOrder::INDEX_COLUMN_NAME =  1;
 const int FormForGiveOrder::INDEX_COLUMN_COUNT = 0;
 const int FormForGiveOrder::INDEX_FIRST_ROW =    0;
 
+const int FormForGiveOrder::FULL_PRICE =         100;
+
 const int FormForGiveOrder::OFFSET_INDEX = 1;
 
 const char* FormForGiveOrder::COST_LABEL = "Сумма:";
 
 const char* FormForGiveOrder::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
 const char* FormForGiveOrder::REQUEST_INSERT_ORDERS =
-        "INSERT INTO orders(number, client, worker, date, status, cost, services)"
-        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7);";
+        "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
+        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7, %8);";
 const char* FormForGiveOrder::REQUEST_CREATE_TABLE_ORDER =
         "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
 const char* FormForGiveOrder::REQUEST_INSERT_SERVICE_ORDER =
         "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
 
 const char* FormForGiveOrder::ERROR_MESSAGE =
-        "Неудалось зарегистрировать заказ. Попробуйте позже.";
+        "Не удалось зарегистрировать заказ. Попробуйте позже.";
 const char* FormForGiveOrder::ERROR = "ОШИБКА";
 
 const char* FormForGiveOrder::REGISTRATION = "Регистрация";
@@ -28,12 +30,13 @@ const char* FormForGiveOrder::MESSAGE_NUMBER_ORDER = "Заказ оформле�
 
 FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Give_Order),
+    ui(new Ui::FormForGiveOrder),
     _mapper(new QSignalMapper)
 {
     ui->setupUi(this);
     connect(ui->name_client,SIGNAL(textChanged(QString)),SLOT(enabled_button()));
     connect(ui->name_worker,SIGNAL(textChanged(QString)),SLOT(enabled_button()));
+    connect(ui->discount,SIGNAL(valueChanged(int)),SLOT(slot_change_discount(int)));
 
     ui->date->setDate(QDate::currentDate());
     _cost = 0;
@@ -44,8 +47,8 @@ void FormForGiveOrder::set_table(const QTableWidget* table)
     int count_row_table = table->rowCount();
     _boxs.reserve(count_row_table);
     int count_row_data_services = 0;
-    QTableWidgetItem *item_cost = NULL;
-    QTableWidgetItem *item_name = NULL;
+    QTableWidgetItem *item_cost = nullptr;
+    QTableWidgetItem *item_name = nullptr;
     for(int i = 0; i < count_row_table; i++)
     {
         item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
@@ -87,7 +90,9 @@ void FormForGiveOrder::on_back_button_clicked()
 
 bool FormForGiveOrder::check_input_fields()const
 {
-    return _cost!=0 && !ui->name_client->text().isEmpty() && !ui->name_worker->text().isEmpty();
+    return _cost != 0 &&
+            !ui->name_client->text().isEmpty() &&
+            !ui->name_worker->text().isEmpty();
 }
 
 void FormForGiveOrder::enabled_button()const
@@ -102,6 +107,11 @@ void FormForGiveOrder::enabled_button()const
     }
 }
 
+double FormForGiveOrder::get_cost_with_discount(double cost, int discont)const
+{
+    return (cost * (FULL_PRICE - discont))/FULL_PRICE;
+}
+
 void FormForGiveOrder::slot_change_box(int row)
 {
     double cost_service = ui->
@@ -114,8 +124,16 @@ void FormForGiveOrder::slot_change_box(int row)
             cost_service;
 
     _boxs[row]->set_prev_value(_boxs[row]->value());
-    ui->cost->setText(COST_LABEL + QString::number(_cost));
+
+    ui->cost->setText(COST_LABEL +
+                      QString::number(get_cost_with_discount(_cost,ui->discount->value())));
     enabled_button();
+}
+
+void FormForGiveOrder::slot_change_discount(int)
+{
+    ui->cost->setText(COST_LABEL +
+                      QString::number(get_cost_with_discount(_cost,ui->discount->value())));
 }
 
 bool FormForGiveOrder::add_order(Order &order)
@@ -135,6 +153,7 @@ bool FormForGiveOrder::add_order(Order &order)
     const QDateEdit &date = order.get_date();
     bool status = order.get_status();
     double cost = order.get_cost();
+    int discount = order.get_discount();
     QString request = REQUEST_INSERT_ORDERS;
     request = request.arg(count_orders);
     request = request.arg(name_client);
@@ -145,6 +164,7 @@ bool FormForGiveOrder::add_order(Order &order)
     request = request.arg(status);
     request = request.arg(cost);
     request = request.arg(count_orders);
+    request = request.arg(discount);
     if(!query.exec(request))
     {
         return false;
@@ -193,7 +213,8 @@ void FormForGiveOrder::on_enter_button_clicked()
                 ui->name_worker->text(),
                 ui->date,services,
                 _cost,
-                false);
+                false,
+                ui->discount->value());
 
     if(!add_order(order))
     {

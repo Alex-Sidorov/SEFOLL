@@ -12,19 +12,21 @@ class Order
 public:
     void set_data(const QString &name_client, const QString &name_worker,
                   const QDateEdit *date,const QVector<InfoOfOrderedService> &services,
-                  const double cost, const bool status);
+                  const double cost, const bool status, const int discount);
     double get_cost()const;
     const QString& get_name_worker()const;
     const QString& get_name_client()const;
     const QDateEdit& get_date()const;
     const QVector<InfoOfOrderedService>& get_services();
     bool get_status()const;
+    int get_discount()const;
 
     void change_status_order();
 
     Order();
     Order(const QString &name_client, const QString &name_worker, const QDateEdit *date,
-          const QVector<InfoOfOrderedService> &services,const double cost, const bool status);
+          const QVector<InfoOfOrderedService> &services,const double cost, const bool status,
+          const int discount);
     Order(const Order&);
     virtual ~Order(){}
 
@@ -35,6 +37,7 @@ private:
     QDateEdit _date;
     QVector<InfoOfOrderedService> _services;
     bool _status;
+    int _discount;
 };
 
 #endif // ORDER_H

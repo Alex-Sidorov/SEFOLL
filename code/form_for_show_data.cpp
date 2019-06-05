@@ -8,15 +8,17 @@ const char* FormForShowData::COLUMN_WORKER = "worker";
 const char* FormForShowData::COLUMN_DATE =   "date";
 const char* FormForShowData::COLUMN_COST =   "cost";
 const char* FormForShowData::COLUMN_STATUS = "status";
+const char* FormForShowData::COLUMN_DISCOUNT = "discount";
 
 const char* FormForShowData::COMPLETE_ORDER =     "Выполнен";
 const char* FormForShowData::NOT_COMPLETE_ORDER = "Выполняется";
 
-const int FormForShowData::INDEX_COLUMN_CLIENT = 0;
-const int FormForShowData::INDEX_COLUMN_WORKER = 1;
-const int FormForShowData::INDEX_COLUMN_DATE =   2;
-const int FormForShowData::INDEX_COLUMN_COST =   3;
-const int FormForShowData::INDEX_COLUMN_STATUS = 4;
+const int FormForShowData::INDEX_COLUMN_CLIENT =    0;
+const int FormForShowData::INDEX_COLUMN_WORKER =    1;
+const int FormForShowData::INDEX_COLUMN_DATE =      2;
+const int FormForShowData::INDEX_COLUMN_COST =      3;
+const int FormForShowData::INDEX_COLUMN_DISCOUNT =  4;
+const int FormForShowData::INDEX_COLUMN_STATUS =    5;
 
 const int FormForShowData::CODE_NOT_FIND = -1;
 
@@ -81,11 +83,12 @@ void FormForShowData::on_ok_button_clicked()
         return;
     }
     QSqlRecord record;
-    QTableWidgetItem *item_worker = NULL;
-    QTableWidgetItem *item_client = NULL;
-    QTableWidgetItem *item_cost = NULL;
-    QTableWidgetItem *item_status = NULL;
-    QTableWidgetItem *item_date = NULL;
+    QTableWidgetItem *item_worker = nullptr;
+    QTableWidgetItem *item_client = nullptr;
+    QTableWidgetItem *item_cost = nullptr;
+    QTableWidgetItem *item_status = nullptr;
+    QTableWidgetItem *item_date = nullptr;
+    QTableWidgetItem *item_discount = nullptr;
     int count_row = 0;
     ui->data->setRowCount(0);
     while(query.next())
@@ -96,7 +99,7 @@ void FormForShowData::on_ok_button_clicked()
             item_worker = new QTableWidgetItem(query.value(record.indexOf(COLUMN_WORKER)).toString());
             item_client = new QTableWidgetItem(query.value(record.indexOf(COLUMN_CLIENT)).toString());
             item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_COST)).toString());
-
+            item_discount = new QTableWidgetItem(query.value(record.indexOf(COLUMN_DISCOUNT)).toString());
             item_date = new QTableWidgetItem(query.value(record.indexOf(COLUMN_DATE)).toString());
             if(query.value(record.indexOf(COLUMN_STATUS)).toBool())
             {
@@ -113,6 +116,7 @@ void FormForShowData::on_ok_button_clicked()
             ui->data->setItem(count_row,INDEX_COLUMN_DATE,item_date);
             ui->data->setItem(count_row,INDEX_COLUMN_STATUS,item_status);
             ui->data->setItem(count_row,INDEX_COLUMN_CLIENT,item_client);
+            ui->data->setItem(count_row,INDEX_COLUMN_DISCOUNT,item_discount);
         }
     }
 

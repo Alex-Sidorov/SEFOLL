@@ -12,7 +12,7 @@
 #include <QMessageBox>
 
 namespace Ui {
-class Form_For_Give_Order;
+class FormForGiveOrder;
 }
 
 class FormForGiveOrder : public QWidget
@@ -33,9 +33,10 @@ private slots:
     void slot_change_box(int);
     void enabled_button()const;
     void on_enter_button_clicked();
+    void slot_change_discount(int);
 
 private:
-    QSharedPointer<Ui::Form_For_Give_Order> ui;
+    QSharedPointer<Ui::FormForGiveOrder> ui;
     QVector< QSharedPointer<NewSpinBox> > _boxs;
     QSharedPointer<QSignalMapper> _mapper;
     double _cost;
@@ -45,6 +46,7 @@ private:
     static const int INDEX_COLUMN_COUNT;
     static const int INDEX_FIRST_ROW;
     static const int OFFSET_INDEX;
+    static const int FULL_PRICE;
 
     static const char *COST_LABEL;
     static const char *REQUEST_TAKE_TABLE_ORDERS;
@@ -59,6 +61,7 @@ private:
     bool add_order(Order &order);
     void clear_form();
     bool check_input_fields()const;
+    double get_cost_with_discount(double cost, int discont)const;
 };
 
 #endif // FORM_FOR_GIVE_ORDER_H
