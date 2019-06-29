@@ -23,6 +23,7 @@ signals:
     void to_main_window();
 
 private slots:
+    void slot_delete_order();
     void on_back_button_clicked();
     void on_number_order_valueChanged(int number);
     void on_enter_button_clicked();
@@ -34,6 +35,9 @@ private:
     static const char* ERROR;
     static const char* ERROR_FIND_ORDER;
     static const char* ERROR_COMPLETE_ORDER;
+    static const char* ERROR_DELETE_ORDER;
+
+    static const char* MESSAGE_REQUEST_FOR_DELETE;
 
     static const char* LABEL_NUMBER_ORDER;
     static const char* LABEL_CLIENT;
@@ -45,9 +49,12 @@ private:
     static const char* LABEL_STATUS_COMPLETE;
     static const char* LABEL_STATUS_NOT_COMPLETE;
 
+    static const char* REQUEST_TAKE_ORDER;
     static const char* REQUEST_TAKE_TABLE_ORDERS;
     static const char* REQUEST_TAKE_TABLE_SERVICES_ORDER;
     static const char* REQUEST_COMPLETE_ORDER;
+    static const char* REQUEST_DELETE_TABLE_SERVICE_ORDER;
+    static const char* REQUEST_DELETE_ORDER;
 
     static const char* COLUMN_CLIENT;
     static const char* COLUMN_WORKER;
@@ -65,6 +72,9 @@ private:
     static const int INDEX_COLUMN_NAME;
 
     void clear_form();
+    bool delete_row_order(int number_order);
+    bool delete_table_order(int number_order);
+    int request_for_delete()const;
 };
 
 #endif // FORM_FOR_SHOW_ORDER_H

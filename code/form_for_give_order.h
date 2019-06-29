@@ -48,6 +48,7 @@ private:
     static const int OFFSET_INDEX;
     static const int FULL_PRICE;
 
+    static const char *COLUMN_NUMBER;
     static const char *COST_LABEL;
     static const char *REQUEST_TAKE_TABLE_ORDERS;
     static const char *REQUEST_INSERT_ORDERS;

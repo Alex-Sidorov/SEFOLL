@@ -12,6 +12,8 @@ const int FormForGiveOrder::OFFSET_INDEX = 1;
 
 const char* FormForGiveOrder::COST_LABEL = "Сумма:";
 
+const char* FormForGiveOrder::COLUMN_NUMBER = "NUMBER";
+
 const char* FormForGiveOrder::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
 const char* FormForGiveOrder::REQUEST_INSERT_ORDERS =
         "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
@@ -79,6 +81,7 @@ void FormForGiveOrder::clear_form()
     ui->date->setDate(QDate::currentDate());
     ui->data_services->setRowCount(0);
     _boxs.clear();
+    ui->discount->clear();
 }
 
 void FormForGiveOrder::on_back_button_clicked()
@@ -90,7 +93,7 @@ void FormForGiveOrder::on_back_button_clicked()
 
 bool FormForGiveOrder::check_input_fields()const
 {
-    return _cost != 0 &&
+    return _cost != 0.0 &&
             !ui->name_client->text().isEmpty() &&
             !ui->name_worker->text().isEmpty();
 }
@@ -144,7 +147,9 @@ bool FormForGiveOrder::add_order(Order &order)
         return false;
     }
     query.last();
-    int count_orders = query.at() < 0 ? 1 : query.at() + 2;
+    int number_new_order = query.value(query.record().indexOf(COLUMN_NUMBER)).toInt();
+    number_new_order++;
+
     query.first();
 
     const QVector<InfoOfOrderedService> &services = order.get_services();
@@ -155,7 +160,7 @@ bool FormForGiveOrder::add_order(Order &order)
     double cost = order.get_cost();
     int discount = order.get_discount();
     QString request = REQUEST_INSERT_ORDERS;
-    request = request.arg(count_orders);
+    request = request.arg(number_new_order);
     request = request.arg(name_client);
     request = request.arg(name_worker);
     request = request.arg(QString::number(date.date().year()) + QChar('.') +
@@ -163,13 +168,13 @@ bool FormForGiveOrder::add_order(Order &order)
                           QString::number(date.date().day()));
     request = request.arg(status);
     request = request.arg(cost);
-    request = request.arg(count_orders);
+    request = request.arg(number_new_order);
     request = request.arg(discount);
     if(!query.exec(request))
     {
         return false;
     }
-    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(count_orders);
+    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(number_new_order);
     if(!query.exec(request))
     {
         return false;
@@ -177,7 +182,7 @@ bool FormForGiveOrder::add_order(Order &order)
     for(int i = 0; i < services.size(); i++)
     {
         request = REQUEST_INSERT_SERVICE_ORDER;
-        request = request.arg(count_orders);
+        request = request.arg(number_new_order);
         request = request.arg(services[i].cost);
         request = request.arg(services[i].count);
         request = request.arg(services[i].name_service);
@@ -212,7 +217,7 @@ void FormForGiveOrder::on_enter_button_clicked()
     Order order(ui->name_client->text(),
                 ui->name_worker->text(),
                 ui->date,services,
-                _cost,
+                get_cost_with_discount(_cost,ui->discount->value()),
                 false,
                 ui->discount->value());
 

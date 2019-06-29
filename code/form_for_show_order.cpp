@@ -2,8 +2,15 @@
 #include "ui_form_for_show_order.h"
 
 const char* FormForShowOrder::ERROR =                "ОШИБКА";
-const char* FormForShowOrder::ERROR_FIND_ORDER =     "Неудалось найти заказ. Проверьте номер заказа.";
-const char* FormForShowOrder::ERROR_COMPLETE_ORDER = "В данный момент изменить состояние заказа не возможно.";
+const char* FormForShowOrder::ERROR_FIND_ORDER =
+        "Неудалось найти заказ. Проверьте номер заказа.";
+const char* FormForShowOrder::ERROR_COMPLETE_ORDER =
+        "В данный момент изменить состояние заказа не возможно.";
+const char* FormForShowOrder::ERROR_DELETE_ORDER =
+        "В данный момент удалить заказ не возможно.";
+
+const char* FormForShowOrder::MESSAGE_REQUEST_FOR_DELETE =
+        "Вы уверены, что хотите удалить выбранные элементы?";
 
 const char* FormForShowOrder::LABEL_NUMBER_ORDER =        "Номер:";
 const char* FormForShowOrder::LABEL_CLIENT =              "Клиент:";
@@ -15,9 +22,13 @@ const char* FormForShowOrder::LABEL_STATUS =              "Статус зака
 const char* FormForShowOrder::LABEL_STATUS_COMPLETE =     "Статус заказа: закончен.";
 const char* FormForShowOrder::LABEL_STATUS_NOT_COMPLETE = "Статус заказа: не закончен.";
 
+const char* FormForShowOrder::REQUEST_TAKE_ORDER =                "SELECT * FROM orders WHERE number = %1;";
 const char* FormForShowOrder::REQUEST_TAKE_TABLE_ORDERS =         "SELECT * FROM orders;";
 const char* FormForShowOrder::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
 const char* FormForShowOrder::REQUEST_COMPLETE_ORDER =            "UPDATE orders SET status = 1 WHERE number = %1;";
+const char* FormForShowOrder::REQUEST_DELETE_ORDER =              "DELETE FROM orders WHERE number = %1;";
+const char* FormForShowOrder::REQUEST_DELETE_TABLE_SERVICE_ORDER ="DROP TABLE _%1_;";
+
 
 const char* FormForShowOrder::COLUMN_CLIENT =         "client";
 const char* FormForShowOrder::COLUMN_WORKER =         "worker";
@@ -39,6 +50,7 @@ FormForShowOrder::FormForShowOrder(QWidget *parent) :
     ui(new Ui::Form_For_Show_Order)
 {
     ui->setupUi(this);
+    connect(ui->delete_button,&QPushButton::clicked,this,&FormForShowOrder::slot_delete_order);
 }
 
 void FormForShowOrder::on_back_button_clicked()
@@ -76,20 +88,19 @@ void FormForShowOrder::on_number_order_valueChanged(int number)
 
 void FormForShowOrder::on_enter_button_clicked()
 {
-    clear_form();
-
-    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
-    if(!query.isActive())
-    {
-        return;
-    }
     int number_order = ui->number_order->value();
-    if(!query.seek(number_order - 1))
+
+    QSqlQuery query;
+    QString request = REQUEST_TAKE_ORDER;
+    request = request.arg(number_order);
+    if(!query.exec(request) || !query.next())
     {
         QMessageBox::warning(this, tr(ERROR), tr(ERROR_FIND_ORDER));
     }
     else
     {
+        clear_form();
+
         QSqlRecord record = query.record();
         ui->number->setText(LABEL_NUMBER_ORDER +
                             QString::number(number_order));
@@ -114,11 +125,12 @@ void FormForShowOrder::on_enter_button_clicked()
             ui->complete_button->setEnabled(true);
         }
 
-        QString request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
+        request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
         request = request.arg(query.value(record.indexOf(COLUMN_SERVICES)).toInt());
         if(!query.exec(request))
         {
             clear_form();
+            QMessageBox::warning(this, tr(ERROR), tr(ERROR_FIND_ORDER));
             return;
         }
 
@@ -146,6 +158,7 @@ void FormForShowOrder::on_enter_button_clicked()
             ui->data_services->setItem(count_row,INDEX_COLUMN_NAME,item_name);
         }
     }
+    ui->delete_button->setEnabled(true);
 }
 
 void FormForShowOrder::on_complete_button_clicked()
@@ -163,4 +176,54 @@ void FormForShowOrder::on_complete_button_clicked()
         ui->status->setText(LABEL_STATUS_COMPLETE);
         ui->complete_button->setEnabled(false);
     }
+}
+
+bool FormForShowOrder::delete_row_order(int number_order)
+{
+    QString request;
+    QSqlQuery query;
+
+    request = REQUEST_DELETE_ORDER;
+    request = request.arg(number_order);
+
+    if(!query.exec(request))
+    {
+        QMessageBox::warning(this,ERROR,ERROR_DELETE_ORDER);
+        return false;
+    }
+    return true;
+}
+
+bool FormForShowOrder::delete_table_order(int number_order)
+{
+    QString request;
+    QSqlQuery query;
+
+    request = REQUEST_DELETE_TABLE_SERVICE_ORDER;
+    request = request.arg(number_order);
+
+    if(!query.exec(request))
+    {
+        QMessageBox::warning(this,ERROR,ERROR_DELETE_ORDER);
+        return false;
+    }
+    return true;
+}
+
+void FormForShowOrder::slot_delete_order()
+{
+    int number_order = ui->number_order->value();
+    if(request_for_delete() == QMessageBox::Ok && delete_row_order(number_order))
+    {
+        delete_table_order(number_order);
+        clear_form();
+    }
+}
+
+int FormForShowOrder::request_for_delete()const
+{
+    QMessageBox message;
+    message.setText(MESSAGE_REQUEST_FOR_DELETE);
+    message.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    return message.exec();
 }
