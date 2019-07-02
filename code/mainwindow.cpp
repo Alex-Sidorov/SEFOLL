@@ -25,15 +25,15 @@ const int MainWindow::INDEX_COLUMN_NAME = 1;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _name_file_data(NAME_DATA_BASE),
-    _access(GUEST),
     window_for_give_order(new FormForGiveOrder),
-    window_for_add_service(new FormForAddService),
     window_for_change_service(new FormForChangeService),
+    window_for_add_service(new FormForAddService),
     window_for_delete_service( new FormForDeleteService),
     window_for_show_order(new FormForShowOrder),
     window_for_options(new FormForOptions),
-    window_for_show_data(new FormForShowData)
+    window_for_show_data(nullptr),
+    _access(GUEST),
+    _name_file_data(NAME_DATA_BASE)
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -44,9 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(window_for_change_service.data(),SIGNAL(changed_data(int)),SLOT(upload_table(int)));
     connect(window_for_change_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_options.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
-    connect(window_for_show_data.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
 
     ui->setupUi(this);
+
+    window_for_show_data = QSharedPointer<FormForShowData>(new FormForShowData(ui->data_services));
+    connect(window_for_show_data.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
 
     data = QSqlDatabase::addDatabase(TYPE_DATA_BASE);
     data.setDatabaseName(_name_file_data);
