@@ -56,7 +56,10 @@
       <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>true</bool>
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderCascadingSectionResizes">
       <bool>true</bool>
@@ -105,6 +108,9 @@
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_8">
+     <property name="spacing">
+      <number>2</number>
+     </property>
      <item>
       <widget class="QScrollArea" name="scrollArea">
        <property name="widgetResizable">
@@ -114,7 +120,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-307</y>
+          <y>0</y>
           <width>245</width>
           <height>619</height>
          </rect>
@@ -556,6 +562,13 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="save_to_excel_button">
+       <property name="text">
+        <string>Выгрузить в Execl</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

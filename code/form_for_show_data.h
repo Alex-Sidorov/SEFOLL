@@ -7,6 +7,9 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSharedPointer>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QMessageBox>
 
 namespace Ui {
 class Form_For_Show_Data;
@@ -33,25 +36,17 @@ private slots:
     void on_clear_button_clicked();
     void on_add_worker_button_clicked();
     void on_worker_list_doubleClicked(const QModelIndex &index);
-
     void on_is_number_clicked(bool checked);
-
     void on_is_worker_clicked(bool checked);
-
     void on_is_client_clicked(bool checked);
-
     void on_is_date_clicked(bool checked);
-
     void on_is_service_clicked(bool checked);
-
     void on_add_client_button_clicked();
-
     void on_client_list_doubleClicked(const QModelIndex &index);
-
-
     void on_add_service_button_clicked();
-
     void on_service_list_doubleClicked(const QModelIndex &index);
+
+    void on_save_to_excel_button_clicked();
 
 private:
     Ui::Form_For_Show_Data *ui;
@@ -74,6 +69,15 @@ private:
 
     static const char* COMPLETE_ORDER;
     static const char* NOT_COMPLETE_ORDER;
+
+    static const char* CAPTION_TEXT;
+    static const char* FORMAT_FILE;
+
+    static const char* ERROR;
+    static const char* ERROR_SAVE_FILE;
+
+    static const char* COMPLETE;
+    static const char* COMPLETE_SAVE;
 
     static const int INDEX_COLUMN_NUMBER;
     static const int INDEX_COLUMN_CLIENT;
@@ -109,6 +113,9 @@ private:
     bool check_service(int)const;
 
     QTableWidget* create_service_table(int number);
+
+    bool save_csv_file(const QString &file_name)const;
+    void save_service_table(QTextStream &stream, int row)const;
 };
 
 #endif // FORM_FOR_SHOW_DATA_H

@@ -1,5 +1,6 @@
 #include "form_for_show_data.h"
 #include "ui_form_for_show_data.h"
+#include <QDebug>
 
 const char* FormForShowData::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
 const char* FormForShowData::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
@@ -18,6 +19,15 @@ const char* FormForShowData::COLUMN_NAME_SERVICE =   "name";
 
 const char* FormForShowData::COMPLETE_ORDER =     "Выполнен";
 const char* FormForShowData::NOT_COMPLETE_ORDER = "Выполняется";
+
+const char* FormForShowData::CAPTION_TEXT = "Сохранение статистики";
+const char* FormForShowData::FORMAT_FILE =  "Excel (*.csv)";
+
+const char* FormForShowData::COMPLETE = "Готово";
+const char* FormForShowData::COMPLETE_SAVE = "Файл сохранён";
+
+const char* FormForShowData::ERROR = "Ошибка";
+const char* FormForShowData::ERROR_SAVE_FILE = "Не удалось сохранить файл";
 
 const int FormForShowData::INDEX_COLUMN_NUMBER =    0;
 const int FormForShowData::INDEX_COLUMN_CLIENT =    1;
@@ -456,4 +466,73 @@ void FormForShowData::on_service_list_doubleClicked(const QModelIndex &index)
         return;
     }
     delete ui->service_list->takeItem(index.row());
+}
+
+void FormForShowData::on_save_to_excel_button_clicked()
+{
+    auto file_name = QFileDialog::getSaveFileName(this,CAPTION_TEXT,"",FORMAT_FILE,nullptr);
+    if(!save_csv_file(file_name))
+    {
+        QMessageBox::warning(this,tr(ERROR),tr(ERROR_SAVE_FILE));
+    }
+    else
+    {
+        QMessageBox::information(this,tr(COMPLETE),tr(COMPLETE_SAVE));
+    }
+}
+
+bool FormForShowData::save_csv_file(const QString &file_name)const
+{
+    QFile file(file_name);
+    file.open(QIODevice::WriteOnly | QIODevice::Truncate);
+    if(!file.isOpen())
+    {
+        return false;
+    }
+    QTextStream stream(&file);
+    QStringList list;
+
+    for (auto i = 0; i <= INDEX_COLUMN_SERVICES; i++)
+    {
+        list << ui->data->horizontalHeaderItem(i)->text();
+    }
+    stream << list.join(';') << '\n';
+
+    auto row_count = ui->data->rowCount();
+    for (auto i = 0; i < row_count; i++)
+    {
+        list.clear();
+        for (auto j = 0; j < INDEX_COLUMN_SERVICES; j++)
+        {
+           list << "'\'" + ui->data->item(i,j)->text() + "'\'";
+        }
+        stream << list.join(';') << ';';
+        save_service_table(stream,i);
+        stream << "\n";
+    }
+    file.close();
+    return true;
+}
+
+void FormForShowData::save_service_table(QTextStream &stream, int row)const
+{
+    auto table = static_cast<QTableWidget*>(ui->data->cellWidget(row,INDEX_COLUMN_SERVICES));
+    QStringList list;
+
+    for (auto i = 0; i <= INDEX_COLUMN_NAME_SERVICES_TABLE; i++)
+    {
+        list << table->horizontalHeaderItem(i)->text();
+    }
+    stream << list.join(';') << '\n' << QString().fill(';',INDEX_COLUMN_SERVICES);
+
+    auto row_count = table->rowCount();
+    for (auto i = 0; i < row_count; i++)
+    {
+        list.clear();
+        for (auto j = 0; j <= INDEX_COLUMN_NAME_SERVICES_TABLE; j++)
+        {
+            list << "'\'" + table->item(i,j)->text() + "'\'";
+        }
+        stream << list.join(';') << '\n' << QString().fill(';',INDEX_COLUMN_SERVICES);
+    }
 }
