@@ -26,7 +26,8 @@ SOURCES += \
     mainwindow.cpp \
     new_spinbox.cpp \
     order.cpp \
-    security.cpp
+    security.cpp \
+    formforoptionsdatabase.cpp
 
 HEADERS  += \
     form_for_add_service.h \
@@ -41,7 +42,8 @@ HEADERS  += \
     mainwindow.h \
     new_spinbox.h \
     order.h \
-    security.h
+    security.h \
+    formforoptionsdatabase.h
 
 FORMS += \
     form_for_add_password.ui \
@@ -56,4 +58,5 @@ FORMS += \
     form_for_options.ui \
     form_for_show_data.ui \
     form_for_show_order.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    formforoptionsdatabase.ui

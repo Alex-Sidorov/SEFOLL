@@ -229,7 +229,7 @@ void FormForGiveOrder::on_enter_button_clicked()
     {
         QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
         query.last();
-        QString message = MESSAGE_NUMBER_ORDER + QString::number(query.at() + 1);
+        QString message = MESSAGE_NUMBER_ORDER + query.value(query.record().indexOf(COLUMN_NUMBER)).toString();
         QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
         on_back_button_clicked();
     }

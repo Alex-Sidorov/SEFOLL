@@ -105,6 +105,7 @@ void FormForDeleteService::delete_items()
 
 void FormForDeleteService::clear_form()const
 {
+    ui->data_services->clearContents();
     ui->data_services->setRowCount(0);
 }
 

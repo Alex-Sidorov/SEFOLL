@@ -28,7 +28,7 @@ public:
           const QVector<InfoOfOrderedService> &services,const double cost, const bool status,
           const int discount);
     Order(const Order&);
-    virtual ~Order(){}
+    virtual ~Order();
 
 private:
     double _cost;

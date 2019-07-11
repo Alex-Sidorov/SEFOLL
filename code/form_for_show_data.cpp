@@ -1,6 +1,5 @@
 #include "form_for_show_data.h"
 #include "ui_form_for_show_data.h"
-#include <QDebug>
 
 const char* FormForShowData::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
 const char* FormForShowData::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";

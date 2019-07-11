@@ -20,12 +20,12 @@ void FormForAddService::on_back_button_clicked()
 
 bool FormForAddService::is_empty_form()const
 {
-    return !ui->name_service->text().isEmpty() && !ui->cost_service->value() == 0;
+    return ui->name_service->text().isEmpty() || ui->cost_service->value() == 0.0;
 }
 
 void FormForAddService::slot_fields_form_changed()
 {
-    if(is_empty_form())
+    if(!is_empty_form())
     {
         ui->ok_button->setEnabled(true);
     }

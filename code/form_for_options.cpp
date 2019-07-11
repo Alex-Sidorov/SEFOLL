@@ -16,13 +16,13 @@ const char* FormForOptions::MESSAGE_DATA_CHANGED =      "Данные измен
 FormForOptions::FormForOptions(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForOptions),
-    window_for_change_access(new Ui::FormForChangeAccess),
     window_for_add_password(new Ui::FormForAddPassword),
     window_for_change_password(new Ui::FormForChangePassword),
+    window_for_change_access(new Ui::FormForChangeAccess),
     window_for_delete_password(new Ui::FormForDeletePassword),
     _widget_for_add_password(new QWidget),
+    _widget_for_change_password(new QWidget),    
     _widget_for_change_access(new QWidget),
-    _widget_for_change_password(new QWidget),
     _widget_for_delete_password(new QWidget)
 {
     ui->setupUi(this);

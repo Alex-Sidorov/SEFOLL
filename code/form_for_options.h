@@ -20,7 +20,7 @@ class FormForOptions : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormForOptions(QWidget *parent = 0);
+    explicit FormForOptions(QWidget *parent = nullptr);
     FormForOptions(const FormForOptions&) = delete;
     virtual ~FormForOptions(){}
 

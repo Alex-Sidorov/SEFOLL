@@ -83,7 +83,7 @@ bool Security::add_user(QString &id, QString &password, Access &access)
     password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
     request = request.arg(password);
     QSqlQuery query(request);
-    if(!query.isActive() || !query.exec())
+    if(!query.isActive() || !is_id(id) || !query.exec())
     {
         return false;
     }

@@ -13,10 +13,10 @@ Order::Order(const QString &name_client,
              const double cost,
              const bool status,
              const int discount):
+            _cost(cost),
             _name_client(name_client),
             _name_worker(name_worker),
             _date(date->date()),
-            _cost(cost),
             _status(status),
             _discount(discount)
 {
@@ -103,3 +103,5 @@ void Order::change_status_order()
 {
     _status = !_status;
 }
+
+Order::~Order(){}

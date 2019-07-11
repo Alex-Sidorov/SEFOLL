@@ -200,7 +200,7 @@
           </font>
          </property>
          <property name="textAlignment">
-          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+          <set>AlignCenter</set>
          </property>
          <property name="foreground">
           <brush brushstyle="SolidPattern">
@@ -224,7 +224,7 @@
           </font>
          </property>
          <property name="textAlignment">
-          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+          <set>AlignCenter</set>
          </property>
         </column>
        </widget>
@@ -239,7 +239,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Настройки</string>
+           <string>Настройки администратора</string>
           </property>
           <property name="checkable">
            <bool>false</bool>
@@ -258,6 +258,18 @@
           </property>
           <property name="flat">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="options_data_base">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Настройки базы данных</string>
           </property>
          </widget>
         </item>

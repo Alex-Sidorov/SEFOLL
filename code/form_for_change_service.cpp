@@ -71,12 +71,12 @@ void FormForChangeService::clear_form()const
 
 bool FormForChangeService::is_empty_form()const
 {
-    return !ui->name->text().isEmpty() && !ui->cost->value() == 0;
+    return ui->name->text().isEmpty() || ui->cost->value() == 0.0;
 }
 
 void FormForChangeService::slot_fields_form_changed()
 {
-    if(is_empty_form())
+    if(!is_empty_form())
     {
         ui->enter_change_button->setEnabled(true);
     }

@@ -8,6 +8,7 @@
 #include "form_for_show_order.h"
 #include "form_for_options.h"
 #include "form_for_show_data.h"
+#include "formforoptionsdatabase.h"
 #include "security.h"
 #include "ui_mainwindow.h"
 
@@ -17,6 +18,7 @@
 #include <QDoubleSpinBox>
 #include <QFile>
 #include <QDataStream>
+#include <QSettings>
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
 #include <qsqlrecord.h>
@@ -32,7 +34,7 @@ class MainWindow : public QMainWindow
 
 public:
     void set_access(Access access);
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = nullptr);
     MainWindow(const MainWindow&) = delete;
     ~MainWindow();
 
@@ -42,6 +44,8 @@ private slots:
     void on_change_service_button_clicked();
     void on_delete_service_button_clicked();
     void show_main_window();
+    void slot_clicked_options_data_base();
+    void slot_changed_data_base(QString &name_data_base);
     void add_service();
     void upload_table(int index);
     void upload_table(const QVector<int>&);
@@ -60,18 +64,26 @@ private:
     QSharedPointer<FormForShowOrder> window_for_show_order;
     QSharedPointer<FormForOptions> window_for_options;
     QSharedPointer<FormForShowData> window_for_show_data;
+    QSharedPointer<FormForOptionsDataBase> window_for_show_options_data_base;
 
     Access _access;
     QString _name_file_data;
     QSqlDatabase data;
+    QSettings _settings;
 
     static const char* ERROR;
     static const char* ERROR_ACCESS;
     static const char* ERROR_ADD_SERVICE;
     static const char* ERROR_CHANGE_SERVICE;
     static const char* ERROR_OPEN_DATA_BASE;
+    static const char* ERROR_SETTINGS;
 
-    static const char* NAME_DATA_BASE;
+    static const char* NAME_FILE_SETTINGS;
+
+    static const char* NAME_GROUP_DATA_BASE_SETTINGS;
+    static const char* SETTINGS_VALUE_PATH_DATA_BASE;
+
+    static const char* NAME_DEFAULT_DATA_BASE;
     static const char* TYPE_DATA_BASE;
 
     static const char* REQUESTE_DATA_SERVICE;
@@ -87,6 +99,7 @@ private:
     static const int INDEX_COLUMN_NAME;
 
     void read_file_data();
+    void read_settings();
 };
 
 #endif // MAINWINDOW_H
