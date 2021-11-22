@@ -5,6 +5,9 @@ const int FormForDeleteService::INDEX_COLUMN_COST = 0;
 const int FormForDeleteService::INDEX_COLUMN_NAME = 1;
 const int FormForDeleteService::INDEX_FIRST_ROW =   0;
 
+const Qt::GlobalColor FormForDeleteService::SELECT_FIELD_COLOR  = Qt::blue;
+const Qt::GlobalColor FormForDeleteService::DEFAULT_FIELD_COLOR = Qt::white;
+
 const char* FormForDeleteService::MESSAGE_REQUEST_FOR_DELETE =
         "Вы уверены, что хотите удалить выбранные элементы?";
 
@@ -44,17 +47,17 @@ void FormForDeleteService::on_back_button_clicked()
 void FormForDeleteService::on_data_services_clicked(const QModelIndex &index)
 {
     int index_item = index.row();
-    if(ui->data_services->item(index_item,INDEX_COLUMN_NAME)->backgroundColor()!=Qt::blue)
+    if(ui->data_services->item(index_item,INDEX_COLUMN_NAME)->backgroundColor()!=SELECT_FIELD_COLOR)
     {
-        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(QColor(Qt::blue));
-        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(QColor(Qt::blue));
-        _count_delete_items++;
+        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(SELECT_FIELD_COLOR);
+        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(SELECT_FIELD_COLOR);
+        ++_count_delete_items;
     }
     else
     {
-        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(QColor(Qt::white));
-        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(QColor(Qt::white));
-        _count_delete_items--;
+        ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(DEFAULT_FIELD_COLOR);
+        ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(DEFAULT_FIELD_COLOR);
+        --_count_delete_items;
     }
 
     if(_count_delete_items == 0)
@@ -89,17 +92,17 @@ void FormForDeleteService::delete_items()
 
     while(_count_delete_items != 0)
     {
-        if(ui->data_services->item(index,INDEX_COLUMN_NAME)->backgroundColor()==Qt::blue)
+        if(ui->data_services->item(index,INDEX_COLUMN_NAME)->backgroundColor()==SELECT_FIELD_COLOR)
         {
             index_deleted_item.push_back(index_main_table);
             ui->data_services->removeRow(index);
-            _count_delete_items--;
+            --_count_delete_items;
         }
         else
         {
-            index++;
+            ++index;
         }
-        index_main_table++;
+        ++index_main_table;
     }
 }
 

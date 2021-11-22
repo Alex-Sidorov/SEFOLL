@@ -17,11 +17,13 @@ public:
     const QString& get_name_worker()const;
     const QString& get_name_client()const;
     const QDateEdit& get_date()const;
-    const QVector<InfoOfOrderedService>& get_services();
+    const QVector<InfoOfOrderedService>& get_services()const;
     bool get_status()const;
     int get_discount()const;
 
     void change_status_order();
+
+    int add_in_data_base();
 
     Order();
     Order(const QString &name_client, const QString &name_worker, const QDateEdit *date,
@@ -31,13 +33,14 @@ public:
     virtual ~Order();
 
 private:
+
     double _cost;
+    int _discount;
+    bool _status;
     QString _name_client;
     QString _name_worker;
     QDateEdit _date;
     QVector<InfoOfOrderedService> _services;
-    bool _status;
-    int _discount;
 };
 
 #endif // ORDER_H

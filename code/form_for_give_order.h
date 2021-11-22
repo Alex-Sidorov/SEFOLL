@@ -6,8 +6,6 @@
 
 #include <QWidget>
 #include <QSignalMapper>
-#include <QSqlQuery>
-#include <QSqlRecord>
 #include <QSharedPointer>
 #include <QMessageBox>
 
@@ -20,6 +18,7 @@ class FormForGiveOrder : public QWidget
     Q_OBJECT
 
 public:
+    void clear_form();
     void set_table(const QTableWidget*);
     explicit FormForGiveOrder(QWidget *parent = 0);
     FormForGiveOrder(const FormForGiveOrder&) = delete;
@@ -27,6 +26,7 @@ public:
 
 signals:
     void to_main_window();
+    void add_order(const Order&);
 
 private slots:
     void on_back_button_clicked();
@@ -48,19 +48,7 @@ private:
     static const int OFFSET_INDEX;
     static const int FULL_PRICE;
 
-    static const char *COLUMN_NUMBER;
     static const char *COST_LABEL;
-    static const char *REQUEST_TAKE_TABLE_ORDERS;
-    static const char *REQUEST_INSERT_ORDERS;
-    static const char *REQUEST_CREATE_TABLE_ORDER;
-    static const char *REQUEST_INSERT_SERVICE_ORDER;
-    static const char *ERROR_MESSAGE;
-    static const char *ERROR;
-    static const char *REGISTRATION;
-    static const char *MESSAGE_NUMBER_ORDER;
-
-    bool add_order(Order &order);
-    void clear_form();
     bool check_input_fields()const;
     double get_cost_with_discount(double cost, int discont)const;
 };

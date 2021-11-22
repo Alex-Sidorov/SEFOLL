@@ -12,24 +12,6 @@ const int FormForGiveOrder::OFFSET_INDEX = 1;
 
 const char* FormForGiveOrder::COST_LABEL = "Сумма:";
 
-const char* FormForGiveOrder::COLUMN_NUMBER = "NUMBER";
-
-const char* FormForGiveOrder::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
-const char* FormForGiveOrder::REQUEST_INSERT_ORDERS =
-        "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
-        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7, %8);";
-const char* FormForGiveOrder::REQUEST_CREATE_TABLE_ORDER =
-        "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
-const char* FormForGiveOrder::REQUEST_INSERT_SERVICE_ORDER =
-        "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
-
-const char* FormForGiveOrder::ERROR_MESSAGE =
-        "Не удалось зарегистрировать заказ. Попробуйте позже.";
-const char* FormForGiveOrder::ERROR = "ОШИБКА";
-
-const char* FormForGiveOrder::REGISTRATION = "Регистрация";
-const char* FormForGiveOrder::MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
-
 FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForGiveOrder),
@@ -139,61 +121,6 @@ void FormForGiveOrder::slot_change_discount(int)
                       QString::number(get_cost_with_discount(_cost,ui->discount->value())));
 }
 
-bool FormForGiveOrder::add_order(Order &order)
-{
-    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
-    if(!query.isActive())
-    {
-        return false;
-    }
-    query.last();
-    int number_new_order = query.value(query.record().indexOf(COLUMN_NUMBER)).toInt();
-    number_new_order++;
-
-    query.first();
-
-    const QVector<InfoOfOrderedService> &services = order.get_services();
-    const QString &name_worker = order.get_name_worker();
-    const QString &name_client = order.get_name_client();
-    const QDateEdit &date = order.get_date();
-    bool status = order.get_status();
-    double cost = order.get_cost();
-    int discount = order.get_discount();
-    QString request = REQUEST_INSERT_ORDERS;
-    request = request.arg(number_new_order);
-    request = request.arg(name_client);
-    request = request.arg(name_worker);
-    request = request.arg(QString::number(date.date().year()) + QChar('.') +
-                          QString::number(date.date().month()) + QChar('.') +
-                          QString::number(date.date().day()));
-    request = request.arg(status);
-    request = request.arg(cost);
-    request = request.arg(number_new_order);
-    request = request.arg(discount);
-    if(!query.exec(request))
-    {
-        return false;
-    }
-    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(number_new_order);
-    if(!query.exec(request))
-    {
-        return false;
-    }
-    for(int i = 0; i < services.size(); i++)
-    {
-        request = REQUEST_INSERT_SERVICE_ORDER;
-        request = request.arg(number_new_order);
-        request = request.arg(services[i].cost);
-        request = request.arg(services[i].count);
-        request = request.arg(services[i].name_service);
-        if(!query.exec(request))
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
 void FormForGiveOrder::on_enter_button_clicked()
 {
     QVector<InfoOfOrderedService> services;
@@ -221,16 +148,5 @@ void FormForGiveOrder::on_enter_button_clicked()
                 false,
                 ui->discount->value());
 
-    if(!add_order(order))
-    {
-        QMessageBox::warning(this, tr(ERROR), tr(ERROR_MESSAGE));
-    }
-    else
-    {
-        QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
-        query.last();
-        QString message = MESSAGE_NUMBER_ORDER + query.value(query.record().indexOf(COLUMN_NUMBER)).toString();
-        QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
-        on_back_button_clicked();
-    }
+    emit add_order(order);
 }

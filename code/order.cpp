@@ -14,11 +14,11 @@ Order::Order(const QString &name_client,
              const bool status,
              const int discount):
             _cost(cost),
+            _discount(discount),
+            _status(status),
             _name_client(name_client),
             _name_worker(name_worker),
-            _date(date->date()),
-            _status(status),
-            _discount(discount)
+            _date(date->date())
 {
     _services.reserve(services.size());
     for(int i=0; i<services.size(); i++)
@@ -50,12 +50,12 @@ void Order::set_data(const QString &name_client,
 }
 
 Order::Order(const Order &obj):
+    _cost(obj._cost),
+    _discount(obj._discount),
+    _status(obj._status),
     _name_client(obj._name_client),
     _name_worker(obj._name_worker),
-    _date(obj._date.date()),
-    _cost(obj._cost),
-    _status(obj._status),
-    _discount(obj._discount)
+    _date(obj._date.date())
 {
     _services.reserve(obj._services.size());
     for(int i = 0; i<obj._services.size(); i++)
@@ -84,7 +84,7 @@ const QDateEdit& Order::get_date()const
     return _date;
 }
 
-const QVector<InfoOfOrderedService>& Order::get_services()
+const QVector<InfoOfOrderedService>& Order::get_services()const
 {
     return _services;
 }

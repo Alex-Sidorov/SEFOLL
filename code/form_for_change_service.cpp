@@ -23,7 +23,7 @@ void FormForChangeService::set_table(const QTableWidget *table)
     int count_row_data_services = 0;
     QTableWidgetItem *item_cost = nullptr;
     QTableWidgetItem *item_name = nullptr;
-    for(int i = 0; i < count_row_table; i++)
+    for(int i = 0; i < count_row_table; ++i)
     {
         item_cost = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_COST)));
         item_name = new QTableWidgetItem(*(table->item(i,INDEX_COLUMN_NAME)));

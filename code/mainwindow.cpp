@@ -8,6 +8,12 @@ const char* MainWindow::ERROR_CHANGE_SERVICE = "В данный момент н�
 const char* MainWindow::ERROR_OPEN_DATA_BASE = "В данный момент база данных недоступна.";
 const char* MainWindow::ERROR_SETTINGS =       "Ошибка при чтении настроек.";
 
+const char* MainWindow::ERROR_MESSAGE =
+        "Не удалось зарегистрировать заказ. Попробуйте позже.";
+
+const char* MainWindow::REGISTRATION = "Регистрация";
+const char* MainWindow::MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
+
 const char* MainWindow::NAME_FILE_SETTINGS = "settings.conf";
 
 const char* MainWindow::NAME_GROUP_DATA_BASE_SETTINGS = "data_base";
@@ -21,6 +27,15 @@ const char* MainWindow::REQUESTE_TAKE_SERVICES =  "SELECT * FROM services";
 const char* MainWindow::REQUESTE_UPDATE_NAME =    "UPDATE services SET name = '%1' WHERE price = %2 AND name = '%3';";
 const char* MainWindow::REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = %1 WHERE price = %2 AND name = '%3';";
 const char* MainWindow::REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE price = %1 AND name = '%2'";
+
+const char* MainWindow::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
+const char* MainWindow::REQUEST_INSERT_ORDERS =
+        "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
+        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7, %8);";
+const char* MainWindow::REQUEST_CREATE_TABLE_ORDER =
+        "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
+const char* MainWindow::REQUEST_INSERT_SERVICE_ORDER =
+        "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
 
 const char* MainWindow::COLUMN_PRICE = "price";
 const char* MainWindow::COLUMN_NAME =  "name";
@@ -46,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
+    connect(window_for_give_order.data(),SIGNAL(add_order(const Order&)),this,SLOT(slot_add_order_in_data_base(const Order&)));
     connect(window_for_add_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_add_service.data(),SIGNAL(new_data()),SLOT(add_service()));
     connect(window_for_delete_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -200,6 +216,72 @@ void MainWindow::add_service()
     ui->data_services->setItem(count_row,INDEX_COLUMN_NAME,item_name);
 }
 
+void MainWindow::slot_add_order_in_data_base(const Order& order)
+{
+    auto number_new_order = add_order_in_data_base(order);
+    if(!number_new_order)
+    {
+        QMessageBox::warning(this, tr(ERROR), tr(ERROR_MESSAGE));
+    }
+    else
+    {
+        QString message = MESSAGE_NUMBER_ORDER + QString::number(number_new_order);
+        QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
+        window_for_give_order->clear_form();
+        show_main_window();
+    }
+}
+
+int MainWindow::add_order_in_data_base(const Order& order)
+{
+    int number_new_order = 0;
+    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
+    if(!query.isActive())
+    {
+        return number_new_order;
+    }
+    query.last();
+    number_new_order = query.value(query.record().indexOf("NUMBER")).toInt();
+    ++number_new_order;
+
+    query.first();
+
+    QString request = REQUEST_INSERT_ORDERS;
+    request = request.arg(number_new_order);
+    request = request.arg(order.get_name_client());
+    request = request.arg(order.get_name_worker());
+    auto &date = order.get_date();
+    request = request.arg(QString::number(date.date().year()) + QChar('.') +
+                          QString::number(date.date().month()) + QChar('.') +
+                          QString::number(date.date().day()));
+    request = request.arg(order.get_status());
+    request = request.arg(order.get_cost());
+    request = request.arg(number_new_order);
+    request = request.arg(order.get_discount());
+    if(!query.exec(request))
+    {
+        return 0;
+    }
+    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(number_new_order);
+    if(!query.exec(request))
+    {
+        return 0;
+    }
+    auto &services = order.get_services();
+    for(int i = 0; i < services.size(); i++)
+    {
+        request = REQUEST_INSERT_SERVICE_ORDER;
+        request = request.arg(number_new_order);
+        request = request.arg(services[i].cost);
+        request = request.arg(services[i].count);
+        request = request.arg(services[i].name_service);
+        if(!query.exec(request))
+        {
+            return 0;
+        }
+    }
+    return number_new_order;
+}
 
 void MainWindow::read_file_data()
 {

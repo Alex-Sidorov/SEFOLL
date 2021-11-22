@@ -39,6 +39,9 @@ private:
     static const int INDEX_COLUMN_NAME;
     static const int INDEX_FIRST_ROW;
 
+    static const Qt::GlobalColor DEFAULT_FIELD_COLOR;
+    static const Qt::GlobalColor SELECT_FIELD_COLOR;
+
     static const char* MESSAGE_REQUEST_FOR_DELETE;
 
     int request_for_delete()const;

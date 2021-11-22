@@ -51,6 +51,7 @@ private slots:
     void upload_table(const QVector<int>&);
     void on_show_order_button_clicked();
     void on_options_clicked();
+    void slot_add_order_in_data_base(const Order& order);
 
     void on_show_data_button_clicked();
 
@@ -78,6 +79,10 @@ private:
     static const char* ERROR_OPEN_DATA_BASE;
     static const char* ERROR_SETTINGS;
 
+    static const char *ERROR_MESSAGE;
+    static const char *REGISTRATION;
+    static const char *MESSAGE_NUMBER_ORDER;
+
     static const char* NAME_FILE_SETTINGS;
 
     static const char* NAME_GROUP_DATA_BASE_SETTINGS;
@@ -92,6 +97,11 @@ private:
     static const char* REQUESTE_UPDATE_PRICE;
     static const char* REQUESTE_DELETE_SERVICE;
 
+    static const char *REQUEST_TAKE_TABLE_ORDERS;
+    static const char *REQUEST_INSERT_ORDERS;
+    static const char *REQUEST_CREATE_TABLE_ORDER;
+    static const char *REQUEST_INSERT_SERVICE_ORDER;
+
     static const char* COLUMN_PRICE;
     static const char* COLUMN_NAME;
 
@@ -100,6 +110,8 @@ private:
 
     void read_file_data();
     void read_settings();
+
+    int add_order_in_data_base(const Order&);
 };
 
 #endif // MAINWINDOW_H

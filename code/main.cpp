@@ -10,6 +10,12 @@ int main(int argc, char *argv[])
 
     int code = 0;
     MainWindow window;
+
+#if defined (QT_DEBUG)
+    window.set_access(Access::ADMIN);
+    window.show();
+    application.exec();
+#else
     QSharedPointer<FormForLogin> login(new FormForLogin);
     while(!code)
     {
@@ -23,5 +29,7 @@ int main(int argc, char *argv[])
         window.show();
         code = application.exec();
     }
+#endif
+
     return code;
 }
