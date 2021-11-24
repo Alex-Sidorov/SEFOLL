@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QCryptographicHash>
 
-enum Access { GUEST = 0 , CHIEF , WORKER_TAKE_ORDER, WORKER_CLOSE_ORDER, ADMIN};
+#include <Access.h>
 
 class Security
 {

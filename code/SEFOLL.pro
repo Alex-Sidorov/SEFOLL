@@ -30,6 +30,10 @@ SOURCES += \
     formforoptionsdatabase.cpp
 
 HEADERS  += \
+    Access.h \
+    dataBase/AbstractDataUserWorker.h \
+    dataBase/AbstractOrderRW.h \
+    dataBase/AbstractServicesWorker.h \
     form_for_add_service.h \
     form_for_change_service.h \
     form_for_delete_service.h \
