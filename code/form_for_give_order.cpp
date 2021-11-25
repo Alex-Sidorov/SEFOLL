@@ -141,7 +141,7 @@ void FormForGiveOrder::on_enter_button_clicked()
         }
     }
 
-    Order order(ui->name_client->text(),
+    Order order(0,ui->name_client->text(),
                 ui->name_worker->text(),
                 ui->date,services,
                 get_cost_with_discount(_cost,ui->discount->value()),

@@ -10,7 +10,7 @@
 class Order
 {
 public:
-    void set_data(const QString &name_client, const QString &name_worker,
+    void set_data(const int number, const QString &name_client, const QString &name_worker,
                   const QDateEdit *date,const QVector<InfoOfOrderedService> &services,
                   const double cost, const bool status, const int discount);
     double get_cost()const;
@@ -20,20 +20,19 @@ public:
     const QVector<InfoOfOrderedService>& get_services()const;
     bool get_status()const;
     int get_discount()const;
+    int get_number()const;
 
     void change_status_order();
 
-    int add_in_data_base();
-
     Order();
-    Order(const QString &name_client, const QString &name_worker, const QDateEdit *date,
+    Order(int number, const QString &name_client, const QString &name_worker, const QDateEdit *date,
           const QVector<InfoOfOrderedService> &services,const double cost, const bool status,
           const int discount);
     Order(const Order&);
     virtual ~Order();
 
 private:
-
+    int _number;
     double _cost;
     int _discount;
     bool _status;

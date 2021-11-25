@@ -2,17 +2,20 @@
 
 Order::Order()
 {
+    _number = 0;
     _cost = 0;
     _status = false;
 }
 
-Order::Order(const QString &name_client,
+Order::Order(const int number,
+             const QString &name_client,
              const QString &name_worker,
              const QDateEdit *date,
              const QVector<InfoOfOrderedService> &services,
              const double cost,
              const bool status,
              const int discount):
+            _number(number),
             _cost(cost),
             _discount(discount),
             _status(status),
@@ -27,7 +30,8 @@ Order::Order(const QString &name_client,
     }
 }
 
-void Order::set_data(const QString &name_client,
+void Order::set_data(const int number,
+                     const QString &name_client,
                      const QString &name_worker,
                      const QDateEdit *date,
                      const QVector<InfoOfOrderedService> &services,
@@ -35,6 +39,7 @@ void Order::set_data(const QString &name_client,
                      const bool status,
                      const int discount)
 {
+    _number = number;
     _name_client = name_client;
     _name_worker = name_worker;
     _date.setDate(date->date());
@@ -50,6 +55,7 @@ void Order::set_data(const QString &name_client,
 }
 
 Order::Order(const Order &obj):
+    _number(obj._number),
     _cost(obj._cost),
     _discount(obj._discount),
     _status(obj._status),
@@ -97,6 +103,11 @@ bool Order::get_status()const
 int Order::get_discount()const
 {
     return _discount;
+}
+
+int Order::get_number() const
+{
+    return _number;
 }
 
 void Order::change_status_order()

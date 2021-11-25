@@ -1,3 +1,4 @@
+release/databaseworker.o
 release/form_for_add_service.o
 release/form_for_change_service.o
 release/form_for_delete_service.o

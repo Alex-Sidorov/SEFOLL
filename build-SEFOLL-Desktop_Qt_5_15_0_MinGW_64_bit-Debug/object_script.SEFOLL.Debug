@@ -1,3 +1,4 @@
+debug/databaseworker.o
 debug/form_for_add_service.o
 debug/form_for_change_service.o
 debug/form_for_delete_service.o

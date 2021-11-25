@@ -15,7 +15,7 @@ const char* FormForOptionsDataBase::ERROR_CREATE_FILE = "Не удалось с�
 const char* FormForOptionsDataBase::REQUEST_CREATE_TABLE_ORDERS =
         "CREATE TABLE orders(number,client,worker,date,status,cost,services,discount Integer DEFAULT (0))";
 const char* FormForOptionsDataBase::REQUEST_CREATE_TABLE_SECURITY =
-        "CREATE TABLE security(id integer, access integer, password text)";
+        "CREATE TABLE security(id integer UNIQUE, access integer, password text)";
 const char* FormForOptionsDataBase::REQUEST_CREATE_TABLE_SERVICES =
         "CREATE TABLE services(price, name)";
 

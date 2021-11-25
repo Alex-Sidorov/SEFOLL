@@ -14,6 +14,7 @@ TEMPLATE = app
 
 
 SOURCES += \
+    dataBase/databaseworker.cpp \
     form_for_add_service.cpp \
     form_for_change_service.cpp \
     form_for_delete_service.cpp \
@@ -34,6 +35,7 @@ HEADERS  += \
     dataBase/AbstractDataUserWorker.h \
     dataBase/AbstractOrderRW.h \
     dataBase/AbstractServicesWorker.h \
+    dataBase/databaseworker.h \
     form_for_add_service.h \
     form_for_change_service.h \
     form_for_delete_service.h \
