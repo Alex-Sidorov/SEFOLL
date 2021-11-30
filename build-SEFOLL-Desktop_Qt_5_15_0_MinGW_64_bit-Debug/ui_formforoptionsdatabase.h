@@ -53,12 +53,40 @@ public:
         QFont font;
         font.setPointSize(10);
         select_data_base_button->setFont(font);
+        select_data_base_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_2->addWidget(select_data_base_button);
 
         create_data_base_button = new QPushButton(FormForOptionsDataBase);
         create_data_base_button->setObjectName(QString::fromUtf8("create_data_base_button"));
         create_data_base_button->setFont(font);
+        create_data_base_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_2->addWidget(create_data_base_button);
 
@@ -81,6 +109,20 @@ public:
         back_button->setMinimumSize(QSize(0, 0));
         back_button->setBaseSize(QSize(0, 0));
         back_button->setFont(font);
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout->addWidget(back_button);
 

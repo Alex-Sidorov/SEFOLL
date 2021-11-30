@@ -93,7 +93,7 @@ public:
     {
         if (Form_For_Show_Data->objectName().isEmpty())
             Form_For_Show_Data->setObjectName(QString::fromUtf8("Form_For_Show_Data"));
-        Form_For_Show_Data->resize(702, 351);
+        Form_For_Show_Data->resize(668, 417);
         horizontalLayout_5 = new QHBoxLayout(Form_For_Show_Data);
         horizontalLayout_5->setSpacing(2);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
@@ -123,12 +123,15 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(data->sizePolicy().hasHeightForWidth());
         data->setSizePolicy(sizePolicy);
+        data->setStyleSheet(QString::fromUtf8("\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);"));
         data->setEditTriggers(QAbstractItemView::NoEditTriggers);
         data->setDragDropOverwriteMode(false);
         data->setSortingEnabled(false);
         data->setWordWrap(false);
         data->setCornerButtonEnabled(false);
-        data->horizontalHeader()->setVisible(true);
+        data->horizontalHeader()->setVisible(false);
         data->horizontalHeader()->setCascadingSectionResizes(false);
         data->horizontalHeader()->setStretchLastSection(false);
         data->verticalHeader()->setCascadingSectionResizes(true);
@@ -143,7 +146,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 245, 619));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 245, 711));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setSpacing(5);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -177,6 +180,16 @@ public:
         number_order = new QSpinBox(scrollAreaWidgetContents);
         number_order->setObjectName(QString::fromUtf8("number_order"));
         number_order->setEnabled(false);
+        number_order->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"\n"
+""));
 
         verticalLayout_6->addWidget(number_order);
 
@@ -218,6 +231,15 @@ public:
 
         worker_list = new QListWidget(scrollAreaWidgetContents);
         worker_list->setObjectName(QString::fromUtf8("worker_list"));
+        worker_list->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:50;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         verticalLayout_2->addWidget(worker_list);
 
@@ -235,6 +257,15 @@ public:
         sizePolicy3.setHeightForWidth(worker_line->sizePolicy().hasHeightForWidth());
         worker_line->setSizePolicy(sizePolicy3);
         worker_line->setMinimumSize(QSize(0, 0));
+        worker_line->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_4->addWidget(worker_line);
 
@@ -246,6 +277,20 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(add_worker_button->sizePolicy().hasHeightForWidth());
         add_worker_button->setSizePolicy(sizePolicy4);
+        add_worker_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_4->addWidget(add_worker_button);
 
@@ -282,6 +327,14 @@ public:
 
         client_list = new QListWidget(scrollAreaWidgetContents);
         client_list->setObjectName(QString::fromUtf8("client_list"));
+        client_list->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:50;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);"));
 
         verticalLayout_3->addWidget(client_list);
 
@@ -290,12 +343,35 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         client_line = new QLineEdit(scrollAreaWidgetContents);
         client_line->setObjectName(QString::fromUtf8("client_line"));
+        client_line->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_6->addWidget(client_line);
 
         add_client_button = new QPushButton(scrollAreaWidgetContents);
         add_client_button->setObjectName(QString::fromUtf8("add_client_button"));
         add_client_button->setEnabled(false);
+        add_client_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_6->addWidget(add_client_button);
 
@@ -332,6 +408,15 @@ public:
         before_date = new QDateEdit(scrollAreaWidgetContents);
         before_date->setObjectName(QString::fromUtf8("before_date"));
         before_date->setEnabled(false);
+        before_date->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout->addWidget(before_date);
 
@@ -349,6 +434,15 @@ public:
         after_date = new QDateEdit(scrollAreaWidgetContents);
         after_date->setObjectName(QString::fromUtf8("after_date"));
         after_date->setEnabled(false);
+        after_date->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_2->addWidget(after_date);
 
@@ -388,6 +482,15 @@ public:
 
         service_list = new QListWidget(scrollAreaWidgetContents);
         service_list->setObjectName(QString::fromUtf8("service_list"));
+        service_list->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:50;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         verticalLayout_7->addWidget(service_list);
 
@@ -401,12 +504,35 @@ public:
         sizePolicy5.setVerticalStretch(0);
         sizePolicy5.setHeightForWidth(service_box->sizePolicy().hasHeightForWidth());
         service_box->setSizePolicy(sizePolicy5);
+        service_box->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_13->addWidget(service_box);
 
         add_service_button = new QPushButton(scrollAreaWidgetContents);
         add_service_button->setObjectName(QString::fromUtf8("add_service_button"));
         add_service_button->setEnabled(false);
+        add_service_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_13->addWidget(add_service_button);
 
@@ -442,6 +568,15 @@ public:
         status_box->addItem(QString());
         status_box->addItem(QString());
         status_box->setObjectName(QString::fromUtf8("status_box"));
+        status_box->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         verticalLayout_9->addWidget(status_box);
 
@@ -456,16 +591,58 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         ok_button = new QPushButton(Form_For_Show_Data);
         ok_button->setObjectName(QString::fromUtf8("ok_button"));
+        ok_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(ok_button);
 
         clear_button = new QPushButton(Form_For_Show_Data);
         clear_button->setObjectName(QString::fromUtf8("clear_button"));
+        clear_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(clear_button);
 
         back_button = new QPushButton(Form_For_Show_Data);
         back_button->setObjectName(QString::fromUtf8("back_button"));
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:70;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(back_button);
 
@@ -474,6 +651,20 @@ public:
 
         save_to_excel_button = new QPushButton(Form_For_Show_Data);
         save_to_excel_button->setObjectName(QString::fromUtf8("save_to_excel_button"));
+        save_to_excel_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout_8->addWidget(save_to_excel_button);
 
@@ -527,7 +718,7 @@ public:
         ok_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\236\320\272", nullptr));
         clear_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214", nullptr));
         back_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\235\320\260\320\267\320\260\320\264", nullptr));
-        save_to_excel_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\222\321\213\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\262 Execl", nullptr));
+        save_to_excel_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\222\321\213\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\262 Excel", nullptr));
     } // retranslateUi
 
 };

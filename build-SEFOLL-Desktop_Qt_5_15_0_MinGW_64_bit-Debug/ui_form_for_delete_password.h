@@ -63,6 +63,15 @@ public:
 
         id = new QSpinBox(FormForDeletePassword);
         id->setObjectName(QString::fromUtf8("id"));
+        id->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout->addWidget(id);
 
@@ -74,11 +83,39 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         ok_button = new QPushButton(FormForDeletePassword);
         ok_button->setObjectName(QString::fromUtf8("ok_button"));
+        ok_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_2->addWidget(ok_button);
 
         back_button = new QPushButton(FormForDeletePassword);
         back_button->setObjectName(QString::fromUtf8("back_button"));
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_2->addWidget(back_button);
 

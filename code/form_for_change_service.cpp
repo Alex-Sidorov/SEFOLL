@@ -15,6 +15,8 @@ FormForChangeService::FormForChangeService(QWidget *parent) :
 
     connect(ui->cost,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
     connect(ui->name,SIGNAL(textChanged(QString)),this,SLOT(slot_fields_form_changed()));
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForChangeService::set_table(const QTableWidget *table)

@@ -12,6 +12,8 @@ FormForLogin::FormForLogin(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->ok,SIGNAL(clicked()),SLOT(input_ok()));
     connect(ui->password,SIGNAL(returnPressed()),SLOT(input_ok()));
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForLogin::clear_form()const

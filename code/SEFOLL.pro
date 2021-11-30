@@ -66,3 +66,6 @@ FORMS += \
     form_for_show_order.ui \
     mainwindow.ui \
     formforoptionsdatabase.ui
+
+RESOURCES += \
+    resource.qrc

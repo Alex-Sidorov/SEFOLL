@@ -24,6 +24,8 @@ FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
 
     ui->date->setDate(QDate::currentDate());
     _cost = 0;
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForGiveOrder::set_table(const QTableWidget* table)

@@ -49,26 +49,96 @@ public:
 
         add_password_button = new QPushButton(FormForOptions);
         add_password_button->setObjectName(QString::fromUtf8("add_password_button"));
+        add_password_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(add_password_button);
 
         change_password_button = new QPushButton(FormForOptions);
         change_password_button->setObjectName(QString::fromUtf8("change_password_button"));
+        change_password_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(change_password_button);
 
         delete_password_button = new QPushButton(FormForOptions);
         delete_password_button->setObjectName(QString::fromUtf8("delete_password_button"));
+        delete_password_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(delete_password_button);
 
         change_access_button = new QPushButton(FormForOptions);
         change_access_button->setObjectName(QString::fromUtf8("change_access_button"));
+        change_access_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(change_access_button);
 
         back_button = new QPushButton(FormForOptions);
         back_button->setObjectName(QString::fromUtf8("back_button"));
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(back_button);
 

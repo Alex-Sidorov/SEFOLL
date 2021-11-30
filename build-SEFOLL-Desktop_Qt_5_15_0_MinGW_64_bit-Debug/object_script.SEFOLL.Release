@@ -13,6 +13,7 @@ release/new_spinbox.o
 release/order.o
 release/security.o
 release/formforoptionsdatabase.o
+release/qrc_resource.o
 release/moc_form_for_add_service.o
 release/moc_form_for_change_service.o
 release/moc_form_for_delete_service.o

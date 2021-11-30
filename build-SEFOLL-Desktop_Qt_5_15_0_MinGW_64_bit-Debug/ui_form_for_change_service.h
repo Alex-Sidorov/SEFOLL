@@ -66,7 +66,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font1);
         __qtablewidgetitem->setForeground(brush);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
@@ -75,7 +75,7 @@ public:
         font2.setKerning(true);
         font2.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font2);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -86,6 +86,10 @@ public:
         data_services->setContextMenuPolicy(Qt::NoContextMenu);
         data_services->setLayoutDirection(Qt::LeftToRight);
         data_services->setAutoFillBackground(false);
+        data_services->setStyleSheet(QString::fromUtf8("\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         data_services->setFrameShape(QFrame::StyledPanel);
         data_services->setFrameShadow(QFrame::Plain);
         data_services->setLineWidth(2);
@@ -135,6 +139,15 @@ public:
         name = new QLineEdit(Form_For_Change_Service);
         name->setObjectName(QString::fromUtf8("name"));
         name->setEnabled(false);
+        name->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_2->addWidget(name);
 
@@ -151,6 +164,15 @@ public:
         cost = new QDoubleSpinBox(Form_For_Change_Service);
         cost->setObjectName(QString::fromUtf8("cost"));
         cost->setEnabled(false);
+        cost->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:50;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         cost->setMaximum(99999.000000000000000);
 
         horizontalLayout->addWidget(cost);
@@ -163,12 +185,40 @@ public:
         enter_change_button->setObjectName(QString::fromUtf8("enter_change_button"));
         enter_change_button->setEnabled(false);
         enter_change_button->setFont(font);
+        enter_change_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:160;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout->addWidget(enter_change_button);
 
         back_button = new QPushButton(Form_For_Change_Service);
         back_button->setObjectName(QString::fromUtf8("back_button"));
         back_button->setFont(font);
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout->addWidget(back_button);
 

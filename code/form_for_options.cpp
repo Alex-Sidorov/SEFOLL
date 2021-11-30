@@ -39,6 +39,13 @@ FormForOptions::FormForOptions(QWidget *parent) :
     connect(window_for_change_access->ok_button,SIGNAL(clicked()), this, SLOT(slot_change_access_ok_button_clicked()));
     connect(window_for_change_password->back_button,SIGNAL(clicked()), this, SLOT(slot_change_password_back_button_clicked()));
     connect(window_for_change_password->ok_button,SIGNAL(clicked()), this, SLOT(slot_change_password_ok_button_clicked()));
+
+    QIcon icon(":icons/icon.png");
+    setWindowIcon(icon);
+    _widget_for_add_password->setWindowIcon(icon);
+    _widget_for_change_access->setWindowIcon(icon);
+    _widget_for_change_password->setWindowIcon(icon);
+    _widget_for_delete_password->setWindowIcon(icon);
 }
 
 void FormForOptions::on_back_button_clicked()

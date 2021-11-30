@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>351</height>
+    <width>668</width>
+    <height>417</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,6 +37,11 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="styleSheet">
+      <string notr="true">
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);</string>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -53,7 +58,7 @@
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>
@@ -122,7 +127,7 @@
           <x>0</x>
           <y>0</y>
           <width>245</width>
-          <height>619</height>
+          <height>711</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -180,6 +185,18 @@
              <property name="enabled">
               <bool>false</bool>
              </property>
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+
+</string>
+             </property>
             </widget>
            </item>
           </layout>
@@ -235,7 +252,19 @@
             </layout>
            </item>
            <item>
-            <widget class="QListWidget" name="worker_list"/>
+            <widget class="QListWidget" name="worker_list">
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:50;
+width:100;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -258,6 +287,17 @@
                <height>0</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -270,6 +310,22 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
              </property>
              <property name="text">
               <string>Добавить</string>
@@ -320,7 +376,18 @@
             </layout>
            </item>
            <item>
-            <widget class="QListWidget" name="client_list"/>
+            <widget class="QListWidget" name="client_list">
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:50;
+width:100;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);</string>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -328,12 +395,40 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLineEdit" name="client_line"/>
+              <widget class="QLineEdit" name="client_line">
+               <property name="styleSheet">
+                <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="add_client_button">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
                </property>
                <property name="text">
                 <string>Добавить</string>
@@ -383,6 +478,17 @@
                <property name="enabled">
                 <bool>false</bool>
                </property>
+               <property name="styleSheet">
+                <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+               </property>
               </widget>
              </item>
             </layout>
@@ -403,6 +509,17 @@
               <widget class="QDateEdit" name="after_date">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
                </property>
               </widget>
              </item>
@@ -452,7 +569,19 @@
             </layout>
            </item>
            <item>
-            <widget class="QListWidget" name="service_list"/>
+            <widget class="QListWidget" name="service_list">
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:50;
+width:100;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+             </property>
+            </widget>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -467,12 +596,39 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:100;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+               </property>
               </widget>
              </item>
              <item>
               <widget class="QPushButton" name="add_service_button">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
                </property>
                <property name="text">
                 <string>Добавить</string>
@@ -515,6 +671,17 @@
            </item>
            <item>
             <widget class="QComboBox" name="status_box">
+             <property name="styleSheet">
+              <string notr="true">
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:100;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+</string>
+             </property>
              <item>
               <property name="text">
                <string>Не важно</string>
@@ -542,6 +709,22 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QPushButton" name="ok_button">
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
+         </property>
          <property name="text">
           <string>Ок</string>
          </property>
@@ -549,6 +732,22 @@
        </item>
        <item>
         <widget class="QPushButton" name="clear_button">
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
+         </property>
          <property name="text">
           <string>Очистить</string>
          </property>
@@ -556,6 +755,22 @@
        </item>
        <item>
         <widget class="QPushButton" name="back_button">
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:70;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
+         </property>
          <property name="text">
           <string>Назад</string>
          </property>
@@ -565,8 +780,24 @@
      </item>
      <item>
       <widget class="QPushButton" name="save_to_excel_button">
+       <property name="styleSheet">
+        <string notr="true">QPushButton
+{ 
+border-radius : 4px;
+border: 1px solid;
+border-color: rgb(11, 11, 11);
+height:20;
+width:140;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton::pressed {
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);
+}</string>
+       </property>
        <property name="text">
-        <string>Выгрузить в Execl</string>
+        <string>Выгрузить в Excel</string>
        </property>
       </widget>
      </item>

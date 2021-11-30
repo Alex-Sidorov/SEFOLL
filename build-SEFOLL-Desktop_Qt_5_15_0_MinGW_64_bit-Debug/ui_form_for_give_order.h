@@ -67,12 +67,20 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        horizontalSpacer_3 = new QSpacerItem(35, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(30, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_3);
 
         name_client = new QLineEdit(FormForGiveOrder);
         name_client->setObjectName(QString::fromUtf8("name_client"));
+        name_client->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"height:20;\n"
+"border-color: rgb(11, 11, 11);\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout->addWidget(name_client);
 
@@ -89,6 +97,14 @@ public:
 
         name_worker = new QLineEdit(FormForGiveOrder);
         name_worker->setObjectName(QString::fromUtf8("name_worker"));
+        name_worker->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         horizontalLayout_2->addWidget(name_worker);
 
@@ -97,6 +113,15 @@ public:
 
         date = new QDateEdit(FormForGiveOrder);
         date->setObjectName(QString::fromUtf8("date"));
+        date->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
 
         verticalLayout->addWidget(date);
 
@@ -132,6 +157,10 @@ public:
         data_services->setContextMenuPolicy(Qt::NoContextMenu);
         data_services->setLayoutDirection(Qt::LeftToRight);
         data_services->setAutoFillBackground(false);
+        data_services->setStyleSheet(QString::fromUtf8("\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         data_services->setFrameShape(QFrame::StyledPanel);
         data_services->setFrameShadow(QFrame::Plain);
         data_services->setLineWidth(2);
@@ -152,7 +181,7 @@ public:
         data_services->setSortingEnabled(false);
         data_services->setWordWrap(false);
         data_services->setCornerButtonEnabled(false);
-        data_services->horizontalHeader()->setVisible(true);
+        data_services->horizontalHeader()->setVisible(false);
         data_services->horizontalHeader()->setCascadingSectionResizes(false);
         data_services->horizontalHeader()->setMinimumSectionSize(10);
         data_services->horizontalHeader()->setDefaultSectionSize(150);
@@ -184,6 +213,15 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(discount->sizePolicy().hasHeightForWidth());
         discount->setSizePolicy(sizePolicy);
+        discount->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         discount->setMaximum(100);
 
         horizontalLayout_4->addWidget(discount);
@@ -211,12 +249,40 @@ public:
         enter_button->setObjectName(QString::fromUtf8("enter_button"));
         enter_button->setEnabled(false);
         enter_button->setFont(font);
+        enter_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(enter_button);
 
         back_button = new QPushButton(FormForGiveOrder);
         back_button->setObjectName(QString::fromUtf8("back_button"));
         back_button->setFont(font);
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(back_button);
 

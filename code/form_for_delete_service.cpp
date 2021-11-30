@@ -17,6 +17,8 @@ FormForDeleteService::FormForDeleteService(QWidget *parent) :
 {
     ui->setupUi(this);
     _count_delete_items = 0;
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForDeleteService::set_table(const QTableWidget *table)

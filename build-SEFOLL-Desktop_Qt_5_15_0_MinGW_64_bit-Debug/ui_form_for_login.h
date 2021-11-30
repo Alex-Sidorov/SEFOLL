@@ -73,6 +73,15 @@ public:
         sizePolicy.setHeightForWidth(id->sizePolicy().hasHeightForWidth());
         id->setSizePolicy(sizePolicy);
         id->setMinimumSize(QSize(133, 0));
+        id->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:144;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         id->setMaximum(1000);
 
         horizontalLayout->addWidget(id);
@@ -94,6 +103,15 @@ public:
         password->setObjectName(QString::fromUtf8("password"));
         sizePolicy.setHeightForWidth(password->sizePolicy().hasHeightForWidth());
         password->setSizePolicy(sizePolicy);
+        password->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:160;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         password->setEchoMode(QLineEdit::Password);
 
         horizontalLayout_2->addWidget(password);
@@ -103,12 +121,39 @@ public:
 
         ok = new QPushButton(FormForLogin);
         ok->setObjectName(QString::fromUtf8("ok"));
-        ok->setStyleSheet(QString::fromUtf8(""));
+        ok->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(ok);
 
         button_for_guest = new QPushButton(FormForLogin);
         button_for_guest->setObjectName(QString::fromUtf8("button_for_guest"));
+        button_for_guest->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         verticalLayout->addWidget(button_for_guest);
 

@@ -82,6 +82,8 @@ MainWindow::MainWindow(QWidget *parent) :
     read_settings();
     data.open();
     read_file_data();
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 MainWindow::~MainWindow()

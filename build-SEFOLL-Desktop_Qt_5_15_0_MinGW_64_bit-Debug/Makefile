@@ -253,7 +253,8 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/lib/Qt5Sql.prl \
 		D:/qt/5.15.0/mingw81_64/lib/Qt5Core.prl \
 		D:/qt/5.15.0/mingw81_64/lib/qtmain.prl \
-		D:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf
+		D:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf \
+		../code/resource.qrc
 	$(QMAKE) -o Makefile ..\code\SEFOLL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/qt/5.15.0/mingw81_64/mkspecs/features/spec_pre.prf:
 D:/qt/5.15.0/mingw81_64/mkspecs/qdevice.pri:
@@ -439,6 +440,7 @@ D:/qt/5.15.0/mingw81_64/lib/Qt5Sql.prl:
 D:/qt/5.15.0/mingw81_64/lib/Qt5Core.prl:
 D:/qt/5.15.0/mingw81_64/lib/qtmain.prl:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf:
+../code/resource.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\code\SEFOLL.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

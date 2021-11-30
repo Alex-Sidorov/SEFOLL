@@ -40,6 +40,8 @@ FormForOptionsDataBase::FormForOptionsDataBase(QWidget *parent) :
     ui(new Ui::FormForOptionsDataBase)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 FormForOptionsDataBase::~FormForOptionsDataBase()

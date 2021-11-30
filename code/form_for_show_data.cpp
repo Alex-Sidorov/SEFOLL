@@ -56,6 +56,8 @@ FormForShowData::FormForShowData(const QTableWidget *services, QWidget *parent) 
     _services(services)
 {
     ui->setupUi(this);
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForShowData::show()

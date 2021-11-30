@@ -13,6 +13,7 @@ debug/new_spinbox.o
 debug/order.o
 debug/security.o
 debug/formforoptionsdatabase.o
+debug/qrc_resource.o
 debug/moc_form_for_add_service.o
 debug/moc_form_for_change_service.o
 debug/moc_form_for_delete_service.o

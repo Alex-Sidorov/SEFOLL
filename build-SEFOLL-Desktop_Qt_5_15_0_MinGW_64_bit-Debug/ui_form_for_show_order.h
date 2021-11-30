@@ -81,6 +81,15 @@ public:
         number_order->setSizeIncrement(QSize(0, 0));
         number_order->setBaseSize(QSize(0, 0));
         number_order->setLayoutDirection(Qt::LeftToRight);
+        number_order->setStyleSheet(QString::fromUtf8(" \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:140;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         number_order->setMaximum(1000000);
 
         horizontalLayout->addWidget(number_order);
@@ -156,6 +165,10 @@ public:
         data_services->setContextMenuPolicy(Qt::NoContextMenu);
         data_services->setLayoutDirection(Qt::LeftToRight);
         data_services->setAutoFillBackground(false);
+        data_services->setStyleSheet(QString::fromUtf8("\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
         data_services->setFrameShape(QFrame::StyledPanel);
         data_services->setFrameShadow(QFrame::Plain);
         data_services->setLineWidth(2);
@@ -209,6 +222,20 @@ public:
         delete_button->setObjectName(QString::fromUtf8("delete_button"));
         delete_button->setEnabled(false);
         delete_button->setFont(font);
+        delete_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(delete_button);
 
@@ -216,6 +243,20 @@ public:
         complete_button->setObjectName(QString::fromUtf8("complete_button"));
         complete_button->setEnabled(false);
         complete_button->setFont(font);
+        complete_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:160;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(complete_button);
 
@@ -223,12 +264,40 @@ public:
         enter_button->setObjectName(QString::fromUtf8("enter_button"));
         enter_button->setEnabled(false);
         enter_button->setFont(font);
+        enter_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(enter_button);
 
         back_button = new QPushButton(Form_For_Show_Order);
         back_button->setObjectName(QString::fromUtf8("back_button"));
         back_button->setFont(font);
+        back_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
         horizontalLayout_3->addWidget(back_button);
 

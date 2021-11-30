@@ -10,6 +10,8 @@ FormForAddService::FormForAddService(QWidget *parent) :
     connect(this,SIGNAL(new_data()),this,SLOT(close()));
     connect(ui->name_service,SIGNAL(textChanged(QString)),this,SLOT(slot_fields_form_changed()));
     connect(ui->cost_service,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
+
+    setWindowIcon(QIcon(":icons/icon.png"));
 }
 
 void FormForAddService::on_back_button_clicked()
