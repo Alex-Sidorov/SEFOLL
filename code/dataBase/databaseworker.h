@@ -23,38 +23,40 @@ public:
     virtual bool complete_order(const int number)override;
     virtual bool delete_order_with_services(const int number)override;
 
-    virtual bool add_sevice(const QString& name, const float price)override;
-    virtual QVector<QPair<QString, float>> read_services()override;
-    virtual bool change_name_service(const QString& new_name, const QString& old_name)override;
-    virtual bool change_price_service(const QString& name, const float price)override;
-    virtual bool delete_service(const QString& name)override;
+    virtual bool add_service(const QString& name, const double price)override;
+    virtual QVector<QPair<QString, double>> read_services()override;
+    virtual bool change_name_service(const QString& new_name, const QString& old_name, const double price)override;
+    virtual bool change_price_service(const QString& name, const double new_price, const double old_price)override;
+    virtual bool delete_service(const QString& name, const double price)override;
 
     virtual ~DataBaseWorker(){}
 
 private:
-    static constexpr auto REQUESTE_TAKE_USER = "SELECT * FROM security WHERE id = %1 AND password = '%2';";
-    static constexpr auto REQUESTE_ADD_USER = "INSERT INTO security(id, access, password) VALUES(%1,%2,'%3');";
-    static constexpr auto REQUESTE_DELETE_USER = "DELETE FROM security WHERE id = %1;";
-    static constexpr auto REQUESTE_CHANGE_PASSWORD = "UPDATE security SET password = '%1' WHERE id = %2;";
-    static constexpr auto REQUESTE_CHANGE_ACCESS =   "UPDATE security SET access = %1 WHERE id = %2;";
+    static constexpr auto REQUESTE_TAKE_USER = "SELECT * FROM security WHERE id = :1 AND password = :2;";
+    static constexpr auto REQUESTE_TAKE_USER_BY_ONLY_ID = "SELECT * FROM security WHERE id = :1";
+    static constexpr auto REQUESTE_ADD_USER = "INSERT INTO security(id, access, password) VALUES(:1,:2,:3);";
+    static constexpr auto REQUESTE_DELETE_USER = "DELETE FROM security WHERE id = :1;";
+    static constexpr auto REQUESTE_CHANGE_PASSWORD = "UPDATE security SET password = :1 WHERE id = :2;";
+    static constexpr auto REQUESTE_CHANGE_ACCESS =   "UPDATE security SET access = :1 WHERE id = :2;";
 
-    static constexpr auto REQUESTE_ADD_SERVICE =   "INSERT INTO services(price, name) VALUES(%1, '%2');";
+    static constexpr auto REQUESTE_ADD_SERVICE =   "INSERT INTO services(name, price) VALUES(:1, :2);";
     static constexpr auto REQUESTE_TAKE_SERVICES =  "SELECT * FROM services";
-    static constexpr auto REQUESTE_UPDATE_NAME =    "UPDATE services SET name = '%1' WHERE name = '%2';";
-    static constexpr auto REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = %1 WHERE name = '%2';";
-    static constexpr auto REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE price = %1 AND name = '%2'";
+    static constexpr auto REQUESTE_UPDATE_NAME =    "UPDATE services SET name = :1 WHERE name = :2 AND price = :3;";
+    static constexpr auto REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = :1 WHERE name = :2 AND price = :3;";
+    static constexpr auto REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE name = :1 AND price = :2";
 
-    static constexpr auto REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
-    static constexpr auto REQUEST_TAKE_ANY_ORDER = "SELECT * FROM orders WHERE id = %1;";
+    static constexpr auto REQUEST_FIND_ORDERS = "SELECT number FROM orders where number = :1;";
+    static constexpr auto REQUEST_COUNT_ORDERS = "SELECT COUNT(*) as COUNT FROM orders;";
+    static constexpr auto REQUEST_TAKE_ANY_ORDER = "SELECT * FROM orders WHERE number = :1;";
     static constexpr auto REQUEST_INSERT_ORDERS =
             "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
-            " VALUES(%1, '%2', '%3', '%4', %5, %6, %7, %8);";
+            " VALUES(:1, :2, :3, :4, :5, :6, :7, :8);";
     static constexpr auto REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
     static constexpr auto REQUEST_CREATE_TABLE_ORDER =
             "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
     static constexpr auto REQUEST_INSERT_SERVICE_ORDER =
-            "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
-    static constexpr auto REQUEST_COMPLETE_ORDER = "UPDATE orders SET status = 1 WHERE number = %1;";
+            "INSERT INTO _%1_(price, count, name)  VALUES(:1, :2, :3);";
+    static constexpr auto REQUEST_COMPLETE_ORDER = "UPDATE orders SET status = 1 WHERE number = :1;";
     static constexpr auto REQUEST_DELETE_ORDER = "DELETE FROM orders WHERE number = %1;";
     static constexpr auto REQUEST_DELETE_TABLE_SERVICE_ORDER ="DROP TABLE _%1_;";
 
@@ -75,6 +77,8 @@ private:
     bool is_user(const UserData&);
     bool exec_request(QSqlQuery& query) const;
     QVector<InfoOfOrderedService> read_services_order(const int number)const;
+    UserData read_data_user(const int id);
+    bool is_order(const int number)const;
 };
 
 #endif // DATABASEWORKER_H

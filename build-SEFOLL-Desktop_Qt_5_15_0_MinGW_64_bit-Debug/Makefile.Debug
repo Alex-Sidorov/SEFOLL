@@ -832,9 +832,13 @@ debug/moc_form_for_login.cpp: ../code/form_for_login.h \
 
 debug/moc_form_for_options.cpp: ../code/form_for_options.h \
 		ui_form_for_add_password.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qvariant.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic.h \
+		ui_form_for_change_password.h \
+		ui_form_for_delete_password.h \
+		ui_form_for_change_access.h \
+		../code/security.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QString \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qstring.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qchar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qconfig.h \
@@ -846,29 +850,37 @@ debug/moc_form_for_options.cpp: ../code/form_for_options.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsysinfo.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qlogging.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qflags.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobalstatic.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qmutex.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qnumeric.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qversiontagging.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qbasicatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_bootstrap.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qgenericatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_cxx11.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_msvc.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobalstatic.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qmutex.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qnumeric.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qversiontagging.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qbytearray.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qrefcount.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qnamespace.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qarraydata.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qlist.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qalgorithms.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qiterator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qhashfunctions.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qstring.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qchar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringliteral.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringalgorithms.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringview.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringbuilder.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlQuery \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlquery.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsqlglobal.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsql-config.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqldatabase.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlRecord \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qvariant.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qlist.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qalgorithms.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qiterator.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qhashfunctions.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qpair.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qvector.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
@@ -897,23 +909,23 @@ debug/moc_form_for_options.cpp: ../code/form_for_options.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcontiguouscache.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer_impl.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
+		../code/Access.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtguiglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtgui-config.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgets-config.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qwidget.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs_win.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qsize.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qmargins.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qwidget.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qpaintdevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qrect.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qsize.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qpalette.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qcolor.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qrgb.h \
@@ -932,6 +944,7 @@ debug/moc_form_for_options.cpp: ../code/form_for_options.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qfontmetrics.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qfontinfo.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qsizepolicy.h \
+		D:/qt/5.15.0/mingw81_64/include/QtGui/qcursor.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qkeysequence.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qevent.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qurl.h \
@@ -940,62 +953,7 @@ debug/moc_form_for_options.cpp: ../code/form_for_options.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qfiledevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qvector2d.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtouchdevice.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QWidget \
-		ui_form_for_change_password.h \
-		ui_form_for_delete_password.h \
-		ui_form_for_change_access.h \
-		../code/security.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QString \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlQuery \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlquery.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsqlglobal.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsql-config.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqldatabase.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlRecord \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
-		../code/Access.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSharedPointer \
 		debug/moc_predefs.h \
 		D:/qt/5.15.0/mingw81_64/bin/moc.exe
@@ -1426,37 +1384,11 @@ debug/moc_mainwindow.cpp: ../code/mainwindow.h \
 		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
 		../code/form_for_options.h \
 		ui_form_for_add_password.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		ui_form_for_change_password.h \
 		ui_form_for_delete_password.h \
 		ui_form_for_change_access.h \
 		../code/security.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
 		../code/Access.h \
@@ -1469,13 +1401,8 @@ debug/moc_mainwindow.cpp: ../code/mainwindow.h \
 		../code/formforoptionsdatabase.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QDate \
 		ui_mainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMainWindow \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QStatusBar \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstatusbar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidgetItem \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QDoubleSpinBox \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QFile \
@@ -2048,40 +1975,7 @@ debug/form_for_add_service.o: ../code/form_for_add_service.cpp ../code/form_for_
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qvector2d.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtouchdevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSharedPointer \
-		ui_form_for_add_service.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QDoubleSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_add_service.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_add_service.o ..\code\form_for_add_service.cpp
 
 debug/form_for_change_service.o: ../code/form_for_change_service.cpp ../code/form_for_change_service.h \
@@ -2210,37 +2104,7 @@ debug/form_for_change_service.o: ../code/form_for_change_service.cpp ../code/for
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QVector \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSharedPointer \
-		ui_form_for_change_service.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QDoubleSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_change_service.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_change_service.o ..\code\form_for_change_service.cpp
 
 debug/form_for_delete_service.o: ../code/form_for_delete_service.cpp ../code/form_for_delete_service.h \
@@ -2371,27 +2235,7 @@ debug/form_for_delete_service.o: ../code/form_for_delete_service.cpp ../code/for
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
-		ui_form_for_delete_service.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h
+		ui_form_for_delete_service.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_delete_service.o ..\code\form_for_delete_service.cpp
 
 debug/form_for_give_order.o: ../code/form_for_give_order.cpp ../code/form_for_give_order.h \
@@ -2534,35 +2378,7 @@ debug/form_for_give_order.o: ../code/form_for_give_order.cpp ../code/form_for_gi
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
-		ui_form_for_give_order.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_give_order.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_give_order.o ..\code\form_for_give_order.cpp
 
 debug/form_for_login.o: ../code/form_for_login.cpp ../code/form_for_login.h \
@@ -2683,45 +2499,18 @@ debug/form_for_login.o: ../code/form_for_login.cpp ../code/form_for_login.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qfiledevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qvector2d.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtouchdevice.h \
-		ui_form_for_login.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_login.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_login.o ..\code\form_for_login.cpp
 
 debug/form_for_options.o: ../code/form_for_options.cpp ../code/form_for_options.h \
 		ui_form_for_add_password.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qvariant.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic.h \
+		ui_form_for_change_password.h \
+		ui_form_for_delete_password.h \
+		ui_form_for_change_access.h \
+		../code/security.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QString \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qstring.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qchar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qconfig.h \
@@ -2733,29 +2522,37 @@ debug/form_for_options.o: ../code/form_for_options.cpp ../code/form_for_options.
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsysinfo.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qlogging.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qflags.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobalstatic.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qmutex.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qnumeric.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qversiontagging.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qbasicatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_bootstrap.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qgenericatomic.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_cxx11.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qatomic_msvc.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qglobalstatic.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qmutex.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qnumeric.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qversiontagging.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qbytearray.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qrefcount.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qnamespace.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qarraydata.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qlist.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qalgorithms.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qiterator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qhashfunctions.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qstring.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qchar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringliteral.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringalgorithms.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringview.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qstringbuilder.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlQuery \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlquery.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsqlglobal.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsql-config.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqldatabase.h \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlRecord \
+		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qvariant.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qlist.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qalgorithms.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qiterator.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qhashfunctions.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qpair.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qvector.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
@@ -2784,23 +2581,23 @@ debug/form_for_options.o: ../code/form_for_options.cpp ../code/form_for_options.
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcontiguouscache.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer_impl.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
+		../code/Access.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtguiglobal.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtgui-config.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgets-config.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qwidget.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs_win.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qsize.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qmargins.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qwidget.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qpaintdevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qrect.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qsize.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qpalette.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qcolor.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qrgb.h \
@@ -2819,6 +2616,7 @@ debug/form_for_options.o: ../code/form_for_options.cpp ../code/form_for_options.
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qfontmetrics.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qfontinfo.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qsizepolicy.h \
+		D:/qt/5.15.0/mingw81_64/include/QtGui/qcursor.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qkeysequence.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qevent.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qurl.h \
@@ -2827,62 +2625,7 @@ debug/form_for_options.o: ../code/form_for_options.cpp ../code/form_for_options.
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qfiledevice.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qvector2d.h \
 		D:/qt/5.15.0/mingw81_64/include/QtGui/qtouchdevice.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QWidget \
-		ui_form_for_change_password.h \
-		ui_form_for_delete_password.h \
-		ui_form_for_change_access.h \
-		../code/security.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QString \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlQuery \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlquery.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsqlglobal.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsql-config.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqldatabase.h \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlRecord \
-		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
-		../code/Access.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSharedPointer \
 		ui_form_for_options.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_options.o ..\code\form_for_options.cpp
@@ -3034,46 +2777,7 @@ debug/form_for_show_data.o: ../code/form_for_show_data.cpp ../code/form_for_show
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QTextStream \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMessageBox \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
-		ui_form_for_show_data.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QCheckBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QListWidget \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlistwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlistview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QScrollArea \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qscrollarea.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_show_data.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_show_data.o ..\code\form_for_show_data.cpp
 
 debug/form_for_show_order.o: ../code/form_for_show_order.cpp ../code/form_for_show_order.h \
@@ -3191,51 +2895,7 @@ debug/form_for_show_order.o: ../code/form_for_show_order.cpp ../code/form_for_sh
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSharedPointer \
-		ui_form_for_show_order.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtabwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpinBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidget \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtablewidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qtableview.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_form_for_show_order.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\form_for_show_order.o ..\code\form_for_show_order.cpp
 
 debug/main.o: ../code/main.cpp ../code/mainwindow.h \
@@ -3393,37 +3053,11 @@ debug/main.o: ../code/main.cpp ../code/mainwindow.h \
 		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
 		../code/form_for_options.h \
 		ui_form_for_add_password.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		ui_form_for_change_password.h \
 		ui_form_for_delete_password.h \
 		ui_form_for_change_access.h \
 		../code/security.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
 		../code/Access.h \
@@ -3436,20 +3070,27 @@ debug/main.o: ../code/main.cpp ../code/mainwindow.h \
 		../code/formforoptionsdatabase.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QDate \
 		ui_mainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMainWindow \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QStatusBar \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstatusbar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidgetItem \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QDoubleSpinBox \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QFile \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QDataStream \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QSettings \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qsettings.h \
-		../code/form_for_login.h
+		../code/form_for_login.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
+		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
+		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
+		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
+		../code/dataBase/databaseworker.h \
+		../code/dataBase/AbstractDataUserWorker.h \
+		../code/dataBase/AbstractOrderRW.h \
+		../code/dataBase/AbstractServicesWorker.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QPair
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\code\main.cpp
 
 debug/mainwindow.o: ../code/mainwindow.cpp ../code/mainwindow.h \
@@ -3607,37 +3248,11 @@ debug/mainwindow.o: ../code/mainwindow.cpp ../code/mainwindow.h \
 		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlrecord.h \
 		../code/form_for_options.h \
 		ui_form_for_add_password.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
 		ui_form_for_change_password.h \
 		ui_form_for_delete_password.h \
 		ui_form_for_change_access.h \
 		../code/security.h \
+		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QCryptographicHash \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
 		../code/Access.h \
@@ -3650,13 +3265,8 @@ debug/mainwindow.o: ../code/mainwindow.cpp ../code/mainwindow.h \
 		../code/formforoptionsdatabase.h \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QDate \
 		ui_mainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QMainWindow \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qmainwindow.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QStatusBar \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qstatusbar.h \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidgetItem \
 		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QDoubleSpinBox \
 		D:/qt/5.15.0/mingw81_64/include/QtCore/QFile \
@@ -4103,29 +3713,7 @@ debug/formforoptionsdatabase.o: ../code/formforoptionsdatabase.cpp ../code/formf
 		D:/qt/5.15.0/mingw81_64/include/QtSql/qtsql-config.h \
 		D:/qt/5.15.0/mingw81_64/include/QtSql/QSqlQuery \
 		D:/qt/5.15.0/mingw81_64/include/QtSql/qsqlquery.h \
-		ui_formforoptionsdatabase.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/QVariant \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
-		D:/qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
+		ui_formforoptionsdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formforoptionsdatabase.o ..\code\formforoptionsdatabase.cpp
 
 debug/qrc_resource.o: debug/qrc_resource.cpp 

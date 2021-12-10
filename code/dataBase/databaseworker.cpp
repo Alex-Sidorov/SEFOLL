@@ -7,23 +7,28 @@
 
 bool DataBaseWorker::add_user(const UserData& user)
 {
-    auto password = QCryptographicHash::hash(user.password.toLatin1(),QCryptographicHash::Md5);
+    QString password = QCryptographicHash::hash(user.password.toLatin1(),QCryptographicHash::Md5);
 
-    QString request = REQUESTE_ADD_USER;
-    request = request.arg(user.id).arg(static_cast<int>(user.access)).arg(QString(password));
+    QSqlQuery query;
+    query.prepare(REQUESTE_ADD_USER);
 
-    QSqlQuery query(request);
+    query.bindValue(":1",user.id);
+    query.bindValue(":2",static_cast<int>(user.access));
+    query.bindValue(":3",password);
+
     return exec_request(query);
 }
 
 UserData DataBaseWorker::read_data_user(const int id, const QString& password)
 {
-    auto hash_password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
+    QString hash_password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
 
-    QString request = REQUESTE_ADD_USER;
-    request = request.arg(id).arg(QString(hash_password));
+    QSqlQuery query;
+    query.prepare(REQUESTE_TAKE_USER);
 
-    QSqlQuery query(request);
+    query.bindValue(":1",id);
+    query.bindValue(":2",hash_password);
+
     if(!exec_request(query) || !query.next())
     {
         return {0,GUEST,""};
@@ -32,37 +37,62 @@ UserData DataBaseWorker::read_data_user(const int id, const QString& password)
     return {id,access,password};
 }
 
+UserData DataBaseWorker::read_data_user(const int id)
+{
+    QSqlQuery query;
+    query.prepare(REQUESTE_TAKE_USER_BY_ONLY_ID);
+
+    query.bindValue(":1",id);
+
+    if(!exec_request(query) || !query.next())
+    {
+        return {0,GUEST,""};
+    }
+    auto access = static_cast<Access>(query.value(query.record().indexOf(COLUMN_ACCESS)).toInt());
+    auto password = query.value(query.record().indexOf("password")).toString();
+    return {id,access,password};
+}
+
 bool DataBaseWorker::delete_user(const int id)
 {
-    QString request = REQUESTE_DELETE_USER;
-    request = request.arg(id);
-    QSqlQuery query(request);
-    return exec_request(query);
+    QSqlQuery query;
+    query.prepare(REQUESTE_DELETE_USER);
+    query.bindValue(":1",id);
+    return read_data_user(id).id && exec_request(query);
 }
 
 bool DataBaseWorker::change_password(const int id, const QString& new_password)
 {
-    QString request = REQUESTE_CHANGE_PASSWORD;
-    auto hash_new_password = QCryptographicHash::hash(new_password.toLatin1(),QCryptographicHash::Md5);
-    request = request.arg(QString(hash_new_password)).arg(id);
-    QSqlQuery query(request);
-    return exec_request(query);
+    QString hash_new_password = new_password;//QCryptographicHash::hash(new_password.toLatin1(),QCryptographicHash::Md5);
+    QSqlQuery query;
+
+    query.prepare(REQUESTE_CHANGE_PASSWORD);
+    query.bindValue(":1",hash_new_password);
+    query.bindValue(":2",id);
+
+    return read_data_user(id).id && exec_request(query);
 }
 
 bool DataBaseWorker::change_access(const int id, const Access &access)
 {
-    QString request = REQUESTE_CHANGE_ACCESS;
-    request = request.arg(QString::number(access)).arg(id);
-    QSqlQuery query(request);
-    return exec_request(query);
+    QSqlQuery query;
+
+    query.prepare(REQUESTE_CHANGE_ACCESS);
+    query.bindValue(":1",static_cast<int>(access));
+    query.bindValue(":2",id);
+
+    return read_data_user(id).id && exec_request(query);
 }
 
 
 Order DataBaseWorker::read_order(const int number)
 {
     Order order;
-    QString request = QString(REQUEST_TAKE_ANY_ORDER).arg(number);
-    QSqlQuery query(request);
+    QSqlQuery query;
+
+    query.prepare(REQUEST_TAKE_ANY_ORDER);
+    query.bindValue(":1",number);
+
     if(exec_request(query) && query.next())
     {
         QSqlRecord record = query.record();
@@ -86,11 +116,12 @@ QVector<Order> DataBaseWorker::read_orders()
 {
     QVector<Order> orders;
 
-    QString request = QString(REQUEST_TAKE_TABLE_ORDERS);
+    QString request = QString(REQUEST_COUNT_ORDERS);
     QSqlQuery query(request);
-    if(exec_request(query))
+    if(exec_request(query) && query.next())
     {
-        auto count_order = query.record().count();
+        auto record = query.record();
+        auto count_order = query.value(record.indexOf("COUNT")).toInt();
         for(int i = 1; i <= count_order; ++i)
         {
             orders.push_back(read_order(i));
@@ -103,43 +134,45 @@ bool DataBaseWorker::write_order(const Order& order)
 {
     auto number_order = order.get_number();
 
-    QString request = REQUEST_INSERT_ORDERS;
-    request = request.arg(number_order);
-    request = request.arg(order.get_name_client());
-    request = request.arg(order.get_name_worker());
+    QSqlQuery query;
+    query.prepare(REQUEST_INSERT_ORDERS);
+
+    query.bindValue(":1",number_order);
+    query.bindValue(":2",order.get_name_client());
+    query.bindValue(":3",order.get_name_worker());
     auto &date = order.get_date();
-    request = request.arg(QString::number(date.date().year()) + QChar('.') +
+    query.bindValue(":4",(QString::number(date.date().year()) + QChar('.') +
                           QString::number(date.date().month()) + QChar('.') +
-                          QString::number(date.date().day()));
-    request = request.arg(order.get_status());
-    request = request.arg(order.get_cost());
-    request = request.arg(number_order);
-    request = request.arg(order.get_discount());
+                          QString::number(date.date().day())));
+    query.bindValue(":5",order.get_status());
+    query.bindValue(":6",order.get_cost());
+    query.bindValue(":7",number_order);
+    query.bindValue(":8",order.get_discount());
 
     auto data_base = QSqlDatabase::database();
     data_base.transaction();
 
-    QSqlQuery query(request);
-    if(!query.exec(request))
+    if(!exec_request(query))
     {
         return false;
     }
 
-    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(number_order);
-    if(!query.exec(request))
+    query.prepare(QString(REQUEST_CREATE_TABLE_ORDER).arg(number_order));
+
+    if(!exec_request(query))
     {
         data_base.rollback();
         return false;
     }
     auto &services = order.get_services();
+    auto request = QString(REQUEST_INSERT_SERVICE_ORDER).arg(number_order);
     for(int i = 0; i < services.size(); i++)
     {
-        request = REQUEST_INSERT_SERVICE_ORDER;
-        request = request.arg(number_order);
-        request = request.arg(services[i].cost);
-        request = request.arg(services[i].count);
-        request = request.arg(services[i].name_service);
-        if(!query.exec(request))
+        query.prepare(request);
+        query.bindValue(":1",services[i].cost);
+        query.bindValue(":2",services[i].count);
+        query.bindValue(":3",services[i].name_service);
+        if(!exec_request(query))
         {
             data_base.rollback();
             return false;
@@ -151,45 +184,63 @@ bool DataBaseWorker::write_order(const Order& order)
 
 bool DataBaseWorker::delete_order_with_services(const int number)
 {
-    auto request = QString(REQUEST_DELETE_ORDER).arg(number);
-    QSqlQuery query(request);
-
-    auto data_base = QSqlDatabase::database();
-    data_base.transaction();
-
-    if(!exec_request(query))
+    if(is_order(number))
     {
-        return false;
-    }
+        auto request = QString(REQUEST_DELETE_ORDER).arg(number);
+        QSqlQuery query(request);
 
-    request = QString(REQUEST_DELETE_TABLE_SERVICE_ORDER).arg(number);
-    query.prepare(request);
-    if(!exec_request(query))
-    {
-        data_base.rollback();
-        return false;
+        auto data_base = QSqlDatabase::database();
+        data_base.transaction();
+
+        if(!(exec_request(query)))
+        {
+            return false;
+        }
+
+        request = QString(REQUEST_DELETE_TABLE_SERVICE_ORDER).arg(number);
+        query.prepare(request);
+        if(!exec_request(query))
+        {
+            data_base.rollback();
+            return false;
+        }
+        return data_base.commit();
     }
-    return data_base.commit();
+    return false;
 }
 
 bool DataBaseWorker::complete_order(const int number)
 {
-    QString request = QString(REQUEST_COMPLETE_ORDER).arg(number);
-    QSqlQuery query(request);
+    if(is_order(number))
+    {
+        QSqlQuery query;
+        query.prepare(REQUEST_COMPLETE_ORDER);
+        query.bindValue(":1",number);
+        return exec_request(query);
+    }
+    return false;
+}
+
+bool DataBaseWorker::is_order(const int number)const
+{
+    QSqlQuery query;
+    query.prepare(REQUEST_FIND_ORDERS);
+    query.bindValue(":1",number);
+    return exec_request(query) && query.next();
+}
+
+bool DataBaseWorker::add_service(const QString& name, const double price)
+{
+    QSqlQuery query;
+    query.prepare(REQUESTE_ADD_SERVICE);
+    query.bindValue(":1",name);
+    query.bindValue(":2",price);
     return exec_request(query);
 }
 
-bool DataBaseWorker::add_sevice(const QString& name, const float price)
+QVector<QPair<QString, double>> DataBaseWorker::read_services()
 {
-    QString request = REQUESTE_ADD_SERVICE;
-    request = request.arg(name).arg(price);
-    QSqlQuery query(request);
-    return exec_request(query);
-}
-
-QVector<QPair<QString, float>> DataBaseWorker::read_services()
-{
-    QVector<QPair<QString, float>> services;
+    QVector<QPair<QString, double>> services;
     QSqlQuery query(REQUESTE_TAKE_SERVICES);
     if(exec_request(query))
     {
@@ -204,34 +255,40 @@ QVector<QPair<QString, float>> DataBaseWorker::read_services()
     return services;
 }
 
-bool DataBaseWorker::change_name_service(const QString& new_name, const QString& old_name)
+bool DataBaseWorker::change_name_service(const QString& new_name, const QString& old_name, const double price)
 {
-    QString request = REQUESTE_UPDATE_NAME;
-    request = request.arg(new_name,old_name);
-    QSqlQuery query(request);
+    QSqlQuery query;
+    query.prepare(REQUESTE_UPDATE_NAME);
+    query.bindValue(":1",new_name);
+    query.bindValue(":2",old_name);
+    query.bindValue(":3",price);
     return exec_request(query);
 }
 
-bool DataBaseWorker::change_price_service(const QString& name, const float price)
+bool DataBaseWorker::change_price_service(const QString& name, const double new_price, const double old_price)
 {
-    QString request = REQUESTE_UPDATE_PRICE;
-    request = request.arg(price).arg(name);
-    QSqlQuery query(request);
+    QSqlQuery query;
+    query.prepare(REQUESTE_UPDATE_PRICE);
+    query.bindValue(":1",new_price);
+    query.bindValue(":2",name);
+    query.bindValue(":3",old_price);
     return exec_request(query);
 }
 
-bool DataBaseWorker::delete_service(const QString& name)
+bool DataBaseWorker::delete_service(const QString& name, const double price)
 {
-    auto request = QString(REQUESTE_DELETE_SERVICE).arg(name);
-    QSqlQuery query(request);
+    QSqlQuery query;
+    query.prepare(REQUESTE_DELETE_SERVICE);
+    query.bindValue(":1",name);
+    query.bindValue(":2",price);
     return exec_request(query);
 }
 
 QVector<InfoOfOrderedService> DataBaseWorker::read_services_order(const int number)const
 {
     QVector<InfoOfOrderedService> services;
-    auto request = QString(REQUEST_TAKE_TABLE_SERVICES_ORDER).arg(number);
-    QSqlQuery query(request);
+    QSqlQuery query;
+    query.prepare(QString(REQUEST_TAKE_TABLE_SERVICES_ORDER).arg(number));
     if(exec_request(query))
     {
         while(query.next())
@@ -249,7 +306,7 @@ QVector<InfoOfOrderedService> DataBaseWorker::read_services_order(const int numb
 
 bool DataBaseWorker::exec_request(QSqlQuery& query) const
 {
-    return query.isActive() && query.exec();
+    return query.exec();
 }
 
 DataBaseWorker::DataBaseWorker()
