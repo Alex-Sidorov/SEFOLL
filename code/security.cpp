@@ -9,51 +9,24 @@ const char* Security::REQUESTE_CHANGE_PASSWORD = "UPDATE security SET password =
 
 const char* Security::COLUMN_ACCESS = "access";
 
+DataBaseWorker Security::_data_base_worker;
+
 bool Security::check_access(QString &id, QString &password, Access &access)
 {
-    QString request = REQUESTE_TAKE_USER;
-    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
-    request = request.arg(id,password);
-    QSqlQuery query(request);
-    if(!query.isActive() || !query.exec())
-    {
-        return false;
-    }
-    else
-    {
-        if(!query.next())
-        {
-            return false;
-        }
-        QSqlRecord record = query.record();
-        access = static_cast<Access>(query.value(record.indexOf(COLUMN_ACCESS)).toInt());
-    }
-    return true;
+    auto user = _data_base_worker.read_data_user(id.toInt(),password);
+    bool res = access == user.access;
+    access = user.access;
+    return res;
 }
 
 bool Security::change_access(QString &id, Access access)
 {
-    QString request = REQUESTE_CHANGE_ACCESS;
-    request = request.arg(static_cast<int>(access));
-    request = request.arg(id);
-    QSqlQuery query(request);
-    if(!query.isActive() || !is_id(id) || !query.exec())
-    {
-        return false;
-    }
-    return true;
+    return _data_base_worker.change_access(id.toInt(),access);
 }
 
 bool Security::delete_user(QString &id)
 {
-    QString request = REQUESTE_DELETE_USER;
-    request = request.arg(id);
-    QSqlQuery query(request);
-    if(!query.isActive() || !is_id(id) || !query.exec())
-    {
-        return false;
-    }
-    return true;
+    return _data_base_worker.delete_user(id.toInt());
 }
 
 bool Security::is_id(QString &id)
@@ -77,28 +50,10 @@ bool Security::is_id(QString &id)
 
 bool Security::add_user(QString &id, QString &password, Access &access)
 {
-    QString request = REQUESTE_ADD_USER;
-    request = request.arg(id);
-    request = request.arg(static_cast<int>(access));
-    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
-    request = request.arg(password);
-    QSqlQuery query(request);
-    if(!query.isActive() || !is_id(id) || !query.exec())
-    {
-        return false;
-    }
-    return true;
+    return _data_base_worker.add_user(UserData{id.toInt(),access,password});
 }
 
 bool Security::change_password(QString &id, QString &password)
 {
-    QString request = REQUESTE_CHANGE_PASSWORD;
-    password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
-    request = request.arg(password,id);
-    QSqlQuery query(request);
-    if(!query.isActive()|| !is_id(id) || !query.exec())
-    {
-        return false;
-    }
-    return true;
+    return _data_base_worker.change_password(id.toInt(),password);
 }

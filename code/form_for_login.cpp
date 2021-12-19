@@ -33,7 +33,7 @@ void FormForLogin::input_ok()
 {
     QString password = ui->password->text();
     QString id = ui->id->text();
-    if(!Security::check_access(id, password, _access))
+    if(Security::check_access(id, password, _access))
     {
         ui->error->setText(MESSAGE_ERROR);
         return;

@@ -1,0 +1,2 @@
+[data_base]
+path=F:\SEFOLL\build\data2021.sqlite

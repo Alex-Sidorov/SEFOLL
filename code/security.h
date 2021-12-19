@@ -8,6 +8,7 @@
 #include <QCryptographicHash>
 
 #include <Access.h>
+#include <dataBase/databaseworker.h>
 
 class Security
 {
@@ -27,6 +28,7 @@ private:
     static const char* REQUESTE_FIND_USER;
 
     static const char* COLUMN_ACCESS;
+    static DataBaseWorker _data_base_worker;
 };
 
 
