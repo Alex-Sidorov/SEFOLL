@@ -303,6 +303,40 @@ QVector<InfoOfOrderedService> DataBaseWorker::read_services_order(const int numb
     return services;
 }
 
+bool DataBaseWorker::add_worker(const QString& name)
+{
+    QSqlQuery query;
+    query.prepare(REQUESTE_ADD_WORKER);
+    query.bindValue(":1",name);
+    return exec_request(query);
+}
+
+bool DataBaseWorker::remove_worker(const QString& name)
+{
+    QSqlQuery query;
+    query.prepare(REQUESTE_REMOVE_WORKER);
+    query.bindValue(":1",name);
+    return exec_request(query);
+}
+
+const QList<QString> DataBaseWorker::read_workers()
+{
+    QSqlQuery query;
+    query.prepare(REQUESTE_TAKE_WORKERS);
+
+    QList<QString> workers;
+    if(exec_request(query))
+    {
+        while(query.next())
+        {
+            auto record = query.record();
+            auto name = query.value(record.indexOf(COLUMN_NAME)).toString();
+            workers.push_back(name);
+        }
+    }
+    return workers;
+
+}
 
 bool DataBaseWorker::exec_request(QSqlQuery& query) const
 {

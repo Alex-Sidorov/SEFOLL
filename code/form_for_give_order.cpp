@@ -19,7 +19,6 @@ FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->name_client,SIGNAL(textChanged(QString)),SLOT(enabled_button()));
-    connect(ui->name_worker,SIGNAL(textChanged(QString)),SLOT(enabled_button()));
     connect(ui->discount,SIGNAL(valueChanged(int)),SLOT(slot_change_discount(int)));
 
     ui->date->setDate(QDate::currentDate());
@@ -61,7 +60,7 @@ void FormForGiveOrder::clear_form()
     _cost = 0;
     ui->cost->setText(QString(COST_LABEL) + '0');
     ui->name_client->clear();
-    ui->name_worker->clear();
+    ui->names_workers->clear();
     ui->date->setDate(QDate::currentDate());
     ui->data_services->setRowCount(0);
     _boxs.clear();
@@ -77,9 +76,7 @@ void FormForGiveOrder::on_back_button_clicked()
 
 bool FormForGiveOrder::check_input_fields()const
 {
-    return _cost != 0.0 &&
-            !ui->name_client->text().isEmpty() &&
-            !ui->name_worker->text().isEmpty();
+    return _cost != 0.0 && !ui->name_client->text().isEmpty();
 }
 
 void FormForGiveOrder::enabled_button()const
@@ -123,6 +120,11 @@ void FormForGiveOrder::slot_change_discount(int)
                       QString::number(get_cost_with_discount(_cost,ui->discount->value())));
 }
 
+void FormForGiveOrder::set_workers(const QList<QString> &workers)
+{
+    ui->names_workers->addItems(workers);
+}
+
 void FormForGiveOrder::on_enter_button_clicked()
 {
     QVector<InfoOfOrderedService> services;
@@ -143,8 +145,9 @@ void FormForGiveOrder::on_enter_button_clicked()
         }
     }
 
+
     Order order(0,ui->name_client->text(),
-                ui->name_worker->text(),
+                ui->names_workers->currentText(),
                 ui->date,services,
                 get_cost_with_discount(_cost,ui->discount->value()),
                 false,

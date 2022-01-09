@@ -78,7 +78,6 @@ void FormForShowData::fill_service_box()
             ui->service_box->addItem(_services->item(i,INDEX_COLUMN_NAME_SERVICE)->text());
         }
     }
-
 }
 
 void FormForShowData::on_back_button_clicked()
@@ -356,15 +355,17 @@ void FormForShowData::on_clear_button_clicked()
     ui->service_list->clear();
     ui->client_list->clear();
     ui->client_line->clear();
-    ui->worker_line->clear();
+    ui->names_workers->clear();
+}
+
+void FormForShowData::set_workers(const QList<QString> &workers)
+{
+    ui->names_workers->addItems(workers);
 }
 
 void FormForShowData::on_add_worker_button_clicked()
 {
-    if(!ui->worker_line->text().isEmpty())
-    {
-        ui->worker_list->addItem(ui->worker_line->text());
-    }
+    ui->worker_list->addItem(ui->names_workers->currentText());
 }
 
 void FormForShowData::on_worker_list_doubleClicked(const QModelIndex &index)

@@ -24,6 +24,7 @@ public:
     FormForShowData(const FormForShowData&) = delete;
     virtual ~FormForShowData(){}
 
+    void set_workers(const QList<QString> &workers);
 signals:
     void to_main_window();
 

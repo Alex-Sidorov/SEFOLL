@@ -134,7 +134,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
       <bool>false</bool>
@@ -184,9 +184,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
       <property name="foreground">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
@@ -207,9 +204,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <stylestrategy>PreferAntialias</stylestrategy>
         <kerning>true</kerning>
        </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
       </property>
      </column>
     </widget>

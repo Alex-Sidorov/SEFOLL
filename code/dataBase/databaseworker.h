@@ -4,9 +4,15 @@
 #include "AbstractDataUserWorker.h"
 #include "AbstractOrderRW.h"
 #include "AbstractServicesWorker.h"
+#include "AbstractWorkersWorker.h"
+
 #include <QSqlQuery>
 
-class DataBaseWorker : public AbstractOrderRW, public AbstractDataUserWorker, public AbstractServicesWorker
+class DataBaseWorker :
+        public AbstractOrderRW,
+        public AbstractDataUserWorker,
+        public AbstractServicesWorker,
+        public AbstractWorkersWorker
 {
 public:
     DataBaseWorker();
@@ -28,6 +34,10 @@ public:
     virtual bool change_name_service(const QString& new_name, const QString& old_name, const double price)override;
     virtual bool change_price_service(const QString& name, const double new_price, const double old_price)override;
     virtual bool delete_service(const QString& name, const double price)override;
+
+    virtual bool add_worker(const QString& name) override;
+    virtual bool remove_worker(const QString& name)override;
+    virtual const QList<QString> read_workers() override;
 
     virtual ~DataBaseWorker(){}
 
@@ -59,6 +69,10 @@ private:
     static constexpr auto REQUEST_COMPLETE_ORDER = "UPDATE orders SET status = 1 WHERE number = :1;";
     static constexpr auto REQUEST_DELETE_ORDER = "DELETE FROM orders WHERE number = %1;";
     static constexpr auto REQUEST_DELETE_TABLE_SERVICE_ORDER ="DROP TABLE _%1_;";
+
+    static constexpr auto REQUESTE_ADD_WORKER = "INSERT INTO workers(name) VALUES(:1);";
+    static constexpr auto REQUESTE_REMOVE_WORKER = "DELETE FROM workers WHERE name = :1;";
+    static constexpr auto REQUESTE_TAKE_WORKERS = "SELECT * FROM workers;";
 
     static constexpr auto COLUMN_ACCESS =         "access";
     static constexpr auto COLUMN_PRICE =          "price";

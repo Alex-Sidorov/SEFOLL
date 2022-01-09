@@ -9,8 +9,10 @@
 #include "form_for_options.h"
 #include "form_for_show_data.h"
 #include "formforoptionsdatabase.h"
+#include "formforworkers.h"
 #include "security.h"
 #include "ui_mainwindow.h"
+#include "dataBase/databaseworker.h"
 
 #include <QMainWindow>
 #include <QSharedPointer>
@@ -52,11 +54,14 @@ private slots:
     void on_show_order_button_clicked();
     void on_options_clicked();
     void slot_add_order_in_data_base(const Order& order);
-
     void on_show_data_button_clicked();
+    void on_workers_button_clicked();
 
 private:
     QSharedPointer<Ui::MainWindow> ui;
+
+    QSqlDatabase data;
+    DataBaseWorker m_data_base;
 
     QSharedPointer<FormForGiveOrder> window_for_give_order;
     QSharedPointer<FormForChangeService> window_for_change_service;
@@ -66,11 +71,13 @@ private:
     QSharedPointer<FormForOptions> window_for_options;
     QSharedPointer<FormForShowData> window_for_show_data;
     QSharedPointer<FormForOptionsDataBase> window_for_show_options_data_base;
+    QSharedPointer<FormForWorkers> window_for_workers;
 
     Access _access;
     QString _name_file_data;
-    QSqlDatabase data;
+
     QSettings _settings;
+
 
     static const char* ERROR;
     static const char* ERROR_ACCESS;

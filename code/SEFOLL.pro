@@ -23,6 +23,7 @@ SOURCES += \
     form_for_options.cpp \
     form_for_show_data.cpp \
     form_for_show_order.cpp \
+    formforworkers.cpp \
     main.cpp \
     mainwindow.cpp \
     new_spinbox.cpp \
@@ -35,6 +36,7 @@ HEADERS  += \
     dataBase/AbstractDataUserWorker.h \
     dataBase/AbstractOrderRW.h \
     dataBase/AbstractServicesWorker.h \
+    dataBase/AbstractWorkersWorker.h \
     dataBase/databaseworker.h \
     form_for_add_service.h \
     form_for_change_service.h \
@@ -45,6 +47,7 @@ HEADERS  += \
     form_for_show_data.h \
     form_for_show_order.h \
     Info_of_ordered_service.h \
+    formforworkers.h \
     mainwindow.h \
     new_spinbox.h \
     order.h \
@@ -64,6 +67,7 @@ FORMS += \
     form_for_options.ui \
     form_for_show_data.ui \
     form_for_show_order.ui \
+    formforworkers.ui \
     mainwindow.ui \
     formforoptionsdatabase.ui
 

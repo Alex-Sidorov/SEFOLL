@@ -45,7 +45,8 @@ const int MainWindow::INDEX_COLUMN_NAME = 1;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
+    ui(new Ui::MainWindow),    
+    data(QSqlDatabase::addDatabase(TYPE_DATA_BASE)),
     window_for_give_order(new FormForGiveOrder),
     window_for_change_service(new FormForChangeService),
     window_for_add_service(new FormForAddService),
@@ -54,9 +55,9 @@ MainWindow::MainWindow(QWidget *parent) :
     window_for_options(new FormForOptions),
     window_for_show_data(nullptr),
     window_for_show_options_data_base(new FormForOptionsDataBase),
+    window_for_workers(new FormForWorkers(&m_data_base)),
     _access(GUEST),
     _name_file_data(NAME_DEFAULT_DATA_BASE),
-    data(QSqlDatabase::addDatabase(TYPE_DATA_BASE)),
     _settings(NAME_FILE_SETTINGS,QSettings::IniFormat)
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -65,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(window_for_add_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_add_service.data(),SIGNAL(new_data()),SLOT(add_service()));
     connect(window_for_delete_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
+    connect(window_for_workers.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_delete_service.data(),SIGNAL(changed_table(QVector<int>)),SLOT(upload_table(QVector<int>)));
     connect(window_for_change_service.data(),SIGNAL(changed_data(int)),SLOT(upload_table(int)));
     connect(window_for_change_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -133,6 +135,7 @@ void MainWindow::on_give_order_button_clicked()
         return;
     }
 
+    window_for_give_order->set_workers(window_for_workers->get_names_workers());
     window_for_give_order->set_table(ui->data_services);
     window_for_give_order->show();
     this->close();
@@ -417,6 +420,21 @@ void MainWindow::on_show_data_button_clicked()
         QMessageBox::warning(this,ERROR,ERROR_ACCESS);
         return;
     }
+
     window_for_show_data->show();
+    window_for_show_data->set_workers(window_for_workers->get_names_workers());
     this->close();
 }
+
+void MainWindow::on_workers_button_clicked()
+{
+    if(_access != ADMIN &&
+       _access != CHIEF)
+    {
+        QMessageBox::warning(this,ERROR,ERROR_ACCESS);
+        return;
+    }
+    window_for_workers->show();
+    this->close();
+}
+

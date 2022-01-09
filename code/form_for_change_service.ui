@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>669</width>
+    <width>734</width>
     <height>339</height>
    </rect>
   </property>
@@ -136,10 +136,10 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
       <bool>false</bool>
      </property>
      <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>10</number>
@@ -148,7 +148,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
       <number>100</number>
      </attribute>
      <attribute name="horizontalHeaderHighlightSections">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>false</bool>
@@ -186,9 +186,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
       <property name="foreground">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
@@ -209,9 +206,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <stylestrategy>PreferAntialias</stylestrategy>
         <kerning>true</kerning>
        </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
       </property>
      </column>
     </widget>

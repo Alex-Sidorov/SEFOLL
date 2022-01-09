@@ -19,6 +19,7 @@ class FormForGiveOrder : public QWidget
 
 public:
     void clear_form();
+    void set_workers(const QList<QString> &workers);
     void set_table(const QTableWidget*);
     explicit FormForGiveOrder(QWidget *parent = 0);
     FormForGiveOrder(const FormForGiveOrder&) = delete;
