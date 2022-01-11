@@ -48,9 +48,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),    
     data(QSqlDatabase::addDatabase(TYPE_DATA_BASE)),
     window_for_give_order(new FormForGiveOrder),
-    window_for_change_service(new FormForChangeService),
+    window_for_change_service(new FormForChangeService(&m_data_base)),
     window_for_add_service(new FormForAddService),
-    window_for_delete_service( new FormForDeleteService),
+    window_for_delete_service( new FormForDeleteService(&m_data_base)),
     window_for_show_order(new FormForShowOrder),
     window_for_options(new FormForOptions),
     window_for_show_data(nullptr),
@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(window_for_delete_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_workers.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_delete_service.data(),SIGNAL(changed_table(QVector<int>)),SLOT(upload_table(QVector<int>)));
-    connect(window_for_change_service.data(),SIGNAL(changed_data(int)),SLOT(upload_table(int)));
+    connect(window_for_change_service.data(),SIGNAL(changed_data(int, const QString &, double)),SLOT(upload_table(int, const QString &, double)));
     connect(window_for_change_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_options.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_show_options_data_base.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -201,18 +201,15 @@ void MainWindow::add_service()
 {
     show_main_window();
 
-    QString cost = window_for_add_service->get_cost_service();
+    double cost = window_for_add_service->get_cost_service();
     QString name = window_for_add_service->get_name_service();
-    QString request = REQUESTE_DATA_SERVICE;
-    request = request.arg(cost.replace(QChar(','),QChar('.'))).arg(name);
-    QSqlQuery query;
-    if(!query.exec(request))
+    if(!m_data_base.add_service(name, cost))
     {
         QMessageBox::warning(this,ERROR,ERROR_ADD_SERVICE);
         return;
     }
 
-    QTableWidgetItem *item_cost = new QTableWidgetItem(cost);
+    QTableWidgetItem *item_cost = new QTableWidgetItem(QString::number(cost));
     QTableWidgetItem *item_name = new QTableWidgetItem(name);
 
     int count_row = ui->data_services->rowCount();
@@ -344,59 +341,17 @@ void MainWindow::read_settings()
     data.setDatabaseName(path);
 }
 
-void MainWindow::upload_table(int index)
+void MainWindow::upload_table(int index, const QString &name, double price)
 {
-    const QTableWidget *table = window_for_change_service->get_table();
-    QString cost = table->item(index,INDEX_COLUMN_COST)->text();
-    cost.replace(QChar(','),QChar('.'));
-    QString name = table->item(index,INDEX_COLUMN_NAME)->text();
-
-    QString request = REQUESTE_UPDATE_PRICE;
-    request = request.arg(cost);
-    request = request.arg(ui->data_services->item(index,INDEX_COLUMN_COST)->text());
-    request = request.arg(ui->data_services->item(index,INDEX_COLUMN_NAME)->text());
-    QSqlQuery query;
-    if(!query.exec(request))
-    {
-        QMessageBox::warning(this,ERROR,ERROR_CHANGE_SERVICE);
-        return;
-    }
-    request = REQUESTE_UPDATE_NAME;
-    request = request.arg(name);
-    request = request.arg(cost);
-    request = request.arg(ui->data_services->item(index,INDEX_COLUMN_NAME)->text());
-    if(!query.exec(request))
-    {
-        QMessageBox::warning(this,ERROR,ERROR_CHANGE_SERVICE);
-        return;
-    }
-
-    ui->data_services->item(index,INDEX_COLUMN_COST)->setText(cost);
+    ui->data_services->item(index,INDEX_COLUMN_COST)->setText(QString::number(price));
     ui->data_services->item(index,INDEX_COLUMN_NAME)->setText(name);
 }
 
 void MainWindow::upload_table(const QVector<int>& index_deleted_items)
 {
-    int index = index_deleted_items.size() - 1;
-    QString request;
-    QSqlQuery query;
-    while(index >= 0)
+    for(auto index : index_deleted_items)
     {
-        request = REQUESTE_DELETE_SERVICE;
-        request = request.arg(ui->data_services->item(index_deleted_items[index],INDEX_COLUMN_COST)->text());
-        request = request.arg(ui->data_services->item(index_deleted_items[index],INDEX_COLUMN_NAME)->text());
-        if(!query.exec(request))
-        {
-            QMessageBox::warning(this,ERROR,ERROR_CHANGE_SERVICE);
-            return;
-        }
-        index--;
-    }
-    index = index_deleted_items.size() - 1;
-    while(index >= 0)
-    {
-        ui->data_services->removeRow(index_deleted_items[index]);
-        index--;
+        ui->data_services->removeRow(index);
     }
 }
 

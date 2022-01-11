@@ -14,7 +14,7 @@ class FormForAddService : public QWidget
 
 public:
     QString get_name_service()const;
-    QString get_cost_service()const;
+    double get_cost_service()const;
     void show();
     explicit FormForAddService(QWidget *parent = 0);
     FormForAddService(const FormForAddService&) = delete;

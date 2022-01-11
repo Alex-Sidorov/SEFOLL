@@ -6,6 +6,8 @@
 #include <QVector>
 #include <QSharedPointer>
 
+#include "dataBase/AbstractServicesWorker.h"
+
 namespace Ui {
 class Form_For_Change_Service;
 }
@@ -17,13 +19,13 @@ class FormForChangeService : public QWidget
 public:
     void set_table(const QTableWidget *table);
     const QTableWidget* get_table()const;
-    explicit FormForChangeService(QWidget *parent = 0);
+    explicit FormForChangeService(AbstractServicesWorker *data_base, QWidget *parent = 0);
     FormForChangeService(const FormForChangeService&) = delete;
     virtual ~FormForChangeService(){}
 
 signals:
     void to_main_window();
-    void changed_data(int);
+    void changed_data(int, const QString &, double);
 
 private slots:
     void on_back_button_clicked();
@@ -34,6 +36,8 @@ private slots:
 private:
     QSharedPointer<Ui::Form_For_Change_Service> ui;
     int _index_record;
+
+    AbstractServicesWorker *m_data_base;
 
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_NAME;

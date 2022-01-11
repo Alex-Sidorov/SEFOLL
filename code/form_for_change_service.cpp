@@ -5,9 +5,10 @@ const int FormForChangeService::INDEX_COLUMN_COST = 0;
 const int FormForChangeService::INDEX_COLUMN_NAME = 1;
 const int FormForChangeService::INDEX_FIRST_ROW =   0;
 
-FormForChangeService::FormForChangeService(QWidget *parent) :
+FormForChangeService::FormForChangeService(AbstractServicesWorker *data_base, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Change_Service)
+    ui(new Ui::Form_For_Change_Service),
+    m_data_base(data_base)
 {
     _index_record = 0;
 
@@ -90,7 +91,35 @@ void FormForChangeService::slot_fields_form_changed()
 
 void FormForChangeService::on_enter_change_button_clicked()
 {
-    ui->data_services->item(_index_record,INDEX_COLUMN_COST)->setText(ui->cost->text());
-    ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->setText(ui->name->text());
-    emit changed_data(_index_record);
+    if(m_data_base)
+    {
+        bool is_changed = false;
+
+        auto old_name = ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->text();
+        auto old_price = ui->data_services->item(_index_record,INDEX_COLUMN_COST)->text().toDouble();
+        auto new_name = ui->name->text();
+        auto new_price = ui->cost->value();
+
+        if(old_name != new_name)
+        {
+            if(m_data_base->change_name_service(new_name, old_name, old_price))
+            {
+                ui->data_services->item(_index_record,INDEX_COLUMN_NAME)->setText(ui->name->text());
+                is_changed = true;
+            }
+        }
+        if(old_price != new_price)
+        {
+            if(m_data_base->change_price_service(new_name, new_price, old_price))
+            {
+                is_changed = true;
+                ui->data_services->item(_index_record,INDEX_COLUMN_COST)->setText(ui->cost->text());
+            }
+        }
+
+        if(is_changed)
+        {
+            emit changed_data(_index_record, new_name, new_price);
+        }
+    }
 }

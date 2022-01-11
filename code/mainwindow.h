@@ -49,7 +49,7 @@ private slots:
     void slot_clicked_options_data_base();
     void slot_changed_data_base(QString &name_data_base);
     void add_service();
-    void upload_table(int index);
+    void upload_table(int, const QString &, double);
     void upload_table(const QVector<int>&);
     void on_show_order_button_clicked();
     void on_options_clicked();

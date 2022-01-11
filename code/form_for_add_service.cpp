@@ -54,8 +54,8 @@ QString FormForAddService::get_name_service()const
     return ui->name_service->text();
 }
 
-QString FormForAddService::get_cost_service()const
+double FormForAddService::get_cost_service()const
 {
-    return ui->cost_service->text();
+    return ui->cost_service->value();
 }
 

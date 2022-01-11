@@ -11,12 +11,12 @@ const Qt::GlobalColor FormForDeleteService::DEFAULT_FIELD_COLOR = Qt::white;
 const char* FormForDeleteService::MESSAGE_REQUEST_FOR_DELETE =
         "Вы уверены, что хотите удалить выбранные элементы?";
 
-FormForDeleteService::FormForDeleteService(QWidget *parent) :
+FormForDeleteService::FormForDeleteService(AbstractServicesWorker *data_base, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Delete_Service)
+    ui(new Ui::Form_For_Delete_Service),
+    m_data_base(data_base)
 {
     ui->setupUi(this);
-    _count_delete_items = 0;
 
     setWindowIcon(QIcon(":icons/icon.png"));
 }
@@ -53,16 +53,16 @@ void FormForDeleteService::on_data_services_clicked(const QModelIndex &index)
     {
         ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(SELECT_FIELD_COLOR);
         ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(SELECT_FIELD_COLOR);
-        ++_count_delete_items;
+        index_deleted_item.push_back(index_item);
     }
     else
     {
         ui->data_services->item(index_item,INDEX_COLUMN_COST)->setBackgroundColor(DEFAULT_FIELD_COLOR);
         ui->data_services->item(index_item,INDEX_COLUMN_NAME)->setBackgroundColor(DEFAULT_FIELD_COLOR);
-        --_count_delete_items;
+        index_deleted_item.removeAll(index_item);
     }
 
-    if(_count_delete_items == 0)
+    if(index_deleted_item.size() == 0)
     {
         ui->delete_button->setEnabled(false);
     }
@@ -78,40 +78,34 @@ void FormForDeleteService::on_delete_button_clicked()
     if(request_for_delete() == QMessageBox::Ok)
     {
         delete_items();
-        _count_delete_items = 0;
         ui->delete_button->setEnabled(false);
+        emit changed_table(index_deleted_item);
+        index_deleted_item.clear();
     }
-    emit changed_table(index_deleted_item);
 }
 
 void FormForDeleteService::delete_items()
 {
-    index_deleted_item.clear();
-    index_deleted_item.reserve(_count_delete_items);
-
-    int index_main_table=0;
-    int index = 0;
-
-    while(_count_delete_items != 0)
+    if(m_data_base)
     {
-        if(ui->data_services->item(index,INDEX_COLUMN_NAME)->backgroundColor()==SELECT_FIELD_COLOR)
+        for(auto &index : index_deleted_item)
         {
-            index_deleted_item.push_back(index_main_table);
+            auto name = ui->data_services->item(index,INDEX_COLUMN_NAME)->text();
+            auto price = ui->data_services->item(index,INDEX_COLUMN_COST)->text().toDouble();
+            if(!m_data_base->delete_service(name, price))
+            {
+                return;
+            }
             ui->data_services->removeRow(index);
-            --_count_delete_items;
         }
-        else
-        {
-            ++index;
-        }
-        ++index_main_table;
     }
 }
 
-void FormForDeleteService::clear_form()const
+void FormForDeleteService::clear_form()
 {
     ui->data_services->clearContents();
     ui->data_services->setRowCount(0);
+    index_deleted_item.clear();
 }
 
 int FormForDeleteService::request_for_delete()const

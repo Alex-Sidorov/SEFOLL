@@ -6,6 +6,8 @@
 #include <QSharedPointer>
 #include <QMessageBox>
 
+#include "dataBase/AbstractServicesWorker.h"
+
 namespace Ui {
 class Form_For_Delete_Service;
 }
@@ -16,7 +18,8 @@ class FormForDeleteService : public QWidget
 
 public:
     void set_table(const QTableWidget*);
-    explicit FormForDeleteService(QWidget *parent = 0);
+
+    explicit FormForDeleteService(AbstractServicesWorker *data_base = nullptr, QWidget *parent = 0);
     FormForDeleteService(const FormForDeleteService&) = delete;
     virtual ~FormForDeleteService(){}
 
@@ -31,9 +34,9 @@ private slots:
 
 private:
     QSharedPointer<Ui::Form_For_Delete_Service> ui;
-
-    int _count_delete_items;
     QVector<int> index_deleted_item;
+
+    AbstractServicesWorker *m_data_base;
 
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_NAME;
@@ -46,7 +49,7 @@ private:
 
     int request_for_delete()const;
     void delete_items();
-    void clear_form()const;
+    void clear_form();
 };
 
 #endif // FORM_FOR_DELETE_SERVICE_H
