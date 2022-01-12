@@ -3,6 +3,7 @@
 
 #include "order.h"
 #include "new_spinbox.h"
+#include "dataBase/AbstractOrderRW.h"
 
 #include <QWidget>
 #include <QSignalMapper>
@@ -21,13 +22,12 @@ public:
     void clear_form();
     void set_workers(const QList<QString> &workers);
     void set_table(const QTableWidget*);
-    explicit FormForGiveOrder(QWidget *parent = 0);
+    explicit FormForGiveOrder(AbstractOrderRW* database, QWidget *parent = 0);
     FormForGiveOrder(const FormForGiveOrder&) = delete;
     virtual ~FormForGiveOrder(){}
 
 signals:
     void to_main_window();
-    void add_order(const Order&);
 
 private slots:
     void on_back_button_clicked();
@@ -42,6 +42,10 @@ private:
     QSharedPointer<QSignalMapper> _mapper;
     double _cost;
 
+    AbstractOrderRW* m_database;
+
+    static constexpr auto REGISTRATION = "Регистрация";
+    static constexpr auto MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
     static const int INDEX_COLUMN_COST;
     static const int INDEX_COLUMN_NAME;
     static const int INDEX_COLUMN_COUNT;

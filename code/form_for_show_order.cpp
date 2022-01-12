@@ -22,13 +22,6 @@ const char* FormForShowOrder::LABEL_STATUS =              "Статус зака
 const char* FormForShowOrder::LABEL_STATUS_COMPLETE =     "Статус заказа: закончен.";
 const char* FormForShowOrder::LABEL_STATUS_NOT_COMPLETE = "Статус заказа: не закончен.";
 
-const char* FormForShowOrder::REQUEST_TAKE_ORDER =                "SELECT * FROM orders WHERE number = %1;";
-const char* FormForShowOrder::REQUEST_TAKE_TABLE_ORDERS =         "SELECT * FROM orders;";
-const char* FormForShowOrder::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
-const char* FormForShowOrder::REQUEST_COMPLETE_ORDER =            "UPDATE orders SET status = 1 WHERE number = %1;";
-const char* FormForShowOrder::REQUEST_DELETE_ORDER =              "DELETE FROM orders WHERE number = %1;";
-const char* FormForShowOrder::REQUEST_DELETE_TABLE_SERVICE_ORDER ="DROP TABLE _%1_;";
-
 
 const char* FormForShowOrder::COLUMN_CLIENT =         "client";
 const char* FormForShowOrder::COLUMN_WORKER =         "worker";
@@ -45,14 +38,17 @@ const int FormForShowOrder::INDEX_COLUMN_COUNT = 0;
 const int FormForShowOrder::INDEX_COLUMN_COST =  1;
 const int FormForShowOrder::INDEX_COLUMN_NAME =  2;
 
-FormForShowOrder::FormForShowOrder(QWidget *parent) :
+FormForShowOrder::FormForShowOrder(AbstractOrderRW* database, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Show_Order)
+    ui(new Ui::Form_For_Show_Order),
+    m_database(database)
 {
     ui->setupUi(this);
     connect(ui->delete_button,&QPushButton::clicked,this,&FormForShowOrder::slot_delete_order);
 
     setWindowIcon(QIcon(":icons/icon.png"));
+
+    ui->delete_button->setVisible(false);
 }
 
 void FormForShowOrder::on_back_button_clicked()
@@ -90,12 +86,15 @@ void FormForShowOrder::on_number_order_valueChanged(int number)
 
 void FormForShowOrder::on_enter_button_clicked()
 {
+    if(!m_database)
+    {
+        return;
+    }
+
     int number_order = ui->number_order->value();
 
-    QSqlQuery query;
-    QString request = REQUEST_TAKE_ORDER;
-    request = request.arg(number_order);
-    if(!query.exec(request) || !query.next())
+    auto order = m_database->read_order(number_order);
+    if(order.get_number() != number_order)
     {
         QMessageBox::warning(this, tr(ERROR), tr(ERROR_FIND_ORDER));
     }
@@ -103,21 +102,20 @@ void FormForShowOrder::on_enter_button_clicked()
     {
         clear_form();
 
-        QSqlRecord record = query.record();
         ui->number->setText(LABEL_NUMBER_ORDER +
                             QString::number(number_order));
         ui->client->setText(LABEL_CLIENT +
-                            query.value(record.indexOf(COLUMN_CLIENT)).toString());
+                            order.get_name_client());
         ui->worker->setText(LABEL_WORKER +
-                            query.value(record.indexOf(COLUMN_WORKER)).toString());
+                            order.get_name_worker());
         ui->date->setText(LABEL_DATE_ORDER +
-                            query.value(record.indexOf(COLUMN_DATE)).toString());
+                            order.get_date().text());
         ui->cost->setText(LABEL_COST +
-                            query.value(record.indexOf(COLUMN_COST)).toString());
+                            QString::number(order.get_cost()));
         ui->discount->setText(LABEL_DISCOUNT +
-                            query.value(record.indexOf(COLUMN_DISCOUNT)).toString());
+                            QString::number(order.get_discount()));
 
-        if(query.value(record.indexOf(COLUMN_STATUS)).toBool())
+        if(order.get_status())
         {
             ui->status->setText(LABEL_STATUS_COMPLETE);
         }
@@ -127,14 +125,7 @@ void FormForShowOrder::on_enter_button_clicked()
             ui->complete_button->setEnabled(true);
         }
 
-        request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
-        request = request.arg(query.value(record.indexOf(COLUMN_SERVICES)).toInt());
-        if(!query.exec(request))
-        {
-            clear_form();
-            QMessageBox::warning(this, tr(ERROR), tr(ERROR_FIND_ORDER));
-            return;
-        }
+        auto records = order.get_services();
 
         QString cost;
         QString count;
@@ -143,12 +134,11 @@ void FormForShowOrder::on_enter_button_clicked()
         QTableWidgetItem *item_cost = nullptr;
         QTableWidgetItem *item_name = nullptr;
         QTableWidgetItem *item_count = nullptr;
-        while(query.next())
+        for(auto &record : records)
         {
-            record = query.record();
-            cost = query.value(record.indexOf(COLUMN_PRICE_SERVICE)).toString();
-            count = query.value(record.indexOf(COLUMN_COUNT_SERVICES)).toString();
-            name = query.value(record.indexOf(COLUMN_NAME_SERVICE)).toString();
+            cost = QString::number(record.cost);
+            count = QString::number(record.count);
+            name = record.name_service;
             item_cost = new QTableWidgetItem(cost);
             item_name = new QTableWidgetItem(name);
             item_count = new QTableWidgetItem(count);
@@ -165,59 +155,25 @@ void FormForShowOrder::on_enter_button_clicked()
 
 void FormForShowOrder::on_complete_button_clicked()
 {
-    QString request = REQUEST_COMPLETE_ORDER;
-    QString number = ui->number->text();
-    request = request.arg(number.mid(number.indexOf(':') + 1).toInt());
-    QSqlQuery query(request);
-    if(!query.exec())
+    if(m_database)
     {
-        QMessageBox::warning(this,tr(ERROR),tr(ERROR_COMPLETE_ORDER));
+        if(!m_database->complete_order(ui->number_order->value()))
+        {
+            QMessageBox::warning(this,tr(ERROR),tr(ERROR_COMPLETE_ORDER));
+        }
+        else
+        {
+            ui->status->setText(LABEL_STATUS_COMPLETE);
+            ui->complete_button->setEnabled(false);
+        }
     }
-    else
-    {
-        ui->status->setText(LABEL_STATUS_COMPLETE);
-        ui->complete_button->setEnabled(false);
-    }
-}
-
-bool FormForShowOrder::delete_row_order(int number_order)
-{
-    QString request;
-    QSqlQuery query;
-
-    request = REQUEST_DELETE_ORDER;
-    request = request.arg(number_order);
-
-    if(!query.exec(request))
-    {
-        QMessageBox::warning(this,ERROR,ERROR_DELETE_ORDER);
-        return false;
-    }
-    return true;
-}
-
-bool FormForShowOrder::delete_table_order(int number_order)
-{
-    QString request;
-    QSqlQuery query;
-
-    request = REQUEST_DELETE_TABLE_SERVICE_ORDER;
-    request = request.arg(number_order);
-
-    if(!query.exec(request))
-    {
-        QMessageBox::warning(this,ERROR,ERROR_DELETE_ORDER);
-        return false;
-    }
-    return true;
 }
 
 void FormForShowOrder::slot_delete_order()
 {
-    int number_order = ui->number_order->value();
-    if(request_for_delete() == QMessageBox::Ok && delete_row_order(number_order))
+    if(request_for_delete() == QMessageBox::Ok && m_database)
     {
-        delete_table_order(number_order);
+        m_database->delete_order_with_services(ui->number_order->value());
         clear_form();
     }
 }

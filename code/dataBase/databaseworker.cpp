@@ -116,18 +116,26 @@ QVector<Order> DataBaseWorker::read_orders()
 {
     QVector<Order> orders;
 
-    QString request = QString(REQUEST_COUNT_ORDERS);
-    QSqlQuery query(request);
-    if(exec_request(query) && query.next())
+    auto count_order = count_orders();
+    if(count_order != -1)
     {
-        auto record = query.record();
-        auto count_order = query.value(record.indexOf("COUNT")).toInt();
         for(int i = 1; i <= count_order; ++i)
         {
             orders.push_back(read_order(i));
         }
     }
     return orders;
+}
+
+int DataBaseWorker::count_orders()
+{
+    QString request = QString(REQUEST_COUNT_ORDERS);
+    QSqlQuery query(request);
+    if(exec_request(query) && query.next())
+    {
+        return query.value( query.record().indexOf("COUNT")).toInt();
+    }
+    return -1;
 }
 
 bool DataBaseWorker::write_order(const Order& order)
@@ -226,7 +234,10 @@ bool DataBaseWorker::is_order(const int number)const
     QSqlQuery query;
     query.prepare(REQUEST_FIND_ORDERS);
     query.bindValue(":1",number);
-    return exec_request(query) && query.next();
+    auto t = exec_request(query);
+    t = query.next();
+    return t;
+    //return exec_request(query) && query.next();
 }
 
 bool DataBaseWorker::add_service(const QString& name, const double price)

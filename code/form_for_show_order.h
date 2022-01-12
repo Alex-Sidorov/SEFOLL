@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QSharedPointer>
 
+#include "dataBase/AbstractOrderRW.h"
+
 namespace Ui {
 class Form_For_Show_Order;
 }
@@ -16,7 +18,7 @@ class FormForShowOrder : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormForShowOrder(QWidget *parent = 0);
+    explicit FormForShowOrder(AbstractOrderRW* database, QWidget *parent = 0);
     virtual ~FormForShowOrder(){}
 
 signals:
@@ -31,6 +33,8 @@ private slots:
 
 private:
     QSharedPointer<Ui::Form_For_Show_Order> ui;
+
+    AbstractOrderRW* m_database;
 
     static const char* ERROR;
     static const char* ERROR_FIND_ORDER;
@@ -49,13 +53,6 @@ private:
     static const char* LABEL_STATUS_COMPLETE;
     static const char* LABEL_STATUS_NOT_COMPLETE;
 
-    static const char* REQUEST_TAKE_ORDER;
-    static const char* REQUEST_TAKE_TABLE_ORDERS;
-    static const char* REQUEST_TAKE_TABLE_SERVICES_ORDER;
-    static const char* REQUEST_COMPLETE_ORDER;
-    static const char* REQUEST_DELETE_TABLE_SERVICE_ORDER;
-    static const char* REQUEST_DELETE_ORDER;
-
     static const char* COLUMN_CLIENT;
     static const char* COLUMN_WORKER;
     static const char* COLUMN_DATE;
@@ -72,8 +69,6 @@ private:
     static const int INDEX_COLUMN_NAME;
 
     void clear_form();
-    bool delete_row_order(int number_order);
-    bool delete_table_order(int number_order);
     int request_for_delete()const;
 };
 

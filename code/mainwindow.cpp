@@ -11,9 +11,6 @@ const char* MainWindow::ERROR_SETTINGS =       "Ошибка при чтении
 const char* MainWindow::ERROR_MESSAGE =
         "Не удалось зарегистрировать заказ. Попробуйте позже.";
 
-const char* MainWindow::REGISTRATION = "Регистрация";
-const char* MainWindow::MESSAGE_NUMBER_ORDER = "Заказ оформлен.\n Номер:";
-
 const char* MainWindow::NAME_FILE_SETTINGS = "settings.conf";
 
 const char* MainWindow::NAME_GROUP_DATA_BASE_SETTINGS = "data_base";
@@ -47,11 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),    
     data(QSqlDatabase::addDatabase(TYPE_DATA_BASE)),
-    window_for_give_order(new FormForGiveOrder),
+    window_for_give_order(new FormForGiveOrder(&m_data_base)),
     window_for_change_service(new FormForChangeService(&m_data_base)),
     window_for_add_service(new FormForAddService(&m_data_base)),
     window_for_delete_service( new FormForDeleteService(&m_data_base)),
-    window_for_show_order(new FormForShowOrder),
+    window_for_show_order(new FormForShowOrder(&m_data_base)),
     window_for_options(new FormForOptions),
     window_for_show_data(nullptr),
     window_for_show_options_data_base(new FormForOptionsDataBase),
@@ -62,7 +59,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
-    connect(window_for_give_order.data(),SIGNAL(add_order(const Order&)),this,SLOT(slot_add_order_in_data_base(const Order&)));
     connect(window_for_add_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_add_service.data(),SIGNAL(new_data()),SLOT(add_service()));
     connect(window_for_delete_service.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -211,73 +207,6 @@ void MainWindow::add_service()
     ui->data_services->insertRow(count_row);
     ui->data_services->setItem(count_row,INDEX_COLUMN_COST,item_cost);
     ui->data_services->setItem(count_row,INDEX_COLUMN_NAME,item_name);
-}
-
-void MainWindow::slot_add_order_in_data_base(const Order& order)
-{
-    auto number_new_order = add_order_in_data_base(order);
-    if(!number_new_order)
-    {
-        QMessageBox::warning(this, tr(ERROR), tr(ERROR_MESSAGE));
-    }
-    else
-    {
-        QString message = MESSAGE_NUMBER_ORDER + QString::number(number_new_order);
-        QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
-        window_for_give_order->clear_form();
-        show_main_window();
-    }
-}
-
-int MainWindow::add_order_in_data_base(const Order& order)
-{
-    int number_new_order = 0;
-    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
-    if(!query.isActive())
-    {
-        return number_new_order;
-    }
-    query.last();
-    number_new_order = query.value(query.record().indexOf("NUMBER")).toInt();
-    ++number_new_order;
-
-    query.first();
-
-    QString request = REQUEST_INSERT_ORDERS;
-    request = request.arg(number_new_order);
-    request = request.arg(order.get_name_client());
-    request = request.arg(order.get_name_worker());
-    auto &date = order.get_date();
-    request = request.arg(QString::number(date.date().year()) + QChar('.') +
-                          QString::number(date.date().month()) + QChar('.') +
-                          QString::number(date.date().day()));
-    request = request.arg(order.get_status());
-    request = request.arg(order.get_cost());
-    request = request.arg(number_new_order);
-    request = request.arg(order.get_discount());
-    if(!query.exec(request))
-    {
-        return 0;
-    }
-    request = QString(REQUEST_CREATE_TABLE_ORDER).arg(number_new_order);
-    if(!query.exec(request))
-    {
-        return 0;
-    }
-    auto &services = order.get_services();
-    for(int i = 0; i < services.size(); i++)
-    {
-        request = REQUEST_INSERT_SERVICE_ORDER;
-        request = request.arg(number_new_order);
-        request = request.arg(services[i].cost);
-        request = request.arg(services[i].count);
-        request = request.arg(services[i].name_service);
-        if(!query.exec(request))
-        {
-            return 0;
-        }
-    }
-    return number_new_order;
 }
 
 void MainWindow::read_file_data()

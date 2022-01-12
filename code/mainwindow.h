@@ -53,7 +53,6 @@ private slots:
     void upload_table(const QVector<int>&);
     void on_show_order_button_clicked();
     void on_options_clicked();
-    void slot_add_order_in_data_base(const Order& order);
     void on_show_data_button_clicked();
     void on_workers_button_clicked();
 
@@ -87,8 +86,6 @@ private:
     static const char* ERROR_SETTINGS;
 
     static const char *ERROR_MESSAGE;
-    static const char *REGISTRATION;
-    static const char *MESSAGE_NUMBER_ORDER;
 
     static const char* NAME_FILE_SETTINGS;
 
@@ -117,8 +114,6 @@ private:
 
     void read_file_data();
     void read_settings();
-
-    int add_order_in_data_base(const Order&);
 };
 
 #endif // MAINWINDOW_H

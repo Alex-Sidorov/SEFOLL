@@ -12,10 +12,11 @@ const int FormForGiveOrder::OFFSET_INDEX = 1;
 
 const char* FormForGiveOrder::COST_LABEL = "Сумма:";
 
-FormForGiveOrder::FormForGiveOrder(QWidget *parent) :
+FormForGiveOrder::FormForGiveOrder(AbstractOrderRW* database, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForGiveOrder),
-    _mapper(new QSignalMapper)
+    _mapper(new QSignalMapper),
+    m_database(database)
 {
     ui->setupUi(this);
     connect(ui->name_client,SIGNAL(textChanged(QString)),SLOT(enabled_button()));
@@ -127,6 +128,20 @@ void FormForGiveOrder::set_workers(const QList<QString> &workers)
 
 void FormForGiveOrder::on_enter_button_clicked()
 {
+    if(!m_database)
+    {
+        return;
+    }
+
+    auto number_order = m_database->count_orders();
+    if(number_order)
+    {
+        ++number_order;
+    }
+    else
+    {
+        return;
+    }
     QVector<InfoOfOrderedService> services;
     services.reserve(_boxs.size());
 
@@ -146,12 +161,15 @@ void FormForGiveOrder::on_enter_button_clicked()
     }
 
 
-    Order order(0,ui->name_client->text(),
+    Order order(number_order,ui->name_client->text(),
                 ui->names_workers->currentText(),
                 ui->date,services,
                 get_cost_with_discount(_cost,ui->discount->value()),
                 false,
                 ui->discount->value());
 
-    emit add_order(order);
+    m_database->write_order(order);
+
+    QString message = MESSAGE_NUMBER_ORDER + QString::number(number_order);
+    QMessageBox::information(this,tr(REGISTRATION), tr(message.toStdString().c_str()));
 }

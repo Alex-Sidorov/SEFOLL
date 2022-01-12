@@ -23,6 +23,7 @@ public:
     virtual bool change_password(const int id, const QString& new_password)override;
     virtual bool change_access(const int id, const Access& access)override;
 
+    virtual int count_orders()override;
     virtual Order read_order(const int number)override;
     virtual QVector<Order> read_orders()override;
     virtual bool write_order(const Order&)override;
