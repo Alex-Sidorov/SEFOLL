@@ -1,12 +1,12 @@
 #include "form_for_add_service.h"
 #include "ui_form_for_add_service.h"
 
-FormForAddService::FormForAddService(QWidget *parent) :
+FormForAddService::FormForAddService(AbstractServicesWorker* database, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Form_For_Add_Service)
+    ui(new Ui::Form_For_Add_Service),
+    m_database(database)
 {
     ui->setupUi(this);
-    connect(ui->ok_button, SIGNAL(clicked()), this, SIGNAL(new_data()));
     connect(this,SIGNAL(new_data()),this,SLOT(close()));
     connect(ui->name_service,SIGNAL(textChanged(QString)),this,SLOT(slot_fields_form_changed()));
     connect(ui->cost_service,SIGNAL(valueChanged(double)),this,SLOT(slot_fields_form_changed()));
@@ -47,6 +47,17 @@ void FormForAddService::show()
 {
     clear_form();
     QWidget::show();
+}
+
+void FormForAddService::on_ok_button_clicked()
+{
+    if(m_database)
+    {
+        m_database->add_service(ui->name_service->text(), ui->cost_service->value());
+        this->close();
+        emit new_data();
+
+    }
 }
 
 QString FormForAddService::get_name_service()const

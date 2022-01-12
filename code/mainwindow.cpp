@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     data(QSqlDatabase::addDatabase(TYPE_DATA_BASE)),
     window_for_give_order(new FormForGiveOrder),
     window_for_change_service(new FormForChangeService(&m_data_base)),
-    window_for_add_service(new FormForAddService),
+    window_for_add_service(new FormForAddService(&m_data_base)),
     window_for_delete_service( new FormForDeleteService(&m_data_base)),
     window_for_show_order(new FormForShowOrder),
     window_for_options(new FormForOptions),
@@ -203,11 +203,6 @@ void MainWindow::add_service()
 
     double cost = window_for_add_service->get_cost_service();
     QString name = window_for_add_service->get_name_service();
-    if(!m_data_base.add_service(name, cost))
-    {
-        QMessageBox::warning(this,ERROR,ERROR_ADD_SERVICE);
-        return;
-    }
 
     QTableWidgetItem *item_cost = new QTableWidgetItem(QString::number(cost));
     QTableWidgetItem *item_name = new QTableWidgetItem(name);

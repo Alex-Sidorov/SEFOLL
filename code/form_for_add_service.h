@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSharedPointer>
 
+#include "dataBase/AbstractServicesWorker.h"
+
 namespace Ui {
 class Form_For_Add_Service;
 }
@@ -16,7 +18,7 @@ public:
     QString get_name_service()const;
     double get_cost_service()const;
     void show();
-    explicit FormForAddService(QWidget *parent = 0);
+    explicit FormForAddService(AbstractServicesWorker* database, QWidget *parent = 0);
     FormForAddService(const FormForAddService&) = delete;
     virtual ~FormForAddService(){}
 
@@ -27,9 +29,11 @@ signals:
 private slots:
     void on_back_button_clicked();
     void slot_fields_form_changed();
+    void on_ok_button_clicked();
 
 private:
     QSharedPointer<Ui::Form_For_Add_Service> ui;
+    AbstractServicesWorker* m_database;
 
     void clear_form()const;
     bool is_empty_form()const;
