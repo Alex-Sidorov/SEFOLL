@@ -43,6 +43,7 @@ private:
 
     static const char* LABEL_NUMBER_ORDER;
     static const char* LABEL_CLIENT;
+    static const char* LABEL_PHONE;
     static const char* LABEL_WORKER;
     static const char* LABEL_DATE_ORDER;
     static const char* LABEL_COST;

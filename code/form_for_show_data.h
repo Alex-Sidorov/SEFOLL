@@ -80,6 +80,7 @@ private:
 
     static const int INDEX_COLUMN_NUMBER;
     static const int INDEX_COLUMN_CLIENT;
+    static const int INDEX_COLUMN_PHONE;
     static const int INDEX_COLUMN_WORKER;
     static const int INDEX_COLUMN_DATE;
     static const int INDEX_COLUMN_COST;
@@ -110,6 +111,8 @@ private:
     bool check_number(int)const;
     bool check_status(bool)const;
     bool check_service(const Order& order)const;
+
+    uint m_fullPrice = 0;
 
     QTableWidget* create_service_table(const Order& order);
 

@@ -27,12 +27,13 @@ const char* FormForShowData::ERROR_SAVE_FILE = "Не удалось сохран
 
 const int FormForShowData::INDEX_COLUMN_NUMBER =    0;
 const int FormForShowData::INDEX_COLUMN_CLIENT =    1;
-const int FormForShowData::INDEX_COLUMN_WORKER =    2;
-const int FormForShowData::INDEX_COLUMN_DATE =      3;
-const int FormForShowData::INDEX_COLUMN_COST =      4;
-const int FormForShowData::INDEX_COLUMN_DISCOUNT =  5;
-const int FormForShowData::INDEX_COLUMN_STATUS =    6;
-const int FormForShowData::INDEX_COLUMN_SERVICES =  7;
+const int FormForShowData::INDEX_COLUMN_PHONE =     2;
+const int FormForShowData::INDEX_COLUMN_WORKER =    3;
+const int FormForShowData::INDEX_COLUMN_DATE =      4;
+const int FormForShowData::INDEX_COLUMN_COST =      5;
+const int FormForShowData::INDEX_COLUMN_DISCOUNT =  6;
+const int FormForShowData::INDEX_COLUMN_STATUS =    7;
+const int FormForShowData::INDEX_COLUMN_SERVICES =  8;
 
 const int FormForShowData::INDEX_COLUMN_COST_SERVICE = 0;
 const int FormForShowData::INDEX_COLUMN_NAME_SERVICE = 1;
@@ -226,18 +227,24 @@ void FormForShowData::on_ok_button_clicked()
     QTableWidgetItem *item_client = nullptr;
     QTableWidgetItem *item_cost =   nullptr;
     QTableWidgetItem *item_status = nullptr;
+    QTableWidgetItem *item_phone = nullptr;
     QTableWidgetItem *item_date =   nullptr;
     QTableWidgetItem *item_discount = nullptr;
     int count_row = 0;
     ui->data->setRowCount(0);
+
+    m_fullPrice = 0;
     for(const auto &order : qAsConst(orders))
     {
         if(is_need_order(order))
         {
+            m_fullPrice += order.get_cost();
+
             item_number = new QTableWidgetItem(QString::number(order.get_number()));
             item_worker = new QTableWidgetItem(order.get_name_worker());
             item_client = new QTableWidgetItem(order.get_name_client());
             item_cost = new QTableWidgetItem(QString::number(order.get_cost()));
+            item_phone = new QTableWidgetItem(order.get_phone());
             item_discount = new QTableWidgetItem(QString::number(order.get_discount()));
             item_date = new QTableWidgetItem(order.get_date().dateTime().toString("dd:MM:yyyy"));
             item_status = new QTableWidgetItem(order.get_status() ? COMPLETE_ORDER : NOT_COMPLETE_ORDER);
@@ -246,6 +253,7 @@ void FormForShowData::on_ok_button_clicked()
             ui->data->insertRow(count_row);
             ui->data->setItem(count_row,INDEX_COLUMN_NUMBER,item_number);
             ui->data->setItem(count_row,INDEX_COLUMN_COST,item_cost);
+            ui->data->setItem(count_row,INDEX_COLUMN_PHONE,item_phone);
             ui->data->setItem(count_row,INDEX_COLUMN_WORKER,item_worker);
             ui->data->setItem(count_row,INDEX_COLUMN_DATE,item_date);
             ui->data->setItem(count_row,INDEX_COLUMN_STATUS,item_status);
@@ -261,6 +269,8 @@ void FormForShowData::on_ok_button_clicked()
             ui->data->setRowHeight(count_row,160);
         }
     }
+
+    ui->sumOrders->setText("Сумма: " + QString::number(m_fullPrice));
 }
 
 QTableWidget* FormForShowData::create_service_table(const Order &order)
@@ -316,6 +326,8 @@ void FormForShowData::on_clear_button_clicked()
     ui->client_list->clear();
     ui->client_line->clear();
     ui->names_workers->clear();
+
+    ui->sumOrders->setText("Сумма: ");
 }
 
 void FormForShowData::set_workers(const QList<QString> &workers)
@@ -472,6 +484,8 @@ bool FormForShowData::save_csv_file(const QString &file_name)const
         save_service_table(stream,i);
         stream << "\n";
     }
+
+    stream << "Сумма: " + QString::number(m_fullPrice);
     file.close();
     return true;
 }

@@ -110,6 +110,7 @@ Order DataBaseWorker::read_order(const int number)
     {
         QSqlRecord record = query.record();
 
+        auto phone = query.value(record.indexOf(COLUMN_PHONE)).toString();
         auto client = query.value(record.indexOf(COLUMN_CLIENT)).toString();
         auto worker = query.value(record.indexOf(COLUMN_WORKER)).toString();
         auto cost = query.value(record.indexOf(COLUMN_COST)).toDouble();
@@ -120,7 +121,7 @@ Order DataBaseWorker::read_order(const int number)
         QDateEdit date(QDate(temp.at(0).toInt(),temp.at(1).toInt(),temp.at(2).toInt()));
         auto services_order = read_services_order(services);
 
-        order.set_data(number,client,worker,&date,services_order,cost,is_complete,dicsount);
+        order.set_data(number,client,worker,&date,services_order,cost,is_complete,dicsount,phone);
     }
     return order;
 }
@@ -129,14 +130,22 @@ QVector<Order> DataBaseWorker::read_orders()
 {
     QVector<Order> orders;
 
-    auto count_order = count_orders();
-    if(count_order != -1)
+    QSqlQuery query;
+
+    query.prepare(REQUEST_TAKE_NUMBER_ORDERS);
+    if(exec_request(query))
     {
-        for(int i = 1; i <= count_order; ++i)
+        QVector<int> numbers;
+        while(query.next())
+            numbers.push_back(query.value("number").toInt());
+
+        for(int i = 0; i < numbers.size(); ++i)
         {
-            orders.push_back(read_order(i));
+            orders.push_back(read_order(numbers[i]));
         }
     }
+
+
     return orders;
 }
 

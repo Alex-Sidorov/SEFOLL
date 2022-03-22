@@ -17,6 +17,7 @@ const char* FormForShowOrder::LABEL_CLIENT =              "Клиент:";
 const char* FormForShowOrder::LABEL_WORKER =              "Исполнитель:";
 const char* FormForShowOrder::LABEL_DATE_ORDER =          "Дата принятия заказа:";
 const char* FormForShowOrder::LABEL_COST =                "Сумма:";
+const char* FormForShowOrder::LABEL_PHONE =               "Телефон:";
 const char* FormForShowOrder::LABEL_DISCOUNT =            "Скидка %:";
 const char* FormForShowOrder::LABEL_STATUS =              "Статус заказа:";
 const char* FormForShowOrder::LABEL_STATUS_COMPLETE =     "Статус заказа: закончен.";
@@ -66,6 +67,7 @@ void FormForShowOrder::clear_form()
     ui->worker->setText(LABEL_WORKER);
     ui->date->setText(LABEL_DATE_ORDER);
     ui->cost->setText(LABEL_COST);
+    ui->phone->setText(LABEL_PHONE);
     ui->status->setText(LABEL_STATUS);
     ui->discount->setText(LABEL_DISCOUNT);
     ui->complete_button->setEnabled(false);
@@ -106,6 +108,8 @@ void FormForShowOrder::on_enter_button_clicked()
                             QString::number(number_order));
         ui->client->setText(LABEL_CLIENT +
                             order.get_name_client());
+        ui->phone->setText(LABEL_PHONE +
+                            order.get_phone());
         ui->worker->setText(LABEL_WORKER +
                             order.get_name_worker());
         ui->date->setText(LABEL_DATE_ORDER +

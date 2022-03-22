@@ -62,6 +62,7 @@ private:
     static constexpr auto REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = :1 WHERE name = :2 AND price = :3;";
     static constexpr auto REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE name = :1 AND price = :2";
 
+    static constexpr auto REQUEST_TAKE_NUMBER_ORDERS = "SELECT number FROM orders;";
     static constexpr auto REQUEST_FIND_ORDERS = "SELECT number FROM orders where number = :1;";
     static constexpr auto REQUEST_COUNT_ORDERS = "SELECT COUNT(*) as COUNT FROM orders;";
     static constexpr auto REQUEST_TAKE_ANY_ORDER = "SELECT * FROM orders WHERE number = :1;";
@@ -90,6 +91,7 @@ private:
     static constexpr auto COLUMN_COST =           "cost";
     static constexpr auto COLUMN_DISCOUNT =       "discount";
     static constexpr auto COLUMN_STATUS =         "status";
+    static constexpr auto COLUMN_PHONE =          "phone";
     static constexpr auto COLUMN_SERVICES =       "services";
     static constexpr auto COLUMN_PRICE_SERVICE =  "price";
     static constexpr auto COLUMN_COUNT_SERVICES = "count";

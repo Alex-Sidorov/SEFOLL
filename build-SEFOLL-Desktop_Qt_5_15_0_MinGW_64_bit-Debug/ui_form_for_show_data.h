@@ -88,17 +88,18 @@ public:
     QPushButton *clear_button;
     QPushButton *back_button;
     QPushButton *save_to_excel_button;
+    QLabel *sumOrders;
 
     void setupUi(QWidget *Form_For_Show_Data)
     {
         if (Form_For_Show_Data->objectName().isEmpty())
             Form_For_Show_Data->setObjectName(QString::fromUtf8("Form_For_Show_Data"));
-        Form_For_Show_Data->resize(668, 417);
+        Form_For_Show_Data->resize(668, 426);
         horizontalLayout_5 = new QHBoxLayout(Form_For_Show_Data);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         data = new QTableWidget(Form_For_Show_Data);
-        if (data->columnCount() < 8)
-            data->setColumnCount(8);
+        if (data->columnCount() < 9)
+            data->setColumnCount(9);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         data->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -115,6 +116,8 @@ public:
         data->setHorizontalHeaderItem(6, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         data->setHorizontalHeaderItem(7, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        data->setHorizontalHeaderItem(8, __qtablewidgetitem8);
         data->setObjectName(QString::fromUtf8("data"));
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(30);
@@ -664,6 +667,12 @@ public:
 
         verticalLayout_8->addWidget(save_to_excel_button);
 
+        sumOrders = new QLabel(Form_For_Show_Data);
+        sumOrders->setObjectName(QString::fromUtf8("sumOrders"));
+        sumOrders->setFont(font);
+
+        verticalLayout_8->addWidget(sumOrders);
+
 
         horizontalLayout_5->addLayout(verticalLayout_8);
 
@@ -681,17 +690,19 @@ public:
         QTableWidgetItem *___qtablewidgetitem1 = data->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\232\320\273\320\270\320\265\320\275\321\202", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = data->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\240\320\260\320\261\320\276\321\202\320\275\320\270\320\272", nullptr));
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\235\320\276\320\274\320\265\321\200", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = data->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\224\320\260\321\202\320\260", nullptr));
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\240\320\260\320\261\320\276\321\202\320\275\320\270\320\272", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = data->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\321\203\320\274\320\274\320\260", nullptr));
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\224\320\260\321\202\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = data->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\320\272\320\270\320\264\320\272\320\260", nullptr));
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\321\203\320\274\320\274\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = data->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\321\202\320\260\321\202\321\203\321\201", nullptr));
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\320\272\320\270\320\264\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = data->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\243\321\201\320\273\321\203\320\263\320\270", nullptr));
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\321\202\320\260\321\202\321\203\321\201", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = data->horizontalHeaderItem(8);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\243\321\201\320\273\321\203\320\263\320\270", nullptr));
         is_number->setText(QString());
         label_5->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\235\320\276\320\274\320\265\321\200 \320\267\320\260\320\272\320\260\320\267", nullptr));
         is_worker->setText(QString());
@@ -715,6 +726,7 @@ public:
         clear_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214", nullptr));
         back_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\235\320\260\320\267\320\260\320\264", nullptr));
         save_to_excel_button->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\222\321\213\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\262 Excel", nullptr));
+        sumOrders->setText(QCoreApplication::translate("Form_For_Show_Data", "\320\241\321\203\320\274\320\274\320\260: ", nullptr));
     } // retranslateUi
 
 };

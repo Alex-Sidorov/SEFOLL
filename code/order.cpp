@@ -14,14 +14,16 @@ Order::Order(const int number,
              const QVector<InfoOfOrderedService> &services,
              const double cost,
              const bool status,
-             const int discount):
+             const int discount,
+             const QString &phone):
             _number(number),
             _cost(cost),
             _discount(discount),
             _status(status),
             _name_client(name_client),
             _name_worker(name_worker),
-            _date(date->date())
+            _date(date->date()),
+            _phone(phone)
 {
     _services.reserve(services.size());
     for(int i=0; i<services.size(); i++)
@@ -37,7 +39,8 @@ void Order::set_data(const int number,
                      const QVector<InfoOfOrderedService> &services,
                      const double cost,
                      const bool status,
-                     const int discount)
+                     const int discount,
+                     const QString &phone)
 {
     _number = number;
     _name_client = name_client;
@@ -47,6 +50,7 @@ void Order::set_data(const int number,
     _status = status;
     _discount = discount;
     _services.clear();
+    _phone = phone;
     _services.reserve(services.size());
     for(int i = 0; i<services.size(); i++)
     {
@@ -61,13 +65,19 @@ Order::Order(const Order &obj):
     _status(obj._status),
     _name_client(obj._name_client),
     _name_worker(obj._name_worker),
-    _date(obj._date.date())
+    _date(obj._date.date()),
+    _phone(obj._phone)
 {
     _services.reserve(obj._services.size());
     for(int i = 0; i<obj._services.size(); i++)
     {
         _services.push_back(obj._services[i]);
     }
+}
+
+QString Order::get_phone()const
+{
+    return _phone;
 }
 
 double Order::get_cost()const

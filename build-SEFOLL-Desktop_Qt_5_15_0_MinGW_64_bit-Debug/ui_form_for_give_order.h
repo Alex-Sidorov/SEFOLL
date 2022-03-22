@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -34,6 +35,9 @@ public:
     QLabel *label;
     QSpacerItem *horizontalSpacer_3;
     QLineEdit *name_client;
+    QFrame *line;
+    QLabel *label_4;
+    QLineEdit *phoneLine;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QComboBox *names_workers;
@@ -84,6 +88,32 @@ public:
 ""));
 
         horizontalLayout->addWidget(name_client);
+
+        line = new QFrame(FormForGiveOrder);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout->addWidget(line);
+
+        label_4 = new QLabel(FormForGiveOrder);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setFont(font);
+
+        horizontalLayout->addWidget(label_4);
+
+        phoneLine = new QLineEdit(FormForGiveOrder);
+        phoneLine->setObjectName(QString::fromUtf8("phoneLine"));
+        phoneLine->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"height:20;\n"
+"border-color: rgb(11, 11, 11);\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+""));
+
+        horizontalLayout->addWidget(phoneLine);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -305,6 +335,8 @@ public:
     {
         FormForGiveOrder->setWindowTitle(QCoreApplication::translate("FormForGiveOrder", "\320\236\321\204\320\276\321\200\320\274\320\273\320\265\320\275\320\270\320\265 \320\267\320\260\320\272\320\260\320\267\320\260", nullptr));
         label->setText(QCoreApplication::translate("FormForGiveOrder", "\320\232\320\273\320\270\320\265\320\275\321\202", nullptr));
+        label_4->setText(QCoreApplication::translate("FormForGiveOrder", "\320\235\320\276\320\274\320\265\321\200", nullptr));
+        phoneLine->setText(QString());
         label_2->setText(QCoreApplication::translate("FormForGiveOrder", "\320\230\321\201\320\277\320\276\320\273\320\275\320\270\321\202\320\265\320\273\321\214", nullptr));
         QTableWidgetItem *___qtablewidgetitem = data_services->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("FormForGiveOrder", "\320\232\320\236\320\233\320\230\320\247\320\225\320\241\320\242\320\222\320\236", nullptr));

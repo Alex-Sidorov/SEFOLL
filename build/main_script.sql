@@ -15,12 +15,13 @@ CREATE TABLE IF NOT EXISTS "workers" (
 );
 CREATE TABLE IF NOT EXISTS "orders" (
 	"number"	INTEGER,
-	"client"	,
-	"worker"	,
-	"date"	,
-	"status"	,
-	"cost"	,
-	"services"	,
-	"discount"	Integer DEFAULT (0)
+	"client"	TEXT,
+	"worker"	TEXT,
+	"date"	TEXT,
+	"status"	TEXT,
+	"cost"	TEXT,
+	"services"	TEXT,
+	"discount"	Integer DEFAULT (0),
+	"phone"	TEXT
 );
 COMMIT;

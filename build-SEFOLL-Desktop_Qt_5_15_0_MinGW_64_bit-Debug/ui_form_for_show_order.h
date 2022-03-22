@@ -32,6 +32,7 @@ public:
     QSpinBox *number_order;
     QLabel *number;
     QLabel *client;
+    QLabel *phone;
     QLabel *worker;
     QLabel *date;
     QLabel *status;
@@ -109,6 +110,12 @@ public:
 
         verticalLayout->addWidget(client);
 
+        phone = new QLabel(Form_For_Show_Order);
+        phone->setObjectName(QString::fromUtf8("phone"));
+        phone->setFont(font);
+
+        verticalLayout->addWidget(phone);
+
         worker = new QLabel(Form_For_Show_Order);
         worker->setObjectName(QString::fromUtf8("worker"));
         worker->setFont(font);
@@ -139,13 +146,11 @@ public:
         QFont font1;
         font1.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font1);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font1);
         __qtablewidgetitem1->setForeground(brush);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
@@ -154,7 +159,6 @@ public:
         font2.setKerning(true);
         font2.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        __qtablewidgetitem2->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem2->setFont(font2);
         data_services->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -316,6 +320,7 @@ public:
         label->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\275\320\276\320\274\320\265\321\200 \320\267\320\260\320\272\320\260\320\267\320\260  ", nullptr));
         number->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\235\320\276\320\274\320\265\321\200:", nullptr));
         client->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\232\320\273\320\270\320\265\320\275\321\202:", nullptr));
+        phone->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\242\320\265\320\273\320\265\321\204\320\276\320\275:", nullptr));
         worker->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\230\321\201\320\277\320\276\320\273\320\275\320\270\321\202\320\265\320\273\321\214:", nullptr));
         date->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\224\320\260\321\202\320\260 \320\277\321\200\320\270\320\275\321\217\321\202\320\270\321\217 \320\267\320\260\320\272\320\260\320\267\320\260:", nullptr));
         status->setText(QCoreApplication::translate("Form_For_Show_Order", "\320\241\321\202\320\260\321\202\321\203\321\201 \320\267\320\260\320\272\320\260\320\267\320\260:", nullptr));

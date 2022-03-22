@@ -133,15 +133,8 @@ void FormForGiveOrder::on_enter_button_clicked()
         return;
     }
 
-    auto number_order = m_database->count_orders();
-    if(number_order)
-    {
-        ++number_order;
-    }
-    else
-    {
-        return;
-    }
+    auto number_order = (QDateTime::currentDateTime().toString("yyyyMM") + QString::number(m_database->count_orders())).toInt();
+
     QVector<InfoOfOrderedService> services;
     services.reserve(_boxs.size());
 
@@ -166,7 +159,8 @@ void FormForGiveOrder::on_enter_button_clicked()
                 ui->date,services,
                 get_cost_with_discount(_cost,ui->discount->value()),
                 false,
-                ui->discount->value());
+                ui->discount->value(),
+                ui->phoneLine->text());
 
     m_database->write_order(order);
 

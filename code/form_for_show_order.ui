@@ -136,6 +136,18 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="phone">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Телефон:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="worker">
      <property name="font">
       <font>
@@ -325,9 +337,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
      </column>
      <column>
       <property name="text">
@@ -337,9 +346,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
        <font>
         <pointsize>12</pointsize>
        </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
       </property>
       <property name="foreground">
        <brush brushstyle="SolidPattern">
@@ -361,9 +367,6 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
         <stylestrategy>PreferAntialias</stylestrategy>
         <kerning>true</kerning>
        </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
