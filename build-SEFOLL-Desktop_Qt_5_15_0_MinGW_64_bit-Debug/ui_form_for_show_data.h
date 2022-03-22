@@ -191,6 +191,7 @@ public:
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 "\n"
 ""));
+        number_order->setMaximum(999999999);
 
         verticalLayout_6->addWidget(number_order);
 

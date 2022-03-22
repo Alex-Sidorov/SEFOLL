@@ -48,8 +48,6 @@ FormForShowOrder::FormForShowOrder(AbstractOrderRW* database, QWidget *parent) :
     connect(ui->delete_button,&QPushButton::clicked,this,&FormForShowOrder::slot_delete_order);
 
     setWindowIcon(QIcon(":icons/icon.png"));
-
-    ui->delete_button->setVisible(false);
 }
 
 void FormForShowOrder::on_back_button_clicked()

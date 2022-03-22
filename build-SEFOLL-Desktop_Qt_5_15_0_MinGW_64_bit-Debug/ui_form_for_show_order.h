@@ -91,7 +91,7 @@ public:
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 ""));
-        number_order->setMaximum(1000000);
+        number_order->setMaximum(999999999);
 
         horizontalLayout->addWidget(number_order);
 

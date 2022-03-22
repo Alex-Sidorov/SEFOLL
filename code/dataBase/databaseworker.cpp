@@ -144,8 +144,6 @@ QVector<Order> DataBaseWorker::read_orders()
             orders.push_back(read_order(numbers[i]));
         }
     }
-
-
     return orders;
 }
 
