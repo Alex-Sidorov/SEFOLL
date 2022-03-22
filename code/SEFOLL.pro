@@ -28,11 +28,11 @@ SOURCES += \
     mainwindow.cpp \
     new_spinbox.cpp \
     order.cpp \
-    security.cpp \
     formforoptionsdatabase.cpp
 
 HEADERS  += \
     Access.h \
+    dataBase/AbstractDataBaseOptions.h \
     dataBase/AbstractDataUserWorker.h \
     dataBase/AbstractOrderRW.h \
     dataBase/AbstractServicesWorker.h \
@@ -51,7 +51,6 @@ HEADERS  += \
     mainwindow.h \
     new_spinbox.h \
     order.h \
-    security.h \
     formforoptionsdatabase.h
 
 FORMS += \

@@ -9,11 +9,11 @@ const char* FormForOptions::ERROR =   "ОШИБКА";
 const char* FormForOptions::MESSAGE_ERROR_DELETE_USER = "В данный момент нельзя удалить пользователя.";
 const char* FormForOptions::MESSAGE_USER_WAS_DELETE =   "Пользователь id:%1 удален.";
 const char* FormForOptions::MESSAGE_ERROR_ADD_USER =    "В данный момент нельзя добавить пользователя.";
-const char* FormForOptions::MESSAGE_USER_WAS_ADD =      "Пользователь id:%1 добавлен.";
+const char* FormForOptions::MESSAGE_USER_WAS_ADDED =      "Пользователь id:%1 добавлен.";
 const char* FormForOptions::MESSAGE_ERROR_CHANGE_DATA = "В данный момент нельзя изменить данные.";
 const char* FormForOptions::MESSAGE_DATA_CHANGED =      "Данные изменены";
 
-FormForOptions::FormForOptions(QWidget *parent) :
+FormForOptions::FormForOptions(AbstractDataUserWorker *database, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormForOptions),
     window_for_add_password(new Ui::FormForAddPassword),
@@ -23,7 +23,8 @@ FormForOptions::FormForOptions(QWidget *parent) :
     _widget_for_add_password(new QWidget),
     _widget_for_change_password(new QWidget),    
     _widget_for_change_access(new QWidget),
-    _widget_for_delete_password(new QWidget)
+    _widget_for_delete_password(new QWidget),
+    m_database(database)
 {
     ui->setupUi(this);
     window_for_add_password->setupUi(_widget_for_add_password.data());
@@ -78,8 +79,8 @@ void FormForOptions::slot_delete_password_back_button_clicked()
 
 void FormForOptions::slot_delete_password_ok_button_clicked()
 {
-    QString id = window_for_delete_password->id->text();
-    if(!Security::delete_user(id))
+    int id = window_for_delete_password->id->value();
+    if(!m_database || id == 1 || m_database->delete_user(id))
     {
         QMessageBox::warning(this,ERROR,MESSAGE_ERROR_DELETE_USER);
     }
@@ -92,17 +93,18 @@ void FormForOptions::slot_delete_password_ok_button_clicked()
 
 void FormForOptions::slot_add_password_ok_button_clicked()
 {
-    QString id = window_for_add_password->id->text();
-    QString password = window_for_add_password->password->text();
-    Access access = static_cast<Access>(window_for_add_password->access->currentIndex());
-    if(!Security::add_user(id,password,access))
+    UserData user;
+    user.id = window_for_add_password->id->value();
+    user.password = window_for_add_password->password->text();
+    user.access = static_cast<Access>(window_for_add_password->access->currentIndex());
+    if(!m_database || !m_database->add_user(user))
     {
         QMessageBox::warning(this,ERROR,MESSAGE_ERROR_ADD_USER);
     }
     else
     {
-        QString message = MESSAGE_USER_WAS_ADD;
-        QMessageBox::information(this,RESUALT,message.arg(id));
+        QString message = MESSAGE_USER_WAS_ADDED;
+        QMessageBox::information(this,RESUALT,message.arg(user.id));
     }
 }
 
@@ -126,9 +128,9 @@ void FormForOptions::on_change_access_button_clicked()
 
 void FormForOptions::slot_change_password_ok_button_clicked()
 {
-    QString id = window_for_change_password->id->text();
+    auto id = window_for_change_password->id->value();
     QString password = window_for_change_password->password->text();
-    if(!Security::change_password(id,password))
+    if(!m_database || !m_database->change_password(id, password))
     {
         QMessageBox::warning(this,ERROR,MESSAGE_ERROR_CHANGE_DATA);
     }
@@ -148,9 +150,9 @@ void FormForOptions::slot_change_password_back_button_clicked()
 
 void FormForOptions::slot_change_access_ok_button_clicked()
 {
-    QString id = window_for_change_access->id->text();
+    int id = window_for_change_access->id->value();
     Access access = static_cast<Access>(window_for_change_access->access->currentIndex());
-    if(!Security::change_access(id,access))
+    if(!m_database || !m_database->change_access(id, access))
     {
         QMessageBox::warning(this,ERROR,MESSAGE_ERROR_CHANGE_DATA);
     }

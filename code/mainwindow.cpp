@@ -18,22 +18,6 @@ const char* MainWindow::SETTINGS_VALUE_PATH_DATA_BASE = "path";
 
 const char* MainWindow::NAME_DEFAULT_DATA_BASE = "data.sqlite";
 const char* MainWindow::TYPE_DATA_BASE = "QSQLITE";
-
-const char* MainWindow::REQUESTE_DATA_SERVICE =   "INSERT INTO services(price, name) VALUES(%1, '%2');";
-const char* MainWindow::REQUESTE_TAKE_SERVICES =  "SELECT * FROM services";
-const char* MainWindow::REQUESTE_UPDATE_NAME =    "UPDATE services SET name = '%1' WHERE price = %2 AND name = '%3';";
-const char* MainWindow::REQUESTE_UPDATE_PRICE =   "UPDATE services SET price = %1 WHERE price = %2 AND name = '%3';";
-const char* MainWindow::REQUESTE_DELETE_SERVICE = "DELETE FROM services WHERE price = %1 AND name = '%2'";
-
-const char* MainWindow::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
-const char* MainWindow::REQUEST_INSERT_ORDERS =
-        "INSERT INTO orders(number, client, worker, date, status, cost, services, discount)"
-        " VALUES(%1, '%2', '%3', '%4', %5, %6, %7, %8);";
-const char* MainWindow::REQUEST_CREATE_TABLE_ORDER =
-        "CREATE TABLE _%1_ (price NOT NULL, count NOT NULL, name TEXT);";
-const char* MainWindow::REQUEST_INSERT_SERVICE_ORDER =
-        "INSERT INTO _%1_(price, count, name)  VALUES(%2, %3, '%4');";
-
 const char* MainWindow::COLUMN_PRICE = "price";
 const char* MainWindow::COLUMN_NAME =  "name";
 
@@ -49,13 +33,13 @@ MainWindow::MainWindow(QWidget *parent) :
     window_for_add_service(new FormForAddService(&m_data_base)),
     window_for_delete_service( new FormForDeleteService(&m_data_base)),
     window_for_show_order(new FormForShowOrder(&m_data_base)),
-    window_for_options(new FormForOptions),
+    window_for_options(new FormForOptions(&m_data_base)),
     window_for_show_data(nullptr),
-    window_for_show_options_data_base(new FormForOptionsDataBase),
+    window_for_show_options_data_base(new FormForOptionsDataBase(&m_data_base)),
     window_for_workers(new FormForWorkers(&m_data_base)),
     _access(GUEST),
     _name_file_data(NAME_DEFAULT_DATA_BASE),
-    _settings(NAME_FILE_SETTINGS,QSettings::IniFormat)
+    _settings(NAME_FILE_SETTINGS, QSettings::IniFormat)
 {
     connect(window_for_show_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
     connect(window_for_give_order.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
@@ -74,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->options_data_base,&QPushButton::clicked,this,&MainWindow::slot_clicked_options_data_base);
 
-    window_for_show_data = QSharedPointer<FormForShowData>(new FormForShowData(ui->data_services));
+    window_for_show_data = QSharedPointer<FormForShowData>(new FormForShowData(&m_data_base, ui->data_services));
     connect(window_for_show_data.data(),SIGNAL(to_main_window()),SLOT(show_main_window()));
 
     read_settings();
@@ -87,6 +71,11 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     data.close();
+}
+
+const DataBaseWorker* MainWindow::getDataBase() const
+{
+    return &m_data_base;
 }
 
 void MainWindow::set_access(Access access)
@@ -211,8 +200,8 @@ void MainWindow::add_service()
 
 void MainWindow::read_file_data()
 {
-    QSqlQuery query(REQUESTE_TAKE_SERVICES);
-    if(!data.isOpen() || !query.isActive())
+    auto services = m_data_base.read_services();
+    if(services.isEmpty())
     {
         ui->statusBar->setWindowTitle(ERROR_OPEN_DATA_BASE);
         return;
@@ -225,13 +214,12 @@ void MainWindow::read_file_data()
     }
 
     int count_row = 0;
-    QSqlRecord record = query.record();
     QTableWidgetItem *item_cost = nullptr;
     QTableWidgetItem *item_name = nullptr;
-    while(query.next())
+    for(const auto& service : qAsConst(services))
     {
-        item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_PRICE)).toString());
-        item_name = new QTableWidgetItem(query.value(record.indexOf(COLUMN_NAME)).toString());
+        item_cost = new QTableWidgetItem(QString::number(service.second));
+        item_name = new QTableWidgetItem(service.first);
 
         count_row = ui->data_services->rowCount();
         ui->data_services->insertRow(count_row);

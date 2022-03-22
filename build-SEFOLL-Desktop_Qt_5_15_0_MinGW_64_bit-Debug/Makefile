@@ -116,6 +116,8 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bluetooth.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_charts.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_charts_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_concurrent.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_concurrent_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_core.pri \
@@ -171,6 +173,16 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3d.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3d_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3drender.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3drender_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dutils.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -204,6 +216,8 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uiplugin.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uitools.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uitools_private.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_virtualkeyboard.pri \
+		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_webchannel.pri \
 		D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_webchannel_private.pri \
@@ -302,6 +316,8 @@ D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_axserver_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bluetooth.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bluetooth_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_bootstrap_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_charts.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_charts_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_concurrent.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_concurrent_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_core.pri:
@@ -357,6 +373,16 @@ D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3d.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3d_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3drender.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3drender_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dutils.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick3dutils_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quick_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
@@ -390,6 +416,8 @@ D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_theme_support_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uiplugin.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uitools.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_uitools_private.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_virtualkeyboard.pri:
+D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_virtualkeyboard_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_vulkan_support_private.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_webchannel.pri:
 D:/qt/5.15.0/mingw81_64/mkspecs/modules/qt_lib_webchannel_private.pri:

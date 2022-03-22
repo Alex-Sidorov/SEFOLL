@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -25,6 +26,7 @@ class Ui_Form_For_Delete_Service
 public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
+    QHBoxLayout *tableLayout;
     QTableWidget *data_services;
     QPushButton *delete_button;
     QPushButton *back_button;
@@ -45,6 +47,8 @@ public:
 
         verticalLayout->addWidget(label);
 
+        tableLayout = new QHBoxLayout();
+        tableLayout->setObjectName(QString::fromUtf8("tableLayout"));
         data_services = new QTableWidget(Form_For_Delete_Service);
         if (data_services->columnCount() < 2)
             data_services->setColumnCount(2);
@@ -53,7 +57,6 @@ public:
         QFont font;
         font.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font);
         __qtablewidgetitem->setForeground(brush);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
@@ -62,7 +65,6 @@ public:
         font1.setKerning(true);
         font1.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font1);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -97,7 +99,7 @@ public:
         data_services->setSortingEnabled(false);
         data_services->setWordWrap(false);
         data_services->setCornerButtonEnabled(false);
-        data_services->horizontalHeader()->setVisible(false);
+        data_services->horizontalHeader()->setVisible(true);
         data_services->horizontalHeader()->setCascadingSectionResizes(false);
         data_services->horizontalHeader()->setMinimumSectionSize(10);
         data_services->horizontalHeader()->setDefaultSectionSize(100);
@@ -112,7 +114,10 @@ public:
         data_services->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
         data_services->verticalHeader()->setStretchLastSection(false);
 
-        verticalLayout->addWidget(data_services);
+        tableLayout->addWidget(data_services);
+
+
+        verticalLayout->addLayout(tableLayout);
 
         delete_button = new QPushButton(Form_For_Delete_Service);
         delete_button->setObjectName(QString::fromUtf8("delete_button"));

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[21];
-    char stringdata0[392];
+    QByteArrayData data[18];
+    char stringdata0[372];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,14 +46,11 @@ QT_MOC_LITERAL(9, 208, 8), // "QString&"
 QT_MOC_LITERAL(10, 217, 14), // "name_data_base"
 QT_MOC_LITERAL(11, 232, 11), // "add_service"
 QT_MOC_LITERAL(12, 244, 12), // "upload_table"
-QT_MOC_LITERAL(13, 257, 5), // "index"
-QT_MOC_LITERAL(14, 263, 12), // "QVector<int>"
-QT_MOC_LITERAL(15, 276, 28), // "on_show_order_button_clicked"
-QT_MOC_LITERAL(16, 305, 18), // "on_options_clicked"
-QT_MOC_LITERAL(17, 324, 27), // "slot_add_order_in_data_base"
-QT_MOC_LITERAL(18, 352, 5), // "Order"
-QT_MOC_LITERAL(19, 358, 5), // "order"
-QT_MOC_LITERAL(20, 364, 27) // "on_show_data_button_clicked"
+QT_MOC_LITERAL(13, 257, 12), // "QVector<int>"
+QT_MOC_LITERAL(14, 270, 28), // "on_show_order_button_clicked"
+QT_MOC_LITERAL(15, 299, 18), // "on_options_clicked"
+QT_MOC_LITERAL(16, 318, 27), // "on_show_data_button_clicked"
+QT_MOC_LITERAL(17, 346, 25) // "on_workers_button_clicked"
 
     },
     "MainWindow\0on_give_order_button_clicked\0"
@@ -63,9 +60,9 @@ QT_MOC_LITERAL(20, 364, 27) // "on_show_data_button_clicked"
     "show_main_window\0slot_clicked_options_data_base\0"
     "slot_changed_data_base\0QString&\0"
     "name_data_base\0add_service\0upload_table\0"
-    "index\0QVector<int>\0on_show_order_button_clicked\0"
-    "on_options_clicked\0slot_add_order_in_data_base\0"
-    "Order\0order\0on_show_data_button_clicked"
+    "QVector<int>\0on_show_order_button_clicked\0"
+    "on_options_clicked\0on_show_data_button_clicked\0"
+    "on_workers_button_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -91,12 +88,12 @@ static const uint qt_meta_data_MainWindow[] = {
        7,    0,   89,    2, 0x08 /* Private */,
        8,    1,   90,    2, 0x08 /* Private */,
       11,    0,   93,    2, 0x08 /* Private */,
-      12,    1,   94,    2, 0x08 /* Private */,
-      12,    1,   97,    2, 0x08 /* Private */,
-      15,    0,  100,    2, 0x08 /* Private */,
-      16,    0,  101,    2, 0x08 /* Private */,
-      17,    1,  102,    2, 0x08 /* Private */,
-      20,    0,  105,    2, 0x08 /* Private */,
+      12,    3,   94,    2, 0x08 /* Private */,
+      12,    1,  101,    2, 0x08 /* Private */,
+      14,    0,  104,    2, 0x08 /* Private */,
+      15,    0,  105,    2, 0x08 /* Private */,
+      16,    0,  106,    2, 0x08 /* Private */,
+      17,    0,  107,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -107,11 +104,11 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   13,
-    QMetaType::Void, 0x80000000 | 14,    2,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString, QMetaType::Double,    2,    2,    2,
+    QMetaType::Void, 0x80000000 | 13,    2,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 18,   19,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -131,12 +128,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->slot_clicked_options_data_base(); break;
         case 6: _t->slot_changed_data_base((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 7: _t->add_service(); break;
-        case 8: _t->upload_table((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->upload_table((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 9: _t->upload_table((*reinterpret_cast< const QVector<int>(*)>(_a[1]))); break;
         case 10: _t->on_show_order_button_clicked(); break;
         case 11: _t->on_options_clicked(); break;
-        case 12: _t->slot_add_order_in_data_base((*reinterpret_cast< const Order(*)>(_a[1]))); break;
-        case 13: _t->on_show_data_button_clicked(); break;
+        case 12: _t->on_show_data_button_clicked(); break;
+        case 13: _t->on_workers_button_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

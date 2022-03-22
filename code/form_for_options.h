@@ -5,7 +5,8 @@
 #include "ui_form_for_change_password.h"
 #include "ui_form_for_delete_password.h"
 #include "ui_form_for_change_access.h"
-#include "security.h"
+
+#include "dataBase/AbstractDataUserWorker.h"
 
 #include <QMessageBox>
 #include <QWidget>
@@ -20,7 +21,7 @@ class FormForOptions : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormForOptions(QWidget *parent = nullptr);
+    explicit FormForOptions(AbstractDataUserWorker *database, QWidget *parent = nullptr);
     FormForOptions(const FormForOptions&) = delete;
     virtual ~FormForOptions(){}
 
@@ -54,11 +55,13 @@ private:
     QSharedPointer<QWidget> _widget_for_change_access;
     QSharedPointer<QWidget> _widget_for_delete_password;
 
+    AbstractDataUserWorker *m_database;
+
     static const char* RESUALT;
     static const char* ERROR;
     static const char* MESSAGE_ERROR_ADD_USER;
     static const char* MESSAGE_ERROR_DELETE_USER;
-    static const char* MESSAGE_USER_WAS_ADD;
+    static const char* MESSAGE_USER_WAS_ADDED;
     static const char* MESSAGE_USER_WAS_DELETE;
     static const char* MESSAGE_ERROR_CHANGE_DATA;
     static const char* MESSAGE_DATA_CHANGED;

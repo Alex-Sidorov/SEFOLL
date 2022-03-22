@@ -1,9 +1,6 @@
 #include "form_for_show_data.h"
 #include "ui_form_for_show_data.h"
 
-const char* FormForShowData::REQUEST_TAKE_TABLE_ORDERS = "SELECT * FROM orders;";
-const char* FormForShowData::REQUEST_TAKE_TABLE_SERVICES_ORDER = "SELECT * FROM _%1_;";
-
 const char* FormForShowData::COLUMN_NUMBER =    "number";
 const char* FormForShowData::COLUMN_CLIENT =    "client";
 const char* FormForShowData::COLUMN_WORKER =    "worker";
@@ -50,10 +47,11 @@ const int FormForShowData::STATUS_WORK =      2;
 
 const int FormForShowData::CODE_NOT_FIND = -1;
 
-FormForShowData::FormForShowData(const QTableWidget *services, QWidget *parent) :
+FormForShowData::FormForShowData(AbstractOrderRW *database, const QTableWidget *services, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form_For_Show_Data),
-    _services(services)
+    _services(services),
+    m_database(database)
 {
     ui->setupUi(this);
 
@@ -86,30 +84,16 @@ void FormForShowData::on_back_button_clicked()
     emit to_main_window();
 }
 
-bool FormForShowData::check_date(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::check_date(const QDateEdit& edit_date)const
 {
     if(!ui->is_date->isChecked())
     {
         return true;
     }
 
-    int date_before = (QString::number(ui->before_date->date().year()) +
-                       (ui->before_date->date().month()< 10 ? '0' +
-                       QString::number(ui->before_date->date().month()):
-                       QString::number(ui->before_date->date().month())) +
-                       (ui->before_date->date().day() < 10 ? '0' +
-                       QString::number(ui->before_date->date().day()):
-                       QString::number(ui->before_date->date().day()))).toInt();
-    int date_after = (QString::number(ui->after_date->date().year()) +
-                      (ui->after_date->date().month()< 10 ? '0' +
-                      QString::number(ui->after_date->date().month()):
-                      QString::number(ui->after_date->date().month())) +
-                      (ui->after_date->date().day()< 10 ? '0' +
-                      QString::number(ui->after_date->date().day()):
-                      QString::number(ui->after_date->date().day()))).toInt();
-
-    QStringList temp = query.value(record.indexOf(COLUMN_DATE)).toString().split('.');
-    int date = ((temp.at(0).toInt()*100) + temp.at(1).toInt())*100 + temp.at(2).toInt();
+    auto date_before = ui->before_date->dateTime().toString("yyyyMMdd");
+    auto date_after = ui->after_date->dateTime().toString("yyyyMMdd");
+    auto date = edit_date.dateTime().toString("yyyyMMdd");
 
     if(!(date_before <= date && date <= date_after))
     {
@@ -118,17 +102,16 @@ bool FormForShowData::check_date(QSqlQuery &query, QSqlRecord &record)const
     return true;
 }
 
-bool FormForShowData::check_worker(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::check_worker(const QString &worker)const
 {
     int count_worker = ui->worker_list->count();
     if(!ui->is_worker->isChecked() || count_worker == 0)
     {
         return true;
     }
-    QString worker = query.value(record.indexOf(COLUMN_WORKER)).toString().toLower();
     for(int i = 0; i < count_worker; i++)
     {
-        if(worker == ui->worker_list->item(i)->text().toLower())
+        if(worker.toLower() == ui->worker_list->item(i)->text().toLower())
         {
             return true;
         }
@@ -136,17 +119,16 @@ bool FormForShowData::check_worker(QSqlQuery &query, QSqlRecord &record)const
     return false;
 }
 
-bool FormForShowData::check_client(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::check_client(const QString &client)const
 {
     int count_client = ui->client_list->count();
     if(!ui->is_client->isChecked() || count_client == 0)
     {
         return true;
     }
-    QString client = query.value(record.indexOf(COLUMN_CLIENT)).toString().toLower();
     for(int i = 0; i < count_client; i++)
     {
-        if(client == ui->client_list->item(i)->text().toLower())
+        if(client.toLower() == ui->client_list->item(i)->text().toLower())
         {
             return true;
         }
@@ -154,23 +136,21 @@ bool FormForShowData::check_client(QSqlQuery &query, QSqlRecord &record)const
     return false;
 }
 
-bool FormForShowData::check_number(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::check_number(int number)const
 {
     if(!ui->is_number->isChecked())
     {
         return true;
     }
-    if(query.value(record.indexOf(COLUMN_NUMBER)).toInt()
-      == ui->number_order->value())
+    if(number == ui->number_order->value())
     {
         return true;
     }
     return false;
 }
 
-bool FormForShowData::check_status(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::check_status(bool status)const
 {
-    bool status = query.value(record.indexOf(COLUMN_STATUS)).toBool();
     switch(ui->status_box->currentIndex())
     {
         case STATUS_NO_MATTER:return true;
@@ -194,31 +174,26 @@ bool FormForShowData::check_status(QSqlQuery &query, QSqlRecord &record)const
     }
 }
 
-bool FormForShowData::check_service(int number_order)const
+bool FormForShowData::check_service(const Order& order)const
 {
     if(!ui->service_list->count())
     {
         return true;
     }
-    QString request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
-    request = request.arg(number_order);
-    QSqlQuery table_query;
-    if(!table_query.exec(request))
+
+    auto &services = order.get_services();
+    if(services.isEmpty())
     {
         return false;
     }
 
-    QSqlRecord table_record;
     QString name_service;
     int count_service = ui->service_list->count();
-    while(table_query.next())
+    for(const auto& service : qAsConst(services))
     {
-        table_record = table_query.record();
-        name_service = table_query.value(table_record.indexOf(COLUMN_NAME_SERVICE)).toString();
-
         for (int i = 0; i < count_service; i++)
         {
-            if(name_service == ui->service_list->item(i)->text())
+            if(service.name_service == ui->service_list->item(i)->text())
             {
                 return true;
             }
@@ -227,14 +202,14 @@ bool FormForShowData::check_service(int number_order)const
     return false;
 }
 
-bool FormForShowData::is_need_order(QSqlQuery &query, QSqlRecord &record)const
+bool FormForShowData::is_need_order(const Order& order)const
 {
-    if(!check_date(query,record)
-      || !check_worker(query,record)
-      || !check_number(query,record)
-      || !check_client(query,record)
-      || !check_status(query, record)
-      || !check_service(query.value(record.indexOf(COLUMN_NUMBER)).toInt()))
+    if(!check_date(order.get_date())
+      || !check_worker(order.get_name_worker())
+      || !check_number(order.get_number())
+      || !check_client(order.get_name_client())
+      || !check_status(order.get_status())
+      || !check_service(order))
     {
         return false;
     }
@@ -244,12 +219,8 @@ bool FormForShowData::is_need_order(QSqlQuery &query, QSqlRecord &record)const
 
 void FormForShowData::on_ok_button_clicked()
 {
-    QSqlQuery query(REQUEST_TAKE_TABLE_ORDERS);
-    if(!query.isActive())
-    {
-        return;
-    }
-    QSqlRecord record;
+    auto orders = m_database->read_orders();
+
     QTableWidgetItem *item_number = nullptr;
     QTableWidgetItem *item_worker = nullptr;
     QTableWidgetItem *item_client = nullptr;
@@ -259,25 +230,18 @@ void FormForShowData::on_ok_button_clicked()
     QTableWidgetItem *item_discount = nullptr;
     int count_row = 0;
     ui->data->setRowCount(0);
-    while(query.next())
+    for(const auto &order : qAsConst(orders))
     {
-        record = query.record();
-        if(is_need_order(query, record))
+        if(is_need_order(order))
         {
-            item_number = new QTableWidgetItem(query.value(record.indexOf(COLUMN_NUMBER)).toString());
-            item_worker = new QTableWidgetItem(query.value(record.indexOf(COLUMN_WORKER)).toString());
-            item_client = new QTableWidgetItem(query.value(record.indexOf(COLUMN_CLIENT)).toString());
-            item_cost = new QTableWidgetItem(query.value(record.indexOf(COLUMN_COST)).toString());
-            item_discount = new QTableWidgetItem(query.value(record.indexOf(COLUMN_DISCOUNT)).toString());
-            item_date = new QTableWidgetItem(query.value(record.indexOf(COLUMN_DATE)).toString());
-            if(query.value(record.indexOf(COLUMN_STATUS)).toBool())
-            {
-                item_status = new QTableWidgetItem(COMPLETE_ORDER);
-            }
-            else
-            {
-                item_status = new QTableWidgetItem(NOT_COMPLETE_ORDER);
-            }
+            item_number = new QTableWidgetItem(QString::number(order.get_number()));
+            item_worker = new QTableWidgetItem(order.get_name_worker());
+            item_client = new QTableWidgetItem(order.get_name_client());
+            item_cost = new QTableWidgetItem(QString::number(order.get_cost()));
+            item_discount = new QTableWidgetItem(QString::number(order.get_discount()));
+            item_date = new QTableWidgetItem(order.get_date().dateTime().toString("dd:MM:yyyy"));
+            item_status = new QTableWidgetItem(order.get_status() ? COMPLETE_ORDER : NOT_COMPLETE_ORDER);
+
             count_row = ui->data->rowCount();
             ui->data->insertRow(count_row);
             ui->data->setItem(count_row,INDEX_COLUMN_NUMBER,item_number);
@@ -288,7 +252,7 @@ void FormForShowData::on_ok_button_clicked()
             ui->data->setItem(count_row,INDEX_COLUMN_CLIENT,item_client);
             ui->data->setItem(count_row,INDEX_COLUMN_DISCOUNT,item_discount);
 
-            auto table = create_service_table(item_number->text().toInt());
+            auto table = create_service_table(order);
             if(table)
             {
                 ui->data->setCellWidget(count_row,INDEX_COLUMN_SERVICES,table);
@@ -299,14 +263,11 @@ void FormForShowData::on_ok_button_clicked()
     }
 }
 
-QTableWidget* FormForShowData::create_service_table(int number)
+QTableWidget* FormForShowData::create_service_table(const Order &order)
 {
-    QSqlQuery query;
-    QString request = REQUEST_TAKE_TABLE_SERVICES_ORDER;
-    request = request.arg(number);
-    if(query.exec(request))
+    auto services = order.get_services();
+    if(!services.isEmpty())
     {
-        QSqlRecord record = query.record();
         QTableWidget *table = new QTableWidget(0,3);//rows,cols
         QString cost;
         QString count;
@@ -315,12 +276,11 @@ QTableWidget* FormForShowData::create_service_table(int number)
         QTableWidgetItem *item_cost = nullptr;
         QTableWidgetItem *item_name = nullptr;
         QTableWidgetItem *item_count = nullptr;
-        while(query.next())
+        for(const auto& service : qAsConst(services))
         {
-            record = query.record();
-            cost = query.value(record.indexOf(COLUMN_PRICE_SERVICE)).toString();
-            count = query.value(record.indexOf(COLUMN_COUNT_SERVICES)).toString();
-            name = query.value(record.indexOf(COLUMN_NAME_SERVICE)).toString();
+            cost = QString::number(service.cost);
+            count = QString::number(service.count);
+            name = service.name_service;
             item_cost = new QTableWidgetItem(cost);
             item_name = new QTableWidgetItem(name);
             item_count = new QTableWidgetItem(count);

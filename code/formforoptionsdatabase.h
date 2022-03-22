@@ -5,8 +5,8 @@
 #include <QFileDialog>
 #include <QDate>
 #include <QMessageBox>
-#include <qsqldatabase.h>
-#include <QSqlQuery>
+
+#include "dataBase/AbstractDataBaseOptions.h"
 
 namespace Ui {
 class FormForOptionsDataBase;
@@ -18,7 +18,7 @@ class FormForOptionsDataBase : public QWidget
 
 public:
     void set_path_data_base(QString &path_data_base);
-    explicit FormForOptionsDataBase(QWidget *parent = nullptr);
+    explicit FormForOptionsDataBase(AbstractDataBaseOptions *database, QWidget *parent = nullptr);
     ~FormForOptionsDataBase();
 
 signals:
@@ -33,6 +33,8 @@ private slots:
 private:
     Ui::FormForOptionsDataBase *ui;
 
+    AbstractDataBaseOptions* m_database;
+
     static const char* CAPTION_TEXT_SELECT;
 
     static const char* CAPTION_TEXT_CREATE;
@@ -43,25 +45,6 @@ private:
 
     static const char* COMPLETE;
     static const char* COMPLETE_CREATE;
-
-    static const char* REQUEST_CREATE_TABLE_ORDERS;
-    static const char* REQUEST_CREATE_TABLE_SECURITY;
-    static const char* REQUEST_CREATE_TABLE_SERVICES;
-    static const char* REQUEST_SELECT_TABLE_SECURITY;
-    static const char* REQUEST_INSERT_RECORD_SECURITY;
-
-    static const char* TYPE_DATA_BASE;
-
-    static const char* VALUE_ID;
-    static const char* VALUE_PASSWORD;
-    static const char* VALUE_ACCESS;
-
-    static const int INDEX_VALUE_ID;
-    static const int INDEX_VALUE_PASSWORD;
-    static const int INDEX_VALUE_ACCESS;
-
-    bool fill_file(QString &name_file)const;
-    bool copy_passwords(QString &name_file)const;
 };
 
 #endif // FORMFOROPTIONSDATABASE_H

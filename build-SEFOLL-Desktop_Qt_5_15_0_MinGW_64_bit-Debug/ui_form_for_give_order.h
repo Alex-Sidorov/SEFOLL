@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -35,7 +36,7 @@ public:
     QLineEdit *name_client;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
-    QLineEdit *name_worker;
+    QComboBox *names_workers;
     QDateEdit *date;
     QTableWidget *data_services;
     QHBoxLayout *horizontalLayout_4;
@@ -52,7 +53,7 @@ public:
     {
         if (FormForGiveOrder->objectName().isEmpty())
             FormForGiveOrder->setObjectName(QString::fromUtf8("FormForGiveOrder"));
-        FormForGiveOrder->resize(667, 365);
+        FormForGiveOrder->resize(751, 365);
         verticalLayout = new QVBoxLayout(FormForGiveOrder);
         verticalLayout->setSpacing(5);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -95,18 +96,23 @@ public:
 
         horizontalLayout_2->addWidget(label_2);
 
-        name_worker = new QLineEdit(FormForGiveOrder);
-        name_worker->setObjectName(QString::fromUtf8("name_worker"));
-        name_worker->setStyleSheet(QString::fromUtf8("\n"
+        names_workers = new QComboBox(FormForGiveOrder);
+        names_workers->setObjectName(QString::fromUtf8("names_workers"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(names_workers->sizePolicy().hasHeightForWidth());
+        names_workers->setSizePolicy(sizePolicy);
+        names_workers->setStyleSheet(QString::fromUtf8("\n"
 "border-radius : 4px;\n"
 "border: 1px solid;\n"
-"border-color: rgb(11, 11, 11);\n"
 "height:20;\n"
+"border-color: rgb(11, 11, 11);\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 ""));
 
-        horizontalLayout_2->addWidget(name_worker);
+        horizontalLayout_2->addWidget(names_workers);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -131,13 +137,11 @@ public:
         QFont font1;
         font1.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font1);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font1);
         __qtablewidgetitem1->setForeground(brush);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
@@ -146,7 +150,6 @@ public:
         font2.setKerning(true);
         font2.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        __qtablewidgetitem2->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem2->setFont(font2);
         data_services->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -158,6 +161,10 @@ public:
         data_services->setLayoutDirection(Qt::LeftToRight);
         data_services->setAutoFillBackground(false);
         data_services->setStyleSheet(QString::fromUtf8("\n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"height:20;\n"
+"border-color: rgb(11, 11, 11);\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 ""));
@@ -208,17 +215,16 @@ public:
 
         discount = new QSpinBox(FormForGiveOrder);
         discount->setObjectName(QString::fromUtf8("discount"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(50);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(discount->sizePolicy().hasHeightForWidth());
-        discount->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(50);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(discount->sizePolicy().hasHeightForWidth());
+        discount->setSizePolicy(sizePolicy1);
         discount->setStyleSheet(QString::fromUtf8("\n"
 "border-radius : 4px;\n"
 "border: 1px solid;\n"
-"border-color: rgb(11, 11, 11);\n"
 "height:20;\n"
-"width:140;\n"
+"border-color: rgb(11, 11, 11);\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 ""));

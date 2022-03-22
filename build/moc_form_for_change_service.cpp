@@ -67,17 +67,17 @@ static const uint qt_meta_data_FormForChangeService[] = {
 
  // signals: name, argc, parameters, tag, flags
        1,    0,   44,    2, 0x06 /* Public */,
-       3,    1,   45,    2, 0x06 /* Public */,
+       3,    3,   45,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   48,    2, 0x08 /* Private */,
-       5,    1,   49,    2, 0x08 /* Private */,
-       8,    0,   52,    2, 0x08 /* Private */,
-       9,    0,   53,    2, 0x08 /* Private */,
+       4,    0,   52,    2, 0x08 /* Private */,
+       5,    1,   53,    2, 0x08 /* Private */,
+       8,    0,   56,    2, 0x08 /* Private */,
+       9,    0,   57,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString, QMetaType::Double,    2,    2,    2,
 
  // slots: parameters
     QMetaType::Void,
@@ -95,7 +95,7 @@ void FormForChangeService::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->to_main_window(); break;
-        case 1: _t->changed_data((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->changed_data((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3]))); break;
         case 2: _t->on_back_button_clicked(); break;
         case 3: _t->on_data_services_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
         case 4: _t->on_enter_change_button_clicked(); break;
@@ -112,7 +112,7 @@ void FormForChangeService::qt_static_metacall(QObject *_o, QMetaObject::Call _c,
             }
         }
         {
-            using _t = void (FormForChangeService::*)(int );
+            using _t = void (FormForChangeService::*)(int , const QString & , double );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormForChangeService::changed_data)) {
                 *result = 1;
                 return;
@@ -168,9 +168,9 @@ void FormForChangeService::to_main_window()
 }
 
 // SIGNAL 1
-void FormForChangeService::changed_data(int _t1)
+void FormForChangeService::changed_data(int _t1, const QString & _t2, double _t3)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

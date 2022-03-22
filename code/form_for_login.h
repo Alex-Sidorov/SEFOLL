@@ -1,7 +1,8 @@
 #ifndef FORM_FOR_LOGIN_H
 #define FORM_FOR_LOGIN_H
 
-#include "security.h"
+#include "Access.h"
+#include "dataBase/AbstractDataUserWorker.h"
 
 #include <QSharedPointer>
 #include <QWidget>
@@ -18,7 +19,8 @@ class FormForLogin : public QWidget
 public:
     bool is_close()const;
     Access get_access()const;
-    explicit FormForLogin(QWidget *parent = 0);
+
+    explicit FormForLogin(const AbstractDataUserWorker *dataBase, QWidget *parent = 0);
     FormForLogin(const FormForLogin&) = delete;
     virtual ~FormForLogin(){}
 
@@ -31,12 +33,17 @@ private slots:
 
 private:
     QSharedPointer<Ui::FormForLogin> ui;
+
+    const AbstractDataUserWorker *_dataBase;
+
     QString _id;
     QString _password;
     Access _access;
 
-    static const char* MESSAGE_ERROR;
     bool _close;
+
+    static const char* MESSAGE_ERROR;
+
 
     void check_access();
     void clear_form()const;

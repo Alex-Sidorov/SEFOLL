@@ -44,7 +44,7 @@ public:
     {
         if (Form_For_Change_Service->objectName().isEmpty())
             Form_For_Change_Service->setObjectName(QString::fromUtf8("Form_For_Change_Service"));
-        Form_For_Change_Service->resize(669, 339);
+        Form_For_Change_Service->resize(734, 339);
         verticalLayout = new QVBoxLayout(Form_For_Change_Service);
         verticalLayout->setSpacing(2);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -66,7 +66,6 @@ public:
         QFont font1;
         font1.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font1);
         __qtablewidgetitem->setForeground(brush);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
@@ -75,7 +74,6 @@ public:
         font2.setKerning(true);
         font2.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font2);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -110,11 +108,11 @@ public:
         data_services->setSortingEnabled(false);
         data_services->setWordWrap(false);
         data_services->setCornerButtonEnabled(false);
-        data_services->horizontalHeader()->setVisible(false);
-        data_services->horizontalHeader()->setCascadingSectionResizes(true);
+        data_services->horizontalHeader()->setVisible(true);
+        data_services->horizontalHeader()->setCascadingSectionResizes(false);
         data_services->horizontalHeader()->setMinimumSectionSize(10);
         data_services->horizontalHeader()->setDefaultSectionSize(100);
-        data_services->horizontalHeader()->setHighlightSections(true);
+        data_services->horizontalHeader()->setHighlightSections(false);
         data_services->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
         data_services->horizontalHeader()->setStretchLastSection(true);
         data_services->verticalHeader()->setVisible(false);

@@ -5,6 +5,7 @@
 #include "AbstractOrderRW.h"
 #include "AbstractServicesWorker.h"
 #include "AbstractWorkersWorker.h"
+#include "AbstractDataBaseOptions.h"
 
 #include <QSqlQuery>
 
@@ -12,13 +13,14 @@ class DataBaseWorker :
         public AbstractOrderRW,
         public AbstractDataUserWorker,
         public AbstractServicesWorker,
-        public AbstractWorkersWorker
+        public AbstractWorkersWorker,
+        public AbstractDataBaseOptions
 {
 public:
     DataBaseWorker();
 
     virtual bool add_user(const UserData& user)override;
-    virtual UserData read_data_user(const int id, const QString& password)override;
+    virtual UserData read_data_user(const int id, const QString& password)const override;
     virtual bool delete_user(const int id)override;
     virtual bool change_password(const int id, const QString& new_password)override;
     virtual bool change_access(const int id, const Access& access)override;
@@ -40,6 +42,9 @@ public:
     virtual bool remove_worker(const QString& name)override;
     virtual const QList<QString> read_workers() override;
 
+    virtual bool createDataBase(const QString& path) override;
+    virtual bool copyDataUsers(const QString &dst) override;
+
     virtual ~DataBaseWorker(){}
 
 private:
@@ -49,6 +54,7 @@ private:
     static constexpr auto REQUESTE_DELETE_USER = "DELETE FROM security WHERE id = :1;";
     static constexpr auto REQUESTE_CHANGE_PASSWORD = "UPDATE security SET password = :1 WHERE id = :2;";
     static constexpr auto REQUESTE_CHANGE_ACCESS =   "UPDATE security SET access = :1 WHERE id = :2;";
+    static constexpr auto REQUESTE_TAKE_ALL_USER =   "SELECT * FROM security;";
 
     static constexpr auto REQUESTE_ADD_SERVICE =   "INSERT INTO services(name, price) VALUES(:1, :2);";
     static constexpr auto REQUESTE_TAKE_SERVICES =  "SELECT * FROM services";
@@ -89,11 +95,15 @@ private:
     static constexpr auto COLUMN_COUNT_SERVICES = "count";
     static constexpr auto COLUMN_NAME_SERVICE =   "name";
 
+    QString m_config_database = "main_script.sql";
+
     bool is_user(const UserData&);
     bool exec_request(QSqlQuery& query) const;
     QVector<InfoOfOrderedService> read_services_order(const int number)const;
     UserData read_data_user(const int id);
     bool is_order(const int number)const;
+
+    bool add_user(const UserData& user, QSqlDatabase &database);
 };
 
 #endif // DATABASEWORKER_H

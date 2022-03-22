@@ -3,9 +3,10 @@
 
 const char* FormForLogin::MESSAGE_ERROR = "Ошибка. Проверьте id и пароль.";
 
-FormForLogin::FormForLogin(QWidget *parent) :
+FormForLogin::FormForLogin(const AbstractDataUserWorker *dataBase, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FormForLogin)
+    ui(new Ui::FormForLogin),
+    _dataBase(dataBase)
 {
     _close = false;
     _access = GUEST;
@@ -31,16 +32,25 @@ void FormForLogin::show()
 
 void FormForLogin::input_ok()
 {
-    QString password = ui->password->text();
-    QString id = ui->id->text();
-    if(Security::check_access(id, password, _access))
+    if(_dataBase)
     {
-        ui->error->setText(MESSAGE_ERROR);
-        return;
+        QString password = ui->password->text();
+        auto id = ui->id->value();
+
+        auto user = _dataBase->read_data_user(id, password);
+
+        if(user.id == 0)
+        {
+            ui->error->setText(MESSAGE_ERROR);
+            return;
+        }
+
+        _access = user.access;
+
+        clear_form();
+        _close = false;
+        QWidget::close();
     }
-    clear_form();
-    _close = false;
-    QWidget::close();
 }
 
 bool FormForLogin::is_close()const

@@ -4,6 +4,19 @@
 #include <QSqlQuery>
 #include <QCryptographicHash>
 #include <QDate>
+#include <QFile>
+
+bool DataBaseWorker::add_user(const UserData& user, QSqlDatabase &dataBase)
+{
+    QSqlQuery query(dataBase);
+    query.prepare(REQUESTE_ADD_USER);
+
+    query.bindValue(":1",user.id);
+    query.bindValue(":2",static_cast<int>(user.access));
+    query.bindValue(":3",user.password);
+
+    return exec_request(query);
+}
 
 bool DataBaseWorker::add_user(const UserData& user)
 {
@@ -19,7 +32,7 @@ bool DataBaseWorker::add_user(const UserData& user)
     return exec_request(query);
 }
 
-UserData DataBaseWorker::read_data_user(const int id, const QString& password)
+UserData DataBaseWorker::read_data_user(const int id, const QString& password) const
 {
     QString hash_password = QCryptographicHash::hash(password.toLatin1(),QCryptographicHash::Md5);
 
@@ -58,12 +71,12 @@ bool DataBaseWorker::delete_user(const int id)
     QSqlQuery query;
     query.prepare(REQUESTE_DELETE_USER);
     query.bindValue(":1",id);
-    return read_data_user(id).id && exec_request(query);
+    return exec_request(query);
 }
 
 bool DataBaseWorker::change_password(const int id, const QString& new_password)
 {
-    QString hash_new_password = new_password;//QCryptographicHash::hash(new_password.toLatin1(),QCryptographicHash::Md5);
+    QString hash_new_password = QCryptographicHash::hash(new_password.toLatin1(),QCryptographicHash::Md5);
     QSqlQuery query;
 
     query.prepare(REQUESTE_CHANGE_PASSWORD);
@@ -347,6 +360,68 @@ const QList<QString> DataBaseWorker::read_workers()
     }
     return workers;
 
+}
+
+bool DataBaseWorker::createDataBase(const QString& path)
+{
+    QFile file(m_config_database);
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QString script = file.readAll();
+        file.close();
+
+        script.replace(QRegularExpression("[\\n|\\r|\\t]+"), " ");
+        QStringList requests = script.split(';', QString::SkipEmptyParts);
+
+        QSqlDatabase dst = QSqlDatabase::addDatabase("QSQLITE",path);
+        dst.setDatabaseName(path);
+        if(dst.open())
+        {
+            QSqlQuery query(dst);
+            for(const auto &request : requests)
+            {
+                query.prepare(request);
+                if(!query.exec())
+                {
+                    return false;
+                }
+            }
+            dst.close();
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DataBaseWorker::copyDataUsers(const QString &database)
+{
+    QSqlDatabase dst = QSqlDatabase::addDatabase("QSQLITE",database);
+    dst.setDatabaseName(database);
+    if(dst.open())
+    {
+        QSqlQuery query;
+        query.prepare(REQUESTE_TAKE_ALL_USER);
+        if(exec_request(query))
+        {
+            QSqlQuery dst_query(dst);
+            while(query.next())
+            {
+                auto access = static_cast<Access>(query.value(query.record().indexOf(COLUMN_ACCESS)).toInt());
+                auto password = query.value(query.record().indexOf("password")).toString();
+                auto id = query.value(query.record().indexOf("id")).toInt();
+
+                if(!add_user({id,access,password}, dst))
+                {
+                    dst.close();
+                    return false;
+                }
+            }
+            dst.close();
+            return true;
+        }
+        dst.close();
+    }
+    return false;
 }
 
 bool DataBaseWorker::exec_request(QSqlQuery& query) const

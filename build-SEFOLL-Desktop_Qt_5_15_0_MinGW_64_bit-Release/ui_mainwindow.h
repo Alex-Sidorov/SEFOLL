@@ -15,7 +15,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -37,7 +36,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *options;
     QPushButton *options_data_base;
-    QSpacerItem *horizontalSpacer;
+    QPushButton *workers_button;
     QPushButton *add_service_button;
     QPushButton *change_service_button;
     QPushButton *delete_service_button;
@@ -56,7 +55,6 @@ public:
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(-1, -1, -1, 2);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -138,7 +136,6 @@ public:
         QFont font1;
         font1.setPointSize(12);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem->setFont(font1);
         __qtablewidgetitem->setForeground(brush);
         data_services->setHorizontalHeaderItem(0, __qtablewidgetitem);
@@ -147,7 +144,6 @@ public:
         font2.setKerning(true);
         font2.setStyleStrategy(QFont::PreferAntialias);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         __qtablewidgetitem1->setFont(font2);
         data_services->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         data_services->setObjectName(QString::fromUtf8("data_services"));
@@ -250,9 +246,25 @@ public:
 
         horizontalLayout->addWidget(options_data_base);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        workers_button = new QPushButton(centralWidget);
+        workers_button->setObjectName(QString::fromUtf8("workers_button"));
+        workers_button->setFont(font);
+        workers_button->setStyleSheet(QString::fromUtf8("QPushButton\n"
+"{ \n"
+"border-radius : 4px;\n"
+"border: 1px solid;\n"
+"border-color: rgb(11, 11, 11);\n"
+"height:20;\n"
+"width:100;\n"
+"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
+"}\n"
+"QPushButton::pressed {\n"
+"    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 rgb(251, 252, 255), stop: 1 #f6f7fa);\n"
+"}"));
 
-        horizontalLayout->addItem(horizontalSpacer);
+        horizontalLayout->addWidget(workers_button);
 
         add_service_button = new QPushButton(centralWidget);
         add_service_button->setObjectName(QString::fromUtf8("add_service_button"));
@@ -345,6 +357,7 @@ public:
         ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "\320\235\320\220\320\230\320\234\320\225\320\235\320\236\320\222\320\220\320\235\320\230\320\225", nullptr));
         options->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\260\320\264\320\274\320\270\320\275\320\270\321\201\321\202\321\200\320\260\321\202\320\276\321\200\320\260", nullptr));
         options_data_base->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270 \320\261\320\260\320\267\321\213 \320\264\320\260\320\275\320\275\321\213\321\205", nullptr));
+        workers_button->setText(QCoreApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\275\320\270\320\272\320\270", nullptr));
         add_service_button->setText(QCoreApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\203\321\201\320\273\321\203\320\263\321\203", nullptr));
         change_service_button->setText(QCoreApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \321\203\321\201\320\273\321\203\320\263\321\203", nullptr));
         delete_service_button->setText(QCoreApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\203\321\201\320\273\321\203\320\263\321\203", nullptr));

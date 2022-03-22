@@ -9,16 +9,20 @@
 int main(int argc, char *argv[])
 {
     QApplication application(argc, argv);
-    int code = 0;
+    //int code = 0;
 
     MainWindow window;
 
-#if defined (QT_DEBUG)
+    window.set_access(Access::ADMIN);
+    window.show();
+    return application.exec();
+
+/*#if defined (QT_DEBUG)
     window.set_access(Access::ADMIN);
     window.show();
     application.exec();
 #else
-    QSharedPointer<FormForLogin> login(new FormForLogin);
+    QSharedPointer<FormForLogin> login(new FormForLogin(window.getDataBase()));
     while(!code)
     {
         login->show();
@@ -33,5 +37,5 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    return code;
+    return code;*/
 }

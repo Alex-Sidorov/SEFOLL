@@ -237,6 +237,7 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/qt_config.prf \
 		D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf \
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf \
@@ -266,7 +267,6 @@ Makefile: ../code/SEFOLL.pro D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.con
 		D:/qt/5.15.0/mingw81_64/lib/Qt5Sql.prl \
 		D:/qt/5.15.0/mingw81_64/lib/Qt5Core.prl \
 		D:/qt/5.15.0/mingw81_64/lib/qtmain.prl \
-		.qmake.stash \
 		D:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf \
 		../code/resource.qrc
 	$(QMAKE) -o Makefile ..\code\SEFOLL.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
@@ -437,6 +437,7 @@ D:/qt/5.15.0/mingw81_64/mkspecs/features/qt_functions.prf:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/qt_config.prf:
 D:/qt/5.15.0/mingw81_64/mkspecs/win32-g++/qmake.conf:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/exclusive_builds.prf:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/toolchain.prf:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/default_pre.prf:
@@ -466,7 +467,6 @@ D:/qt/5.15.0/mingw81_64/lib/Qt5Gui.prl:
 D:/qt/5.15.0/mingw81_64/lib/Qt5Sql.prl:
 D:/qt/5.15.0/mingw81_64/lib/Qt5Core.prl:
 D:/qt/5.15.0/mingw81_64/lib/qtmain.prl:
-.qmake.stash:
 D:/qt/5.15.0/mingw81_64/mkspecs/features/build_pass.prf:
 ../code/resource.qrc:
 qmake: FORCE

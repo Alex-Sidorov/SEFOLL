@@ -50,7 +50,7 @@ public:
     QLabel *label_3;
     QListWidget *worker_list;
     QHBoxLayout *horizontalLayout_4;
-    QLineEdit *worker_line;
+    QComboBox *names_workers;
     QPushButton *add_worker_button;
     QFrame *line;
     QVBoxLayout *verticalLayout_3;
@@ -95,9 +95,7 @@ public:
             Form_For_Show_Data->setObjectName(QString::fromUtf8("Form_For_Show_Data"));
         Form_For_Show_Data->resize(668, 417);
         horizontalLayout_5 = new QHBoxLayout(Form_For_Show_Data);
-        horizontalLayout_5->setSpacing(2);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(2, 2, 2, 2);
         data = new QTableWidget(Form_For_Show_Data);
         if (data->columnCount() < 8)
             data->setColumnCount(8);
@@ -131,7 +129,7 @@ public:
         data->setSortingEnabled(false);
         data->setWordWrap(false);
         data->setCornerButtonEnabled(false);
-        data->horizontalHeader()->setVisible(false);
+        data->horizontalHeader()->setVisible(true);
         data->horizontalHeader()->setCascadingSectionResizes(false);
         data->horizontalHeader()->setStretchLastSection(false);
         data->verticalHeader()->setCascadingSectionResizes(true);
@@ -146,7 +144,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 245, 711));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 248, 723));
         verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout->setSpacing(5);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -249,25 +247,23 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        worker_line = new QLineEdit(scrollAreaWidgetContents);
-        worker_line->setObjectName(QString::fromUtf8("worker_line"));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        names_workers = new QComboBox(scrollAreaWidgetContents);
+        names_workers->setObjectName(QString::fromUtf8("names_workers"));
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(worker_line->sizePolicy().hasHeightForWidth());
-        worker_line->setSizePolicy(sizePolicy3);
-        worker_line->setMinimumSize(QSize(0, 0));
-        worker_line->setStyleSheet(QString::fromUtf8("\n"
+        sizePolicy3.setHeightForWidth(names_workers->sizePolicy().hasHeightForWidth());
+        names_workers->setSizePolicy(sizePolicy3);
+        names_workers->setStyleSheet(QString::fromUtf8("\n"
 "border-radius : 4px;\n"
 "border: 1px solid;\n"
-"border-color: rgb(11, 11, 11);\n"
 "height:20;\n"
-"width:140;\n"
+"border-color: rgb(11, 11, 11);\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                      stop: 0 #dadbde, stop: 1 #f6f7fa);\n"
 ""));
 
-        horizontalLayout_4->addWidget(worker_line);
+        horizontalLayout_4->addWidget(names_workers);
 
         add_worker_button = new QPushButton(scrollAreaWidgetContents);
         add_worker_button->setObjectName(QString::fromUtf8("add_worker_button"));

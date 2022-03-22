@@ -7,11 +7,11 @@ debug/form_for_login.o
 debug/form_for_options.o
 debug/form_for_show_data.o
 debug/form_for_show_order.o
+debug/formforworkers.o
 debug/main.o
 debug/mainwindow.o
 debug/new_spinbox.o
 debug/order.o
-debug/security.o
 debug/formforoptionsdatabase.o
 debug/qrc_resource.o
 debug/moc_form_for_add_service.o
@@ -22,6 +22,7 @@ debug/moc_form_for_login.o
 debug/moc_form_for_options.o
 debug/moc_form_for_show_data.o
 debug/moc_form_for_show_order.o
+debug/moc_formforworkers.o
 debug/moc_mainwindow.o
 debug/moc_new_spinbox.o
 debug/moc_formforoptionsdatabase.o

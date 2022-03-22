@@ -2,10 +2,9 @@
 #define FORM_FOR_SHOW_DATA_H
 
 #include "order.h"
+#include "dataBase/AbstractOrderRW.h"
 
 #include <QWidget>
-#include <QSqlQuery>
-#include <QSqlRecord>
 #include <QSharedPointer>
 #include <QFileDialog>
 #include <QTextStream>
@@ -20,7 +19,7 @@ class FormForShowData : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormForShowData(const QTableWidget *services, QWidget *parent = 0);
+    explicit FormForShowData(AbstractOrderRW *database, const QTableWidget *services, QWidget *parent = 0);
     FormForShowData(const FormForShowData&) = delete;
     virtual ~FormForShowData(){}
 
@@ -53,8 +52,7 @@ private:
     Ui::Form_For_Show_Data *ui;
     const QTableWidget *_services;
 
-    static const char* REQUEST_TAKE_TABLE_ORDERS;
-    static const char* REQUEST_TAKE_TABLE_SERVICES_ORDER;
+    AbstractOrderRW *m_database;
 
     static const char* COLUMN_NUMBER;
     static const char* COLUMN_CLIENT;
@@ -104,16 +102,16 @@ private:
 
     void fill_service_box();
 
-    bool is_need_order(QSqlQuery &query, QSqlRecord &record)const;
+    bool is_need_order(const Order& order)const;
 
-    bool check_date(QSqlQuery &query, QSqlRecord &record)const;
-    bool check_worker(QSqlQuery &query, QSqlRecord &record)const;
-    bool check_client(QSqlQuery &query, QSqlRecord &record)const;
-    bool check_number(QSqlQuery &query, QSqlRecord &record)const;
-    bool check_status(QSqlQuery &query, QSqlRecord &record)const;
-    bool check_service(int)const;
+    bool check_date(const QDateEdit& edit_date)const;
+    bool check_worker(const QString &worker)const;
+    bool check_client(const QString &client)const;
+    bool check_number(int)const;
+    bool check_status(bool)const;
+    bool check_service(const Order& order)const;
 
-    QTableWidget* create_service_table(int number);
+    QTableWidget* create_service_table(const Order& order);
 
     bool save_csv_file(const QString &file_name)const;
     void save_service_table(QTextStream &stream, int row)const;

@@ -2,8 +2,6 @@
 #define FORM_FOR_SHOW_ORDER_H
 
 #include <QWidget>
-#include <QSqlQuery>
-#include <QSqlRecord>
 #include <QMessageBox>
 #include <QSharedPointer>
 

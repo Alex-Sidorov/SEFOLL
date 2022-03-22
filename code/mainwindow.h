@@ -10,7 +10,6 @@
 #include "form_for_show_data.h"
 #include "formforoptionsdatabase.h"
 #include "formforworkers.h"
-#include "security.h"
 #include "ui_mainwindow.h"
 #include "dataBase/databaseworker.h"
 
@@ -21,9 +20,6 @@
 #include <QFile>
 #include <QDataStream>
 #include <QSettings>
-#include <qsqldatabase.h>
-#include <qsqlquery.h>
-#include <qsqlrecord.h>
 
 namespace Ui
 {
@@ -39,6 +35,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     MainWindow(const MainWindow&) = delete;
     ~MainWindow();
+
+    const DataBaseWorker* getDataBase()const;
 
 private slots:
     void on_give_order_button_clicked();
@@ -94,17 +92,6 @@ private:
 
     static const char* NAME_DEFAULT_DATA_BASE;
     static const char* TYPE_DATA_BASE;
-
-    static const char* REQUESTE_DATA_SERVICE;
-    static const char* REQUESTE_TAKE_SERVICES;
-    static const char* REQUESTE_UPDATE_NAME;
-    static const char* REQUESTE_UPDATE_PRICE;
-    static const char* REQUESTE_DELETE_SERVICE;
-
-    static const char *REQUEST_TAKE_TABLE_ORDERS;
-    static const char *REQUEST_INSERT_ORDERS;
-    static const char *REQUEST_CREATE_TABLE_ORDER;
-    static const char *REQUEST_INSERT_SERVICE_ORDER;
 
     static const char* COLUMN_PRICE;
     static const char* COLUMN_NAME;
